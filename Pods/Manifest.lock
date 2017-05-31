@@ -1,0 +1,115 @@
+PODS:
+  - Alamofire (4.4.0)
+  - Auk (7.0.1):
+    - moa
+  - ChameleonFramework/Default (2.1.0)
+  - ChameleonFramework/Swift (2.1.0):
+    - ChameleonFramework/Default
+  - DropDown (2)
+  - Firebase/Auth (4.0.0):
+    - Firebase/Core
+    - FirebaseAuth (= 4.0.0)
+  - Firebase/Core (4.0.0):
+    - FirebaseAnalytics (= 4.0.0)
+    - FirebaseCore (= 4.0.0)
+  - Firebase/Messaging (4.0.0):
+    - Firebase/Core
+    - FirebaseMessaging (= 2.0.0)
+  - FirebaseAnalytics (4.0.0):
+    - FirebaseCore (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseAuth (4.0.0):
+    - FirebaseAnalytics (~> 4.0)
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - FirebaseCore (4.0.0):
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseInstanceID (2.0.0):
+    - FirebaseCore (~> 4.0)
+  - FirebaseMessaging (2.0.0):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseCore (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - Protobuf (~> 3.1)
+  - GoogleToolboxForMac/DebugUtils (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/Logger (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.1)
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
+  - GTMSessionFetcher/Core (1.1.10)
+  - ImagePicker (2.1.1)
+  - MapleBacon (3.1.0)
+  - moa (8.0.4)
+  - Protobuf (3.3.0)
+  - Realm (2.7.0):
+    - Realm/Headers (= 2.7.0)
+  - Realm/Headers (2.7.0)
+  - RealmSwift (2.7.0):
+    - Realm (= 2.7.0)
+  - SwiftyJSON (3.1.4)
+  - Toaster (2.0.3)
+  - VisualHumainNumber (1.0.6)
+  - XMSegmentedControl (0.1.4)
+
+DEPENDENCIES:
+  - Alamofire
+  - Auk
+  - ChameleonFramework/Swift (from `https://github.com/ViccAlexander/Chameleon.git`)
+  - DropDown
+  - Firebase/Auth
+  - Firebase/Core
+  - Firebase/Messaging
+  - ImagePicker
+  - MapleBacon
+  - moa
+  - RealmSwift
+  - SwiftyJSON
+  - Toaster
+  - VisualHumainNumber
+  - XMSegmentedControl
+
+EXTERNAL SOURCES:
+  ChameleonFramework:
+    :git: https://github.com/ViccAlexander/Chameleon.git
+
+CHECKOUT OPTIONS:
+  ChameleonFramework:
+    :commit: acc480fbe023c6e5fe40f68593f4a70a8c4c7ad5
+    :git: https://github.com/ViccAlexander/Chameleon.git
+
+SPEC CHECKSUMS:
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  Auk: 6f8c4e93427d0d02641263776dd3b66ae4050903
+  ChameleonFramework: d21a3cc247abfe5e37609a283a8238b03575cf64
+  DropDown: 744784d9c9aa505100e942c16acd05430cbb2f0a
+  Firebase: 284eea779b73fdff309791817da7c68bff8dd572
+  FirebaseAnalytics: 6f08e746f7d66f5452931bc2e822b5df9c66b64a
+  FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
+  FirebaseCore: 85ad466044c2f013cdb167f85d426d15b128114a
+  FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
+  FirebaseMessaging: 227406c05b0dc9290702d2e9f18ab5528f0c2cf2
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
+  ImagePicker: fe4c699abb56ff03994fa98d8b02e3883ee118be
+  MapleBacon: 03b7a3d61409f8ae286ead261590e4a650754b09
+  moa: 954e2ad962886626d02c3486dd3a7bb5f0052d14
+  Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
+  Realm: 07e5d3a9e0e41d65fd5f9f05150ed6295d0f093b
+  RealmSwift: 6d06425d3900c86473c4f323bf6949b43fca22bc
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+  Toaster: 77c0b03d78e680bbbab0071c9c7ee392b0034010
+  VisualHumainNumber: 8d4151d1080c61a85d243a47d5391f5bcce03078
+  XMSegmentedControl: 51cf4f3daf14920692a064d9252aa7b29622dda6
+
+PODFILE CHECKSUM: c76194ba140f7c4e56bbe1752f33e6c0e0e27cac
+
+COCOAPODS: 1.2.1

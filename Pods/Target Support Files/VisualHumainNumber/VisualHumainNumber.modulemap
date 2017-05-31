@@ -1,0 +1,6 @@
+framework module VisualHumainNumber {
+  umbrella header "VisualHumainNumber-umbrella.h"
+
+  export *
+  module * { export * }
+}
