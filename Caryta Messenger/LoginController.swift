@@ -18,6 +18,8 @@ class LoginController: UIViewController {
     
     @IBOutlet weak var passTxt: UITextField!
     
+    @IBOutlet weak var nextBtn: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -43,16 +45,20 @@ class LoginController: UIViewController {
                 
                     print(JSON(jason).description)
                     
+                    let token = InstanceID.instanceID().token()!
+                    
                     let model = user()
                     
-                    model.user_id       = JSON(jason)["user_id"].stringValue
-                    model.first_name    = JSON(jason)["first_name"].stringValue
-                    model.last_name     = JSON(jason)["last_name"].stringValue
-                    model.email         = JSON(jason)["email"].stringValue
-                    model.no_hp         = JSON(jason)["no_hp"].stringValue
-                    model.sex           = JSON(jason)["sex"].stringValue
-                    model.avatar        = JSON(jason)["avatar_small"].stringValue
-                    model.registrasi_id = JSON(jason)["registrasi_id"].stringValue
+                    model.user_id       = JSON(jason)["data"]["user_id"].stringValue
+                    model.first_name    = JSON(jason)["data"]["first_name"].stringValue
+                    model.last_name     = JSON(jason)["data"]["last_name"].stringValue
+                    model.email         = JSON(jason)["data"]["email"].stringValue
+                    model.no_hp         = JSON(jason)["data"]["no_hp"].stringValue
+                    model.sex           = JSON(jason)["data"]["sex"].stringValue
+                    model.avatar        = JSON(jason)["data"]["avatar_small"].stringValue
+                    model.registrasi_id = token
+                    
+                    self.updateToken(user_id: JSON(jason)["data"]["user_id"].stringValue, token: token)
                     
                     DBHelper.insert(obj: model)
                 
@@ -62,9 +68,7 @@ class LoginController: UIViewController {
         
     }
     
-    func updateToken(user_id: String) {
-        
-        let token = InstanceID.instanceID().token()!
+    func updateToken(user_id: String, token: String) {
         
         let params = [
             "userId"        : user_id,
@@ -86,6 +90,24 @@ class LoginController: UIViewController {
                     
                 }
                 
+        }
+        
+    }
+    
+    @IBAction func checkValue(_ sender: UITextField) {
+        
+        if sender == passTxt {
+        
+            if passTxt.text!.characters.count > 0 {
+            
+                self.nextBtn.isEnabled = true
+            
+            }else{
+                
+                self.nextBtn.isEnabled = false
+                
+            }
+        
         }
         
     }

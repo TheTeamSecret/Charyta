@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyJSON
 import Firebase
 import FirebaseAuth
+import Toaster
 
 class VerifCodeController: UIViewController, UITextFieldDelegate {
 
@@ -49,6 +50,13 @@ class VerifCodeController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         print(phoneNumber)
+        
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+        } catch let signOutError as NSError {
+            print ("Error signing out: %@", signOutError)
+        }
         
         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber) { verificationID, error in
             
@@ -186,6 +194,8 @@ class VerifCodeController: UIViewController, UITextFieldDelegate {
     
     func checkCode() {
         
+        self.performSegue(withIdentifier: "segue_masuk", sender: self)
+        
         let verifCode = "\(sectionOne.text!)\(sectionTwo.text!)\(sectionThree.text!)\(sectionFour.text!)\(sectionFive.text!)\(sectionSix.text!)"
         
         print(verifID)
@@ -198,6 +208,8 @@ class VerifCodeController: UIViewController, UITextFieldDelegate {
             if let error = error {
             
                 print(error)
+                
+                self.loading.stopAnimating()
                 
                 return
             
@@ -232,14 +244,16 @@ class VerifCodeController: UIViewController, UITextFieldDelegate {
         
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "segue_masuk" {
+        
+            let next = segue.destination as! MasukController
+            
+            next.phoneNumber = self.phoneNumber
+        
+        }
+        
     }
-    */
 
 }

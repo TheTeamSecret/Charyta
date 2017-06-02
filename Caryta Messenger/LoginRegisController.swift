@@ -208,6 +208,11 @@ class LoginRegisController: UIViewController, CLLocationManagerDelegate {
         
             let next = segue.destination as! VerifCodeController
             next.phoneNumber = "\(countryDial.text!)\(numberTxt.text!)"
+         
+        }else if segue.identifier == "segue_password" {
+        
+            let next = segue.destination as! LoginController
+            next.username = "\(countryDial.text!)\(numberTxt.text!)"
         
         }
         

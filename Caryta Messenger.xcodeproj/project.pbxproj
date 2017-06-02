@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0F2324971EDBEB3800C73BFD /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2324961EDBEB3800C73BFD /* LoginController.swift */; };
+		0FBF3FAF1EE02406009D41D9 /* SplashScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBF3FAE1EE02406009D41D9 /* SplashScreenController.swift */; };
 		0FC5594C1EDD2616002F810A /* MasukController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC5594B1EDD2616002F810A /* MasukController.swift */; };
 		0FE808CB1ED7DE9A0085B3D9 /* CallProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE808CA1ED7DE990085B3D9 /* CallProviderDelegate.swift */; };
 		0FE909311ED569B80005B2DD /* DialCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE909301ED569B80005B2DD /* DialCodeCell.swift */; };
@@ -66,6 +67,7 @@
 
 /* Begin PBXFileReference section */
 		0F2324961EDBEB3800C73BFD /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		0FBF3FAE1EE02406009D41D9 /* SplashScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenController.swift; sourceTree = "<group>"; };
 		0FC5594B1EDD2616002F810A /* MasukController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasukController.swift; sourceTree = "<group>"; };
 		0FE808CA1ED7DE990085B3D9 /* CallProviderDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallProviderDelegate.swift; sourceTree = "<group>"; };
 		0FE909301ED569B80005B2DD /* DialCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialCodeCell.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				0FE909321ED569FA0005B2DD /* ListDialController.swift */,
 				0F2324961EDBEB3800C73BFD /* LoginController.swift */,
 				0FC5594B1EDD2616002F810A /* MasukController.swift */,
+				0FBF3FAE1EE02406009D41D9 /* SplashScreenController.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -663,6 +666,7 @@
 				7BB3710A1ECC2866005B1B64 /* EditProfilController.swift in Sources */,
 				7B55523B1ECA93B700D50B4D /* AppDelegate.swift in Sources */,
 				0FC5594C1EDD2616002F810A /* MasukController.swift in Sources */,
+				0FBF3FAF1EE02406009D41D9 /* SplashScreenController.swift in Sources */,
 				7BB371111ECC8AE7005B1B64 /* DetailKontakController.swift in Sources */,
 				7B5552691ECAB9FA00D50B4D /* ListChatController.swift in Sources */,
 			);

@@ -21,6 +21,7 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
     var getContactName = ""
     
     var sentChatID = ""
+    var sentName = ""
     
     @IBOutlet weak var loading: UIActivityIndicatorView!
 
@@ -30,8 +31,6 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var kontakImg: UIImageView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var refreshBtn: UIBarButtonItem!
-    
-    let getKontak = try! Realm().objects(kontak.self).sorted(byKeyPath: "nama")
     
     var alfabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
     
@@ -52,13 +51,6 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
         
         kontakTV.reloadData()
         kontakTVHeight.constant = kontakTV.contentSize.height
-        
-        loading.startAnimating()
-        loading.isHidden = false
-        
-        refreshBtn.isEnabled = false
-        
-        refresh()
 
         // Do any additional setup after loading the view.
     }
@@ -73,6 +65,8 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        let getKontak = try! Realm().objects(kontak.self).sorted(byKeyPath: "nama")
         
 //        var row: Int = 1
 //        
@@ -105,6 +99,8 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        let getKontak = try! Realm().objects(kontak.self).sorted(byKeyPath: "nama")
+        
         let cell = kontakTV.dequeueReusableCell(withIdentifier: "kontak", for: indexPath) as! ListKontakCell
         
         cell.avaImg.layer.borderWidth = 1.0
@@ -120,11 +116,17 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let getChat = try! Realm().objects(chat.self).filter("nama = '\(getKontak[indexPath.row].nama)'")
+        let getKontak = try! Realm().objects(kontak.self).sorted(byKeyPath: "nama", ascending: true)
+        
+        sentName = getKontak[indexPath.row].nama
+        
+        let getChat = try! Realm().objects(chat.self).filter("name = '\(sentName)'")
         
         if getChat.count > 0 {
             
-            sentChatID = getChat[0].chat_id
+            print(getChat.first!.chat_id)
+            
+            sentChatID = getChat.first!.chat_id
             
             self.performSegue(withIdentifier: "segue_detail_chat", sender: self)
             
@@ -229,10 +231,11 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
                         
                         let i = self.number.index(of: original)!
                         
-                        model.user_id   =  data["user_id"].stringValue
-                        model.nama      =  self.name[i]
-                        model.gambar    =  data["gambar_small"].stringValue
-                        model.status    =  data["status"].stringValue
+                        model.user_id       =   data["user_id"].stringValue
+                        model.nama          =   self.name[i]
+                        model.gambar        =   data["gambar_small"].stringValue
+                        model.status        =   data["status"].stringValue
+                        model.registrasi_id =   data["registrasi_id"].stringValue
                         
                         DBHelper.update(obj: model)
                         
@@ -275,10 +278,11 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
                         
                         let i = self.number.index(of: original)!
                         
-                        model.user_id   =  data["user_id"].stringValue
-                        model.nama      =  self.name[i]
-                        model.gambar    =  data["gambar_small"].stringValue
-                        model.status    =  data["status"].stringValue
+                        model.user_id       =   data["user_id"].stringValue
+                        model.nama          =   self.name[i]
+                        model.gambar        =   data["gambar_small"].stringValue
+                        model.status        =   data["status"].stringValue
+                        model.registrasi_id =   data["registrasi_id"].stringValue
                         
                         DBHelper.update(obj: model)
                         
@@ -321,10 +325,11 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
                         
                         let i = self.number.index(of: original)!
                         
-                        model.user_id   =  data["user_id"].stringValue
-                        model.nama      =  self.name[i]
-                        model.gambar    =  data["gambar_small"].stringValue
-                        model.status    =  data["status"].stringValue
+                        model.user_id       =   data["user_id"].stringValue
+                        model.nama          =   self.name[i]
+                        model.gambar        =   data["gambar_small"].stringValue
+                        model.status        =   data["status"].stringValue
+                        model.registrasi_id =   data["registrasi_id"].stringValue
                         
                         DBHelper.update(obj: model)
                         
@@ -367,10 +372,11 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
                         
                         let i = self.number.index(of: original)!
                         
-                        model.user_id   =  data["user_id"].stringValue
-                        model.nama      =  self.name[i]
-                        model.gambar    =  data["gambar_small"].stringValue
-                        model.status    =  data["status"].stringValue
+                        model.user_id       =   data["user_id"].stringValue
+                        model.nama          =   self.name[i]
+                        model.gambar        =   data["gambar_small"].stringValue
+                        model.status        =   data["status"].stringValue
+                        model.registrasi_id =   data["registrasi_id"].stringValue
                         
                         DBHelper.update(obj: model)
                         
@@ -410,6 +416,7 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
             let next = segue.destination as! DetailChatController
             
             next.chatID = self.sentChatID
+            next.nama = self.sentName
         
         }
         

@@ -17,6 +17,7 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
 
     @IBOutlet weak var chatTV: UITableView!
     @IBOutlet weak var bottom: NSLayoutConstraint!
+    @IBOutlet weak var navItem: UINavigationItem!
     
     @IBOutlet weak var voiceBtn: UIButton!
     @IBOutlet weak var addBtn: UIButton!
@@ -27,6 +28,8 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var sentBtn: UIButton!
     
     var nama = ""
+    
+    var row = 0
     
     var getUser = try! Realm().objects(user.self)[0]
     
@@ -54,7 +57,17 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if chatID != "" {
+            
+            let getDetailChat = try! Realm().objects(detail_chat.self)
+            
+            print(getDetailChat.count)
+            
+            row = getDetailChat.count
+            
+        }
         
+        self.navItem.title = self.nama
         
         self.chatTxt.layer.cornerRadius = 15.0
         self.chatTxt.layer.borderWidth = 1.0
@@ -76,6 +89,12 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
         self.setStatusBarStyle(.lightContent)
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -115,16 +134,6 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        var row = 0
-        
-        if chatID != "" {
-        
-            let getDetailChat = try! Realm().objects(detail_chat.self).filter("chat_id = '\(chatID)'")
-            
-            row = getDetailChat.count
-            
-        }
-        
         return row
     }
     
@@ -149,7 +158,9 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
             cell.dateLbl.textAlignment = .right
             cell.statusImg.isHidden = true
             
-        }else if getUser.user_id == getDetailChat[indexPath.row].user_id  {
+        }
+        
+        if getUser.user_id == getDetailChat[indexPath.row].user_id  {
             
             cell.otherAva.isHidden = true
             cell.valueView.backgroundColor = UIColor.init(hexString: "91D4F6")
@@ -190,11 +201,23 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
             
             if height > 30 {
             
-                self.ChatViewHeight.constant = height + 16
+                self.ChatViewHeight.constant = height + 33
+                
+                UIView.animate(withDuration: 0.3, animations: {
+                
+                    self.view.layoutIfNeeded()
+                
+                })
             
             }else if 30 > height {
             
                 self.ChatViewHeight.constant = 46
+                
+                UIView.animate(withDuration: 0.3, animations: {
+                    
+                    self.view.layoutIfNeeded()
+                    
+                })
             
             }
             
@@ -213,10 +236,12 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
     }
     
     @IBAction func sentMessage(_ sender: UIButton) {
+
+        let getKontak = try! Realm().objects(kontak.self).filter("nama = '\(self.nama)'").first!
         
         let params = [
-            "to"    : "",
-            "from"  : "",
+            "to"    : getKontak.registrasi_id,
+            "from"  : self.getUser.registrasi_id,
             "text"  : self.chatTxt.text!
         ]
         
@@ -225,6 +250,74 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
         
                 if let jason = response.result.value {
                 
+                    let getChat = try! Realm().objects(chat.self)
+                    
+                    print(getChat)
+                    
+                    let dateFormatter:DateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "h:mm a"
+                    
+                    if getChat.count > 0 {
+                        
+                        let filter = getChat.filter("name = '\(self.nama)'")
+                    
+                        let model = chat()
+                        
+                        model.chat_id   = filter.first!.chat_id
+                        model.name      = self.nama
+                        model.last_chat = self.chatTxt.text!
+                        model.avatar    = filter.first!.avatar
+                        model.date      = dateFormatter.string(from: Date())
+                        
+                        DBHelper.update(obj: model)
+                        
+                        let model1 = detail_chat()
+                        
+                        model1.chat_id  = getChat.first!.chat_id
+                        model1.user_id  = self.getUser.user_id
+                        model1.isi      = self.chatTxt.text!
+                        model1.avatar   = self.getUser.avatar
+                        model1.date     = dateFormatter.string(from: Date())
+                        model1.read     = "0"
+                        
+                        DBHelper.insert(obj: model)
+                        
+                        self.chatTV.reloadData()
+                    
+                    }else{
+                        
+                        let getKontak = try! Realm().objects(kontak.self).filter("nama = '\(self.nama)'")
+                    
+                        let newID = "\(getChat.count + 1)"
+                        
+                        let model = chat()
+                        
+                        model.chat_id   = newID
+                        model.name      = self.nama
+                        model.last_chat = self.chatTxt.text!
+                        model.avatar    = getKontak.first!.gambar
+                        model.date      = dateFormatter.string(from: Date())
+                        
+                        DBHelper.update(obj: model)
+                        
+                        let model1 = detail_chat()
+                        
+                        let dateFormatter:DateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "h:mm a"
+                        
+                        model1.chat_id  = getChat.first!.chat_id
+                        model1.user_id  = self.getUser.user_id
+                        model1.isi      = self.chatTxt.text!
+                        model1.avatar   = self.getUser.avatar
+                        model1.date     = dateFormatter.string(from: Date())
+                        model1.read     = "0"
+                        
+                        DBHelper.insert(obj: model)
+                        
+                        self.chatTV.reloadData()
+                    
+                    }
+                    
                     print(JSON(jason).description)
                 
                 }

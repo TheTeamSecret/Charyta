@@ -45,6 +45,7 @@ class kontak: Object {
     dynamic var nama = String()
     dynamic var gambar = String()
     dynamic var status = String()
+    dynamic var registrasi_id = String()
     
     override static func primaryKey() -> String? {
         

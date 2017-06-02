@@ -22,9 +22,6 @@ class ListTeleponController: UIViewController, UITableViewDataSource, UITableVie
         super.viewDidLoad()
         
         self.setStatusBarStyle(.lightContent)
-        
-        let panGesture = UIPanGestureRecognizer.init(target: self, action: #selector(handlePanGesture(panGesture:)))
-        self.listTeleponTV.addGestureRecognizer(panGesture)
 
         // Do any additional setup after loading the view.
     }
@@ -133,21 +130,6 @@ class ListTeleponController: UIViewController, UITableViewDataSource, UITableVie
     @IBAction func goToInfoKontak(_ sender: UIButton) {
         
         self.performSegue(withIdentifier: "segue_detail_kontak", sender: self)
-        
-    }
-    
-    func handlePanGesture(panGesture: UIPanGestureRecognizer) {
-        
-        let velocity = panGesture.velocity(in: view)
-        
-        if velocity.x > 0 || velocity.x < 0 {
-            
-            // get translation
-            let translation = panGesture.translation(in: view)
-            panGesture.setTranslation(CGPoint.zero, in: view)
-            print(translation)
-        
-        }
         
     }
 

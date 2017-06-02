@@ -7,11 +7,23 @@
 //
 
 import UIKit
+import ContactsUI
+import Alamofire
+import SwiftyJSON
+import RealmSwift
 
-class MenuBarController: UITabBarController {
+class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
+    
+    let store = CNContactStore()
+    var name = [String]()
+    var number = [String]()
+    var getContactNumber = ""
+    var getContactName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        findContacts()
         
         self.setStatusBarStyle(.lightContent)
         
@@ -20,6 +32,8 @@ class MenuBarController: UITabBarController {
         tabBar.items![2].selectedImage = UIImage.init(named: "selected_news")
         tabBar.items![3].selectedImage = UIImage.init(named: "selected_kontak")
         tabBar.items![4].selectedImage = UIImage.init(named: "selected_setting")
+        
+        refresh()
 
         // Do any additional setup after loading the view.
     }
@@ -27,6 +41,211 @@ class MenuBarController: UITabBarController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func findContacts() -> [CNContact] {
+        let keysToFetch = [CNContactGivenNameKey, CNContactMiddleNameKey, CNContactFamilyNameKey, CNContactEmailAddressesKey, CNContactPhoneNumbersKey]
+        let fetchRequest = CNContactFetchRequest(keysToFetch: keysToFetch as [CNKeyDescriptor])
+        let contacts = [CNContact]()
+        self.name.removeAll()
+        self.number.removeAll()
+        do{
+            try! store.enumerateContacts(with: fetchRequest, usingBlock: { (contact, stop) -> Void in
+                if contact.phoneNumbers.count > 0 {
+                    let get = (contact.phoneNumbers[0].value as CNPhoneNumber).value(forKey: "digits") as! String
+                    
+                    let countNumber = get.characters.count
+                    if countNumber > 9 {
+                        
+                        self.getContactNumber = get
+                        var contName = ""
+                        if contact.givenName != "" {
+                            contName += contact.givenName
+                        }
+                        if contact.middleName != "" {
+                            contName += " " + contact.middleName
+                        }
+                        if contact.familyName != "" {
+                            contName += " " + contact.familyName
+                        }
+                        self.getContactName = contName
+                        self.name.append(self.getContactName)
+                        self.number.append(get)
+                    }
+                }
+            }
+            )
+            return contacts
+        }
+    }
+    
+    func refresh() {
+        
+        for numb in number {
+            
+            let indexStr = numb.index(numb.startIndex, offsetBy: 1)
+            let prefix = numb.substring(to: indexStr)
+            
+            if prefix == "+" {
+                
+                let indexStrNew = numb.index(numb.startIndex, offsetBy: 3)
+                let newNumber = numb.substring(from: indexStrNew)
+                checkKontak(phoneNumber: newNumber, original: numb)
+                
+            }else if prefix == "0" {
+                
+                let indexStrNew = numb.index(numb.startIndex, offsetBy: 1)
+                let newNumber = numb.substring(from: indexStrNew)
+                checkKontak(phoneNumber: newNumber, original: numb)
+                
+            }
+            
+        }
+        
+    }
+    
+    func checkKontak(phoneNumber: String, original: String){
+        
+        Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": phoneNumber], encoding: JSONEncoding.default)
+            .responseJSON{response in
+                
+                if let jason = response.result.value {
+                    
+                    if JSON(jason)["status"].stringValue == "1" {
+                        
+                        print(JSON(jason).description)
+                        
+                        let model = kontak()
+                        
+                        let data = JSON(jason)["data"]
+                        
+                        let i = self.number.index(of: original)!
+                        
+                        model.user_id       =   data["user_id"].stringValue
+                        model.nama          =   self.name[i]
+                        model.gambar        =   data["gambar_small"].stringValue
+                        model.status        =   data["status"].stringValue
+                        model.registrasi_id =   data["registrasi_id"].stringValue
+                        
+                        DBHelper.update(obj: model)
+                        
+                    }else{
+                        
+                        self.checkKontak0(phoneNumber: phoneNumber, original: original)
+                        
+                    }
+                    
+                }
+                
+        }
+        
+    }
+    
+    func checkKontak0(phoneNumber: String, original: String){
+        
+        Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": "0\(phoneNumber)"], encoding: JSONEncoding.default)
+            .responseJSON{response in
+                
+                if let jason = response.result.value {
+                    
+                    if JSON(jason)["status"].stringValue == "1" {
+                        
+                        print(JSON(jason).description)
+                        
+                        let model = kontak()
+                        
+                        let data = JSON(jason)["data"]
+                        
+                        let i = self.number.index(of: original)!
+                        
+                        model.user_id       =   data["user_id"].stringValue
+                        model.nama          =   self.name[i]
+                        model.gambar        =   data["gambar_small"].stringValue
+                        model.status        =   data["status"].stringValue
+                        model.registrasi_id =   data["registrasi_id"].stringValue
+                        
+                        DBHelper.update(obj: model)
+                        
+                    }else{
+                        
+                        self.checkKontak62(phoneNumber: phoneNumber, original: original)
+                        
+                    }
+                    
+                }
+                
+        }
+        
+    }
+    
+    func checkKontak62(phoneNumber: String, original: String){
+        
+        Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": "62\(phoneNumber)"], encoding: JSONEncoding.default)
+            .responseJSON{response in
+                
+                if let jason = response.result.value {
+                    
+                    if JSON(jason)["status"].stringValue == "1" {
+                        
+                        print(JSON(jason).description)
+                        
+                        let model = kontak()
+                        
+                        let data = JSON(jason)["data"]
+                        
+                        let i = self.number.index(of: original)!
+                        
+                        model.user_id       =   data["user_id"].stringValue
+                        model.nama          =   self.name[i]
+                        model.gambar        =   data["gambar_small"].stringValue
+                        model.status        =   data["status"].stringValue
+                        model.registrasi_id =   data["registrasi_id"].stringValue
+                        
+                        DBHelper.update(obj: model)
+                        
+                    }else{
+                        
+                        self.checkKontakPlus62(phoneNumber: phoneNumber, original: original)
+                        
+                    }
+                    
+                }
+                
+        }
+        
+    }
+    
+    func checkKontakPlus62(phoneNumber: String, original: String){
+        
+        Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": "+62\(phoneNumber)"], encoding: JSONEncoding.default)
+            .responseJSON{response in
+                
+                if let jason = response.result.value {
+                    
+                    if JSON(jason)["status"].stringValue == "1" {
+                        
+                        print(JSON(jason).description)
+                        
+                        let model = kontak()
+                        
+                        let data = JSON(jason)["data"]
+                        
+                        let i = self.number.index(of: original)!
+                        
+                        model.user_id       =   data["user_id"].stringValue
+                        model.nama          =   self.name[i]
+                        model.gambar        =   data["gambar_small"].stringValue
+                        model.status        =   data["status"].stringValue
+                        model.registrasi_id =   data["registrasi_id"].stringValue
+                        
+                        DBHelper.update(obj: model)
+                        
+                    }
+                    
+                }
+                
+        }
+        
     }
 
     /*

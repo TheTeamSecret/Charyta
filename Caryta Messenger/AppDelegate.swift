@@ -12,14 +12,15 @@ import PushKit
 import Firebase
 import FirebaseAuth
 
+import RealmSwift
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
     
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
     
-    func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
         
@@ -94,6 +95,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
         // TODO: Handle data of notification
         // Print message ID.
         
+        print(userInfo)
+        
         if Auth.auth().canHandleNotification(userInfo) {
         
             completionHandler(UIBackgroundFetchResult.noData)
@@ -125,8 +128,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
         Messaging.messaging().apnsToken = deviceToken
         Messaging.messaging().shouldEstablishDirectChannel = true
         Messaging.messaging().setAPNSToken(deviceToken, type: MessagingAPNSTokenType.sandbox)
-        Messaging.messaging().setAPNSToken(deviceToken, type: MessagingAPNSTokenType.prod)
-        Messaging.messaging().setAPNSToken(deviceToken, type: MessagingAPNSTokenType.unknown)
         print("APNs token retrieved: \(deviceToken)")
         Auth.auth().setAPNSToken(deviceToken, type: AuthAPNSTokenType.sandbox)
         

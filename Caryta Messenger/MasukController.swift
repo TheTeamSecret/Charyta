@@ -11,6 +11,7 @@ import Alamofire
 import RealmSwift
 import SwiftyJSON
 import Firebase
+import DropDown
 
 class MasukController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
@@ -22,18 +23,68 @@ class MasukController: UIViewController, UIImagePickerControllerDelegate, UINavi
     
     @IBOutlet weak var previewImg: UIImageView!
     
-    @IBOutlet weak var namaTF: UITextField!
+    @IBOutlet weak var firstNamaTF: UITextField!
+    @IBOutlet weak var lastNamaTF: UITextField!
+    @IBOutlet weak var genderTF: UITextField!
     @IBOutlet weak var passTF: UITextField!
     @IBOutlet weak var confirmPassTF: UITextField!
     
     @IBOutlet weak var finishBtn: UIBarButtonItem!
     
+    var genderDropDown = DropDown()
+    
+    lazy var dropDown: [DropDown] = {
+        
+        return [
+            self.genderDropDown
+        ]
+        
+    }()
+    
+    func setGender() {
+        
+        setValueGender()
+        
+    }
+    
+    func setValueGender() {
+        
+        genderDropDown.anchorView = genderTF
+        genderDropDown.direction = .bottom
+        genderDropDown.bottomOffset = CGPoint(x: 0, y: (genderDropDown.anchorView?.plainView.bounds.height)!)
+        
+        self.genderDropDown.dataSource = ["L", "P"]
+        
+        
+        let screenSize = self.view.frame.height
+        if screenSize <= 740.0 {
+            
+        } else  {
+            
+        }
+        
+        genderDropDown.selectionAction = { [unowned self] (index, item) in
+            
+            self.genderTF.text = item
+            
+        }
+        
+    }
+    
     var phoneNumber = String()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setGender()
 
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func showGender(_ sender: UIButton) {
+        
+        genderDropDown.show()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -168,7 +219,7 @@ class MasukController: UIViewController, UIImagePickerControllerDelegate, UINavi
     
     @IBAction func checkValue(_ sender: UITextField) {
         
-        if namaTF.text! == "" || passTF.text! == "" || confirmPassTF.text! == "" || passTF.text! != confirmPassTF.text! {
+        if firstNamaTF.text! == "" || lastNamaTF.text! == "" || genderTF.text! == "" || passTF.text! == "" || confirmPassTF.text! == "" || passTF.text! != confirmPassTF.text! {
         
             finishBtn.isEnabled = false
         
@@ -182,12 +233,15 @@ class MasukController: UIViewController, UIImagePickerControllerDelegate, UINavi
     
     @IBAction func selesai(_ sender: UIBarButtonItem) {
         
+        let token = InstanceID.instanceID().token()!
+        
         let params = [
             "phoneNumber"   : phoneNumber,
-            "firstName"     : namaTF.text!,
-            "lastName"      : "",
-            "sex"           : "",
-            "password"      : passTF.text!
+            "firstName"     : firstNamaTF.text!,
+            "lastName"      : lastNamaTF.text!,
+            "sex"           : genderTF.text!,
+            "password"      : passTF.text!,
+            "registrasiId"  : token
         ]
         
         Alamofire.request("\(link().domain)registrasi", method: .post, parameters: params, encoding: JSONEncoding.default)
@@ -199,50 +253,22 @@ class MasukController: UIViewController, UIImagePickerControllerDelegate, UINavi
                     
                     let model = user()
                     
-                    model.user_id       = JSON(jason)["message"].stringValue
-                    model.first_name    = self.namaTF.text!
-                    model.last_name     = ""
-                    model.sex           = self.namaTF.text!
+                    model.user_id       = JSON(jason)["data"]["userId"].stringValue
+                    model.first_name    = self.firstNamaTF.text!
+                    model.last_name     = self.lastNamaTF.text!
+                    model.sex           = self.genderTF.text!
                     model.no_hp         = self.phoneNumber
                     model.email         = ""
                     model.avatar        = ""
                     
                     DBHelper.insert(obj: model)
                     
-                    self.updateToken(user_id: JSON(jason)["message"].stringValue)
+                    self.performSegue(withIdentifier: "segue_main", sender: self)
                 
                 }
         
         }
         
-    }
-    
-    func updateToken(user_id: String) {
-    
-        let token = InstanceID.instanceID().token()!
-        
-        let params = [
-            "userId"        : user_id,
-            "registrasiId"  : token
-        ]
-        
-        Alamofire.request("\(link().domain)registrasi-refresh", method: .post, parameters: params, encoding: JSONEncoding.default)
-            .responseJSON{response in
-        
-                if let jason = response.result.value {
-                
-                    print(JSON(jason).description)
-                    
-                    if JSON(jason)["status"].stringValue == "1" {
-                    
-                        self.performSegue(withIdentifier: "segue_main", sender: self)
-                    
-                    }
-                
-                }
-        
-        }
-    
     }
 
     /*
