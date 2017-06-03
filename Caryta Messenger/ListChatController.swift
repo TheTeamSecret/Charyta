@@ -38,6 +38,13 @@ class ListChatController: UIViewController, UITableViewDataSource, UITableViewDe
 
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        listChatTV.reloadData()
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

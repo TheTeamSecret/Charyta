@@ -13,6 +13,8 @@ import Firebase
 import FirebaseAuth
 
 import RealmSwift
+import SwiftyJSON
+import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
@@ -32,9 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
             UNUserNotificationCenter.current().requestAuthorization(
                 options: authOptions,
                 completionHandler: {_, _ in })
+            let action = UNNotificationAction.init(identifier: "reply", title: "Reply", options: [])
+            let category = UNNotificationCategory.init(identifier: "myCategory", actions: [action], intentIdentifiers: [], options: [])
+            UNUserNotificationCenter.current().setNotificationCategories([category])
         } else {
-            let settings: UIUserNotificationSettings =
-                UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
             application.registerUserNotificationSettings(settings)
         }
         
@@ -64,12 +68,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
         
         guard type == .voIP else { return }
         
-        if  let uuidString = payload.dictionaryPayload["UUID"] as? String,
-            let handle = payload.dictionaryPayload["handle"] as? String,
-            let hasVideo = payload.dictionaryPayload["hasVideo"] as? Bool,
-            let uuid = UUID(uuidString: uuidString)
+        if  let uuidString = payload.dictionaryPayload["UUID"] as? String, let handle = payload.dictionaryPayload["handle"] as? String, let hasVideo = payload.dictionaryPayload["hasVideo"] as? Bool, let uuid = UUID(uuidString: uuidString)
         {
-            // Handle incoming call
+            print(uuidString)
+            print(handle)
+            print(hasVideo)
+            print(uuid)
         }
         
     }
@@ -88,8 +92,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
         print(userInfo)
     }
     
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
-                     fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         // If you are receiving a notification message while your app is in the background,
         // this callback will not be fired till the user taps on the notification launching the application.
         // TODO: Handle data of notification
@@ -131,6 +134,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
         print("APNs token retrieved: \(deviceToken)")
         Auth.auth().setAPNSToken(deviceToken, type: AuthAPNSTokenType.sandbox)
         
+        
+        
         // With swizzling disabled you must set the APNs token here.
         // FIRInstanceID.instanceID().setAPNSToken(deviceToken, type: FIRInstanceIDAPNSTokenType.sandbox)
     }
@@ -141,9 +146,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
 extension AppDelegate : UNUserNotificationCenterDelegate {
     
     // Receive displayed notifications for iOS 10 devices.
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         let userInfo = notification.request.content.userInfo
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {
@@ -151,15 +154,18 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         }
         
         // Print full message.
-        print(userInfo)
+        print(JSON(userInfo).description)
+        
+        let get = JSON(userInfo)
+        let aps = get["aps"]
+        
+        print(aps)
         
         // Change this to your preferred presentation option
         completionHandler([])
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         let userInfo = response.notification.request.content.userInfo
         // Print message ID.
         if let messageID = userInfo[gcmMessageIDKey] {

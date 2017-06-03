@@ -16,6 +16,7 @@ class ChatCell: UITableViewCell {
     @IBOutlet weak var valueView: UIView!
     @IBOutlet weak var valueLbl: UILabel!
     @IBOutlet weak var statusImg: UIImageView!
+    @IBOutlet weak var valueViewHeight: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()

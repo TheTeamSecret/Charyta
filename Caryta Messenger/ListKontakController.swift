@@ -218,13 +218,13 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
         
         Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": phoneNumber], encoding: JSONEncoding.default)
             .responseJSON{response in
-        
+                
                 if let jason = response.result.value {
                     
                     if JSON(jason)["status"].stringValue == "1" {
                         
                         print(JSON(jason).description)
-                    
+                        
                         let model = kontak()
                         
                         let data = JSON(jason)["data"]
@@ -248,17 +248,17 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
                             self.refreshBtn.isEnabled = true
                             
                         }
-                    
+                        
                     }else{
-                    
+                        
                         self.checkKontak0(phoneNumber: phoneNumber, original: original)
-                    
+                        
                     }
-                
+                    
                 }
-        
+                
         }
-    
+        
     }
     
     func checkKontak0(phoneNumber: String, original: String){
@@ -297,9 +297,9 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
                         }
                         
                     }else{
-                    
+                        
                         self.checkKontak62(phoneNumber: phoneNumber, original: original)
-                    
+                        
                     }
                     
                 }
@@ -344,9 +344,9 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
                         }
                         
                     }else{
-                    
+                        
                         self.checkKontakPlus62(phoneNumber: phoneNumber, original: original)
-                    
+                        
                     }
                     
                 }

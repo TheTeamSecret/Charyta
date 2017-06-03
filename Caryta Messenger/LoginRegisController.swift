@@ -212,7 +212,8 @@ class LoginRegisController: UIViewController, CLLocationManagerDelegate {
         }else if segue.identifier == "segue_password" {
         
             let next = segue.destination as! LoginController
-            next.username = "\(countryDial.text!)\(numberTxt.text!)"
+            next.username = numberTxt.text!
+            next.code = countryDial.text!
         
         }
         

@@ -11,10 +11,13 @@ import Alamofire
 import SwiftyJSON
 import RealmSwift
 import Firebase
+import Toaster
 
 class LoginController: UIViewController {
 
     var username = String()
+    
+    var code = String()
     
     @IBOutlet weak var passTxt: UITextField!
     
@@ -22,6 +25,9 @@ class LoginController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let indexStrNew = code.index(code.startIndex, offsetBy: 1)
+        code = code.substring(from: indexStrNew)
 
         // Do any additional setup after loading the view.
     }
@@ -33,6 +39,10 @@ class LoginController: UIViewController {
     
     @IBAction func masuk(_ sender: UIBarButtonItem) {
         
+    }
+    
+    func login(){
+        
         let params = [
             "username" : self.username,
             "password" : passTxt.text!
@@ -40,28 +50,171 @@ class LoginController: UIViewController {
         
         Alamofire.request("\(link().domain)login", method: .post, parameters: params, encoding: JSONEncoding.default)
             .responseJSON{response in
-        
+                
                 if let jason = response.result.value {
+                    
+                    if JSON(jason)["status"].stringValue == "1" {
+                        
+                        print(JSON(jason).description)
+                        
+                        let token = InstanceID.instanceID().token()!
+                        
+                        let model = user()
+                        
+                        model.user_id       = JSON(jason)["data"]["user_id"].stringValue
+                        model.first_name    = JSON(jason)["data"]["name"].stringValue
+                        model.last_name     = ""
+                        model.email         = JSON(jason)["data"]["email"].stringValue
+                        model.no_hp         = JSON(jason)["data"]["no_hp"].stringValue
+                        model.sex           = JSON(jason)["data"]["sex"].stringValue
+                        model.avatar        = JSON(jason)["data"]["avatar_small"].stringValue
+                        model.registrasi_id = token
+                        
+                        self.updateToken(user_id: JSON(jason)["data"]["user_id"].stringValue, token: token)
+                        
+                        DBHelper.insert(obj: model)
+                        
+                    }else{
+                        
+                        self.login0()
+                        
+                    }
+                    
+                }
                 
-                    print(JSON(jason).description)
-                    
-                    let token = InstanceID.instanceID().token()!
-                    
-                    let model = user()
-                    
-                    model.user_id       = JSON(jason)["data"]["user_id"].stringValue
-                    model.first_name    = JSON(jason)["data"]["first_name"].stringValue
-                    model.last_name     = JSON(jason)["data"]["last_name"].stringValue
-                    model.email         = JSON(jason)["data"]["email"].stringValue
-                    model.no_hp         = JSON(jason)["data"]["no_hp"].stringValue
-                    model.sex           = JSON(jason)["data"]["sex"].stringValue
-                    model.avatar        = JSON(jason)["data"]["avatar_small"].stringValue
-                    model.registrasi_id = token
-                    
-                    self.updateToken(user_id: JSON(jason)["data"]["user_id"].stringValue, token: token)
-                    
-                    DBHelper.insert(obj: model)
+        }
+    
+    }
+    
+    func login0(){
+        
+        let params = [
+            "username" : "0\(self.username)",
+            "password" : passTxt.text!
+        ]
+        
+        Alamofire.request("\(link().domain)login", method: .post, parameters: params, encoding: JSONEncoding.default)
+            .responseJSON{response in
                 
+                if let jason = response.result.value {
+                    
+                    if JSON(jason)["status"].stringValue == "1" {
+                        
+                        print(JSON(jason).description)
+                        
+                        let token = InstanceID.instanceID().token()!
+                        
+                        let model = user()
+                        
+                        model.user_id       = JSON(jason)["data"]["user_id"].stringValue
+                        model.first_name    = JSON(jason)["data"]["name"].stringValue
+                        model.last_name     = ""
+                        model.email         = JSON(jason)["data"]["email"].stringValue
+                        model.no_hp         = JSON(jason)["data"]["no_hp"].stringValue
+                        model.sex           = JSON(jason)["data"]["sex"].stringValue
+                        model.avatar        = JSON(jason)["data"]["avatar_small"].stringValue
+                        model.registrasi_id = token
+                        
+                        self.updateToken(user_id: JSON(jason)["data"]["user_id"].stringValue, token: token)
+                        
+                        DBHelper.insert(obj: model)
+                        
+                    }else{
+                        
+                        self.loginCode()
+                        
+                    }
+                    
+                }
+                
+        }
+        
+    }
+    
+    func loginCode(){
+        
+        let params = [
+            "username" : "\(self.code)\(self.username)",
+            "password" : passTxt.text!
+        ]
+        
+        Alamofire.request("\(link().domain)login", method: .post, parameters: params, encoding: JSONEncoding.default)
+            .responseJSON{response in
+                
+                if let jason = response.result.value {
+                    
+                    if JSON(jason)["status"].stringValue == "1" {
+                    
+                        print(JSON(jason).description)
+                        
+                        let token = InstanceID.instanceID().token()!
+                        
+                        let model = user()
+                        
+                        model.user_id       = JSON(jason)["data"]["user_id"].stringValue
+                        model.first_name    = JSON(jason)["data"]["name"].stringValue
+                        model.last_name     = ""
+                        model.email         = JSON(jason)["data"]["email"].stringValue
+                        model.no_hp         = JSON(jason)["data"]["no_hp"].stringValue
+                        model.sex           = JSON(jason)["data"]["sex"].stringValue
+                        model.avatar        = JSON(jason)["data"]["avatar_small"].stringValue
+                        model.registrasi_id = token
+                        
+                        self.updateToken(user_id: JSON(jason)["data"]["user_id"].stringValue, token: token)
+                        
+                        DBHelper.insert(obj: model)
+                        
+                    }else{
+                    
+                        self.loginPlusCode()
+                    
+                    }
+                    
+                }
+                
+        }
+        
+    }
+    
+    func loginPlusCode(){
+        
+        let params = [
+            "username" : "+\(self.code)\(self.username)",
+            "password" : passTxt.text!
+        ]
+        
+        Alamofire.request("\(link().domain)login", method: .post, parameters: params, encoding: JSONEncoding.default)
+            .responseJSON{response in
+                
+                if let jason = response.result.value {
+                    
+                    if JSON(jason)["status"].stringValue == "1" {
+                        
+                        print(JSON(jason).description)
+                        
+                        let token = InstanceID.instanceID().token()!
+                        
+                        let model = user()
+                        
+                        model.user_id       = JSON(jason)["data"]["user_id"].stringValue
+                        model.first_name    = JSON(jason)["data"]["name"].stringValue
+                        model.last_name     = ""
+                        model.email         = JSON(jason)["data"]["email"].stringValue
+                        model.no_hp         = JSON(jason)["data"]["no_hp"].stringValue
+                        model.sex           = JSON(jason)["data"]["sex"].stringValue
+                        model.avatar        = JSON(jason)["data"]["avatar_small"].stringValue
+                        model.registrasi_id = token
+                        
+                        self.updateToken(user_id: JSON(jason)["data"]["user_id"].stringValue, token: token)
+                        
+                        DBHelper.insert(obj: model)
+                        
+                    }else{
+                        
+                        Toast.init(text: "Password salah!").show()
+                        
+                    }
+                    
                 }
                 
         }
