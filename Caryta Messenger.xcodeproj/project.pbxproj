@@ -7,10 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F1E2E061EE9379700B1D43E /* AddGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1E2E051EE9379700B1D43E /* AddGroupController.swift */; };
+		0F1E2E081EE9389200B1D43E /* ParticipantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1E2E071EE9389200B1D43E /* ParticipantCell.swift */; };
 		0F2324971EDBEB3800C73BFD /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2324961EDBEB3800C73BFD /* LoginController.swift */; };
+		0F5688981EE5309E00F1B408 /* SelectKontakController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5688971EE5309E00F1B408 /* SelectKontakController.swift */; };
+		0F56889A1EE5313700F1B408 /* SelectKontakCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5688991EE5313700F1B408 /* SelectKontakCell.swift */; };
 		0FBF3FAF1EE02406009D41D9 /* SplashScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBF3FAE1EE02406009D41D9 /* SplashScreenController.swift */; };
+		0FC47E341EE2AFA900311B5B /* LoginWithStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC47E331EE2AFA900311B5B /* LoginWithStoreController.swift */; };
 		0FC5594C1EDD2616002F810A /* MasukController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC5594B1EDD2616002F810A /* MasukController.swift */; };
-		0FE808CB1ED7DE9A0085B3D9 /* CallProviderDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE808CA1ED7DE990085B3D9 /* CallProviderDelegate.swift */; };
 		0FE909311ED569B80005B2DD /* DialCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE909301ED569B80005B2DD /* DialCodeCell.swift */; };
 		0FE909331ED569FA0005B2DD /* ListDialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE909321ED569FA0005B2DD /* ListDialController.swift */; };
 		18FF7A09FCD34A20C07151E8 /* Pods_Caryta_Messenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BB4AD999016DB7E9C2615C2 /* Pods_Caryta_Messenger.framework */; };
@@ -66,10 +70,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F1E2E051EE9379700B1D43E /* AddGroupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupController.swift; sourceTree = "<group>"; };
+		0F1E2E071EE9389200B1D43E /* ParticipantCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantCell.swift; sourceTree = "<group>"; };
 		0F2324961EDBEB3800C73BFD /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		0F5688971EE5309E00F1B408 /* SelectKontakController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectKontakController.swift; sourceTree = "<group>"; };
+		0F5688991EE5313700F1B408 /* SelectKontakCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectKontakCell.swift; sourceTree = "<group>"; };
+		0F8526001EEE49EC00FAC280 /* Caryta Messenger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Caryta Messenger-Bridging-Header.h"; sourceTree = "<group>"; };
 		0FBF3FAE1EE02406009D41D9 /* SplashScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenController.swift; sourceTree = "<group>"; };
+		0FC47E331EE2AFA900311B5B /* LoginWithStoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWithStoreController.swift; sourceTree = "<group>"; };
 		0FC5594B1EDD2616002F810A /* MasukController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasukController.swift; sourceTree = "<group>"; };
-		0FE808CA1ED7DE990085B3D9 /* CallProviderDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CallProviderDelegate.swift; sourceTree = "<group>"; };
 		0FE909301ED569B80005B2DD /* DialCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialCodeCell.swift; sourceTree = "<group>"; };
 		0FE909321ED569FA0005B2DD /* ListDialController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDialController.swift; sourceTree = "<group>"; };
 		2BB4AD999016DB7E9C2615C2 /* Pods_Caryta_Messenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Caryta_Messenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -246,6 +255,8 @@
 				7B5552761ECAE99600D50B4D /* ListTeleponCell.swift */,
 				7BF924511ED2E0B900F89183 /* TimelineCell.swift */,
 				0FE909301ED569B80005B2DD /* DialCodeCell.swift */,
+				0F5688991EE5313700F1B408 /* SelectKontakCell.swift */,
+				0F1E2E071EE9389200B1D43E /* ParticipantCell.swift */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -255,6 +266,8 @@
 			children = (
 				7B5552681ECAB9FA00D50B4D /* ListChatController.swift */,
 				7BB3710B1ECC86BC005B1B64 /* DetailChatController.swift */,
+				0F5688971EE5309E00F1B408 /* SelectKontakController.swift */,
+				0F1E2E051EE9379700B1D43E /* AddGroupController.swift */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -267,7 +280,7 @@
 				7B5552411ECA93B700D50B4D /* Assets.xcassets */,
 				7B5552461ECA93B700D50B4D /* Info.plist */,
 				7BB371071ECC052F005B1B64 /* UIView+Borders.swift */,
-				0FE808CA1ED7DE990085B3D9 /* CallProviderDelegate.swift */,
+				0F8526001EEE49EC00FAC280 /* Caryta Messenger-Bridging-Header.h */,
 			);
 			name = Config;
 			sourceTree = "<group>";
@@ -291,6 +304,7 @@
 				0F2324961EDBEB3800C73BFD /* LoginController.swift */,
 				0FC5594B1EDD2616002F810A /* MasukController.swift */,
 				0FBF3FAE1EE02406009D41D9 /* SplashScreenController.swift */,
+				0FC47E331EE2AFA900311B5B /* LoginWithStoreController.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -421,6 +435,7 @@
 					7B5552361ECA93B700D50B4D = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = PXA5BJAM6Y;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -641,6 +656,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B5552751ECAE84E00D50B4D /* ListTeleponController.swift in Sources */,
+				0FC47E341EE2AFA900311B5B /* LoginWithStoreController.swift in Sources */,
 				7B55527A1ECB044100D50B4D /* MainSettingController.swift in Sources */,
 				7BB3710E1ECC8709005B1B64 /* ChatCell.swift in Sources */,
 				7B2AFB211ECD9D2C007033C5 /* NavigationSettingController.swift in Sources */,
@@ -655,18 +671,21 @@
 				7BB371081ECC052F005B1B64 /* UIView+Borders.swift in Sources */,
 				7BF924541ED3013C00F89183 /* CommentController.swift in Sources */,
 				0FE909331ED569FA0005B2DD /* ListDialController.swift in Sources */,
+				0F1E2E081EE9389200B1D43E /* ParticipantCell.swift in Sources */,
 				7B55526C1ECABA4600D50B4D /* ListChatCell.swift in Sources */,
 				7BF9244E1ED2CFEA00F89183 /* model.swift in Sources */,
 				7BB3710C1ECC86BC005B1B64 /* DetailChatController.swift in Sources */,
-				0FE808CB1ED7DE9A0085B3D9 /* CallProviderDelegate.swift in Sources */,
 				7B2AFB1D1ECD8AF2007033C5 /* ListNewsController.swift in Sources */,
+				0F1E2E061EE9379700B1D43E /* AddGroupController.swift in Sources */,
 				7B2AFB151ECD4F48007033C5 /* ListKontakController.swift in Sources */,
 				7BF924521ED2E0B900F89183 /* TimelineCell.swift in Sources */,
 				7B8C3D8E1ECEAB8D009EEAE9 /* GantiNomorController.swift in Sources */,
 				7BB3710A1ECC2866005B1B64 /* EditProfilController.swift in Sources */,
+				0F56889A1EE5313700F1B408 /* SelectKontakCell.swift in Sources */,
 				7B55523B1ECA93B700D50B4D /* AppDelegate.swift in Sources */,
 				0FC5594C1EDD2616002F810A /* MasukController.swift in Sources */,
 				0FBF3FAF1EE02406009D41D9 /* SplashScreenController.swift in Sources */,
+				0F5688981EE5309E00F1B408 /* SelectKontakController.swift in Sources */,
 				7BB371111ECC8AE7005B1B64 /* DetailKontakController.swift in Sources */,
 				7B5552691ECAB9FA00D50B4D /* ListChatController.swift in Sources */,
 			);
@@ -823,15 +842,18 @@
 			baseConfigurationReference = 6E67553789C3A38D9F44BB72 /* Pods-Caryta Messenger.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Caryta Messenger/Caryta Messenger.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PXA5BJAM6Y;
 				INFOPLIST_FILE = "Caryta Messenger/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.caryta.messenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Caryta Messenger/Caryta Messenger-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -841,15 +863,17 @@
 			baseConfigurationReference = CAD568A09B3A9562C796798F /* Pods-Caryta Messenger.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Caryta Messenger/Caryta Messenger.entitlements";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PXA5BJAM6Y;
 				INFOPLIST_FILE = "Caryta Messenger/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.caryta.messenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Caryta Messenger/Caryta Messenger-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

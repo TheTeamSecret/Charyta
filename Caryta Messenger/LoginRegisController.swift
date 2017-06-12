@@ -206,7 +206,7 @@ class LoginRegisController: UIViewController, CLLocationManagerDelegate {
         
         if segue.identifier == "segue_verifikasi" {
         
-            let next = segue.destination as! VerifCodeController
+            let next = segue.destination as! MasukController
             next.phoneNumber = "\(countryDial.text!)\(numberTxt.text!)"
          
         }else if segue.identifier == "segue_password" {

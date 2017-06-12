@@ -69,6 +69,8 @@ class ListChatController: UIViewController, UITableViewDataSource, UITableViewDe
         cell.badge.layer.cornerRadius = 6.0
         cell.badge.clipsToBounds = true
         
+        cell.avatarImg.setImage(withUrl: URL.init(string: "\(link().gambar)\(getChat[indexPath.row].avatar)")!, placeholder: UIImage.init(named: "Avatar"), crossFadePlaceholder: true, cacheScaled: false, completion: nil)
+        
         cell.nameLbl.text = getChat[indexPath.row].name
         cell.lastLbl.text = getChat[indexPath.row].last_chat
         cell.dateLbl.text = getChat[indexPath.row].date
@@ -99,6 +101,12 @@ class ListChatController: UIViewController, UITableViewDataSource, UITableViewDe
         
     }
     
+    @IBAction func addChat(_ sender: UIBarButtonItem) {
+        
+        self.shouldPerformSegue(withIdentifier: "segue_add_chat", sender: self)
+        
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "segue_detail_chat" {
@@ -108,6 +116,12 @@ class ListChatController: UIViewController, UITableViewDataSource, UITableViewDe
             next.chatID = self.sentID
             next.nama = self.sentNama
         
+        }else if segue.identifier == "segue_add_chat" {
+            
+            let next = segue.destination as! ListKontakController
+            
+            next.from = "ListChat"
+            
         }
         
     }

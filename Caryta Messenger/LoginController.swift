@@ -39,6 +39,8 @@ class LoginController: UIViewController {
     
     @IBAction func masuk(_ sender: UIBarButtonItem) {
         
+        login()
+        
     }
     
     func login(){

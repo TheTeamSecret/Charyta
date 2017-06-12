@@ -11,8 +11,9 @@ import RealmSwift
 import ContactsUI
 import Alamofire
 import SwiftyJSON
+import MapleBacon
 
-class ListKontakController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, CNContactViewControllerDelegate {
+class ListKontakController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, CNContactViewControllerDelegate, UINavigationControllerDelegate {
     
     let store = CNContactStore()
     var name = [String]()
@@ -20,8 +21,12 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
     var getContactNumber = ""
     var getContactName = ""
     
+    let addContact = CNContactViewController.init(forNewContact: CNContact())
+    
     var sentChatID = ""
     var sentName = ""
+    
+    var from = ""
     
     @IBOutlet weak var loading: UIActivityIndicatorView!
 
@@ -37,7 +42,29 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if from != "" {
+        
+            self.refreshBtn.title = "Kembali"
+        
+        }
+        
         findContacts()
+        
+        let getKontak = try! Realm().objects(kontak.self)
+        
+        if getKontak.count > 0 {
+            
+            for itemKontak in getKontak {
+                
+                if itemKontak.registrasi_id == "" {
+                    
+                    DBHelper.delete(obj: itemKontak)
+                    
+                }
+                
+            }
+            
+        }
         
         self.setStatusBarStyle(.lightContent)
         
@@ -53,6 +80,11 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
         kontakTVHeight.constant = kontakTV.contentSize.height
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        refresh()
     }
 
     override func didReceiveMemoryWarning() {
@@ -229,23 +261,32 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
                         
                         let data = JSON(jason)["data"]
                         
-                        let i = self.number.index(of: original)!
+                        if data["registrasi_id"].stringValue != "" {
                         
-                        model.user_id       =   data["user_id"].stringValue
-                        model.nama          =   self.name[i]
-                        model.gambar        =   data["gambar_small"].stringValue
-                        model.status        =   data["status"].stringValue
-                        model.registrasi_id =   data["registrasi_id"].stringValue
-                        
-                        DBHelper.update(obj: model)
-                        
-                        self.kontakTV.reloadData()
-                        
-                        if original == self.number.last! {
+                            let i = self.number.index(of: original)!
                             
-                            self.loading.stopAnimating()
-                            self.loading.isHidden = true
-                            self.refreshBtn.isEnabled = true
+                            model.user_id       =   data["user_id"].stringValue
+                            model.nama          =   self.name[i]
+                            model.gambar        =   data["gambar_small"].stringValue
+                            model.status        =   data["status"].stringValue
+                            model.registrasi_id =   data["registrasi_id"].stringValue
+                            model.phone         =   phoneNumber
+                            
+                            DBHelper.update(obj: model)
+                            
+                            self.kontakTV.reloadData()
+                            
+                            if original == self.number.last! {
+                                
+                                self.loading.stopAnimating()
+                                self.loading.isHidden = true
+                                self.refreshBtn.isEnabled = true
+                                
+                            }
+                            
+                        }else{
+                            
+                            self.checkKontak0(phoneNumber: phoneNumber, original: original)
                             
                         }
                         
@@ -276,23 +317,32 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
                         
                         let data = JSON(jason)["data"]
                         
-                        let i = self.number.index(of: original)!
-                        
-                        model.user_id       =   data["user_id"].stringValue
-                        model.nama          =   self.name[i]
-                        model.gambar        =   data["gambar_small"].stringValue
-                        model.status        =   data["status"].stringValue
-                        model.registrasi_id =   data["registrasi_id"].stringValue
-                        
-                        DBHelper.update(obj: model)
-                        
-                        self.kontakTV.reloadData()
-                        
-                        if original == self.number.last! {
+                        if data["registrasi_id"].stringValue != "" {
                             
-                            self.loading.stopAnimating()
-                            self.loading.isHidden = true
-                            self.refreshBtn.isEnabled = true
+                            let i = self.number.index(of: original)!
+                            
+                            model.user_id       =   data["user_id"].stringValue
+                            model.nama          =   self.name[i]
+                            model.gambar        =   data["gambar_small"].stringValue
+                            model.status        =   data["status"].stringValue
+                            model.registrasi_id =   data["registrasi_id"].stringValue
+                            model.phone         =   "0\(phoneNumber)"
+                            
+                            DBHelper.update(obj: model)
+                            
+                            self.kontakTV.reloadData()
+                            
+                            if original == self.number.last! {
+                                
+                                self.loading.stopAnimating()
+                                self.loading.isHidden = true
+                                self.refreshBtn.isEnabled = true
+                                
+                            }
+                            
+                        }else{
+                            
+                            self.checkKontak62(phoneNumber: phoneNumber, original: original)
                             
                         }
                         
@@ -323,23 +373,32 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
                         
                         let data = JSON(jason)["data"]
                         
-                        let i = self.number.index(of: original)!
-                        
-                        model.user_id       =   data["user_id"].stringValue
-                        model.nama          =   self.name[i]
-                        model.gambar        =   data["gambar_small"].stringValue
-                        model.status        =   data["status"].stringValue
-                        model.registrasi_id =   data["registrasi_id"].stringValue
-                        
-                        DBHelper.update(obj: model)
-                        
-                        self.kontakTV.reloadData()
-                        
-                        if original == self.number.last! {
+                        if data["registrasi_id"].stringValue != "" {
                             
-                            self.loading.stopAnimating()
-                            self.loading.isHidden = true
-                            self.refreshBtn.isEnabled = true
+                            let i = self.number.index(of: original)!
+                            
+                            model.user_id       =   data["user_id"].stringValue
+                            model.nama          =   self.name[i]
+                            model.gambar        =   data["gambar_small"].stringValue
+                            model.status        =   data["status"].stringValue
+                            model.registrasi_id =   data["registrasi_id"].stringValue
+                            model.phone         =   "62\(phoneNumber)"
+                            
+                            DBHelper.update(obj: model)
+                            
+                            self.kontakTV.reloadData()
+                            
+                            if original == self.number.last! {
+                                
+                                self.loading.stopAnimating()
+                                self.loading.isHidden = true
+                                self.refreshBtn.isEnabled = true
+                                
+                            }
+                            
+                        }else{
+                            
+                            self.checkKontakPlus62(phoneNumber: phoneNumber, original: original)
                             
                         }
                         
@@ -370,17 +429,30 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
                         
                         let data = JSON(jason)["data"]
                         
-                        let i = self.number.index(of: original)!
-                        
-                        model.user_id       =   data["user_id"].stringValue
-                        model.nama          =   self.name[i]
-                        model.gambar        =   data["gambar_small"].stringValue
-                        model.status        =   data["status"].stringValue
-                        model.registrasi_id =   data["registrasi_id"].stringValue
-                        
-                        DBHelper.update(obj: model)
-                        
-                        self.kontakTV.reloadData()
+                        if data["registrasi_id"].stringValue != "" {
+                            
+                            let i = self.number.index(of: original)!
+                            
+                            model.user_id       =   data["user_id"].stringValue
+                            model.nama          =   self.name[i]
+                            model.gambar        =   data["gambar_small"].stringValue
+                            model.status        =   data["status"].stringValue
+                            model.registrasi_id =   data["registrasi_id"].stringValue
+                            model.phone         =   "+62\(phoneNumber)"
+                            
+                            DBHelper.update(obj: model)
+                            
+                            self.kontakTV.reloadData()
+                            
+                            if original == self.number.last! {
+                                
+                                self.loading.stopAnimating()
+                                self.loading.isHidden = true
+                                self.refreshBtn.isEnabled = true
+                                
+                            }
+                            
+                        }
                         
                     }
                     
@@ -400,19 +472,46 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
     
     @IBAction func refreshKontak(_ sender: UIBarButtonItem) {
         
-        loading.startAnimating()
-        loading.isHidden = false
+        if sender.title == "" {
+            
+            loading.startAnimating()
+            loading.isHidden = false
+            
+            refreshBtn.isEnabled = false
+            
+            refresh()
         
-        refreshBtn.isEnabled = false
+        }else{
         
-        refresh()
+            self.dismiss(animated: true, completion: nil)
+        
+        }
+        
+    }
+    
+    func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
+        
+        viewController.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func addKontak(_ sender: UIButton) {
+        
+        addContact.delegate = self
+        let navController = UINavigationController.init(rootViewController: addContact)
+        self.present(navController, animated: true, completion: nil)
+    
+    }
+    
+    @IBAction func addGrup(_ sender: UIButton) {
+        
+        self.performSegue(withIdentifier: "segue_add_grup", sender: self)
         
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "segue_detail_chat" {
-        
             let next = segue.destination as! DetailChatController
             
             next.chatID = self.sentChatID

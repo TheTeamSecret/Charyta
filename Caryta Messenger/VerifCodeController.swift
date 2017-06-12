@@ -58,7 +58,7 @@ class VerifCodeController: UIViewController, UITextFieldDelegate {
             print ("Error signing out: %@", signOutError)
         }
         
-        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber) { verificationID, error in
+        PhoneAuthProvider.provider().verifyPhoneNumber("+6289638153240") { verificationID, error in
             
             if error != nil {
                 print("Verification code not sent \(error!)")

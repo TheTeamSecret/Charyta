@@ -29,6 +29,8 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
     
     var nama = ""
     
+    var groupID = ""
+    
     var row = 0
     
     var getUser = try! Realm().objects(user.self).first!
@@ -57,6 +59,10 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         print(getUser)
+        
+        let getDetailChat = try! Realm().objects(detail_chat.self).filter("chat_id = '\(chatID)'")
+        
+        print(getDetailChat)
         
         self.chatTV.estimatedRowHeight = 87
         self.chatTV.rowHeight = UITableViewAutomaticDimension
@@ -88,6 +94,12 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
     override func viewDidAppear(_ animated: Bool) {
         
         super.viewDidAppear(animated)
+        
+        let item = self.tableView(self.chatTV, numberOfRowsInSection: 0) - 1
+        
+        let lastItem = IndexPath.init(row: item, section: 0)
+        
+        self.chatTV.scrollToRow(at: lastItem, at: .bottom, animated: true)
         
     }
 
@@ -123,7 +135,7 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let getDetailChat = try! Realm().objects(detail_chat.self).filter("chat_id = '\(chatID)'").sorted(byKeyPath: "date")
+        let getDetailChat = try! Realm().objects(detail_chat.self).filter("chat_id = '\(chatID)'")
         
         let cell = chatTV.dequeueReusableCell(withIdentifier: "chatting", for: indexPath) as! ChatCell
         
@@ -135,7 +147,7 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
         cell.otherAva.clipsToBounds = true
         cell.valueView.clipsToBounds = true
         
-        let newHeight = self.estimateHeightForView(text: getDetailChat[indexPath.row].isi, width: cell.valueLbl.frame.size.width, PointSize: cell.valueLbl.font.pointSize).height
+        let newHeight = self.estimateHeightForView(text: getDetailChat[indexPath.row].isi, width: cell.valueLbl.frame.size.width, PointSize: 14.0).height
         
         if newHeight < 25 {
             
@@ -148,6 +160,8 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
         }
         
         if getUser.user_id != getDetailChat[indexPath.row].user_id {
+            
+            cell.otherAva.setImage(withUrl: URL.init(string: "\(link().gambar)\(getDetailChat[indexPath.row].avatar)")!, placeholder: UIImage.init(named: "Avatar"), crossFadePlaceholder: true, cacheScaled: false, completion: nil)
         
             cell.userAva.isHidden = true
             cell.valueView.backgroundColor = UIColor.white
@@ -157,6 +171,8 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
         }
         
         if getUser.user_id == getDetailChat[indexPath.row].user_id  {
+            
+            cell.userAva.setImage(withUrl: URL.init(string: "\(link().gambar)\(getUser.avatar)")!, placeholder: UIImage.init(named: "Avatar"), crossFadePlaceholder: true, cacheScaled: false, completion: nil)
             
             cell.otherAva.isHidden = true
             cell.valueView.backgroundColor = UIColor.init(hexString: "91D4F6")
@@ -244,13 +260,14 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
         let dateFormatter:DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "h:mm a"
         
-        if getChat.count > 0 {
+        if groupID != "" {
             
-            let filter = getChat.filter("name = '\(self.nama)'")
+            let filter = getChat.filter("grup_id = '\(self.groupID)'")
             
             let model = chat()
             
             model.chat_id   = filter.first!.chat_id
+            model.grup_id   = self.groupID
             model.name      = self.nama
             model.last_chat = isi
             model.avatar    = filter.first!.avatar
@@ -274,56 +291,143 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
             self.chatTV.estimatedRowHeight = 80
             self.chatTV.rowHeight = UITableViewAutomaticDimension
             
+            let item = self.tableView(self.chatTV, numberOfRowsInSection: 0) - 1
+            
+            let lastItem = IndexPath.init(row: item, section: 0)
+            
+            self.chatTV.scrollToRow(at: lastItem, at: .bottom, animated: true)
+            
+            let headers = [
+                "Content-Type": "application/json",
+                "Authorization": "key=AAAAVLLQtxM:APA91bGS8w6GjsrDqiR8zorSN8F5AeK4PS3W3G08fUrOGEer07PK0pZ96KtrHmvz69CiU9stQBUsTXiyvmnZPfrLks0vzaJ-whV2ppEIxvJfg8ex_zo9SO9Wh2varAWiSWeXijXXkQ91"
+            ]
+            
+            let params = [
+                "to" : "/topics/\(self.groupID)",
+                "priority" : "high",
+                "notification" : [
+                    "body" : "\(getUser.first_name) : \(isi)",
+                    "title" : self.nama,
+                    "group_id" : self.groupID,
+                    "user_id" : self.getUser.user_id,
+                    "no_hp" : self.getUser.no_hp,
+                    "isi" : isi
+                ]
+            ] as [String : Any]
+            
+            self.chatTxt.text = ""
+            
+            Alamofire.request("https://fcm.googleapis.com/fcm/send", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers)
+                .responseJSON{response in
+                    
+                    if let jason = response.result.value {
+                        
+                        print(JSON(jason).description)
+                        
+                    }
+            
+            }
+        
         }else{
             
-            let getKontak = try! Realm().objects(kontak.self).filter("nama = '\(self.nama)'")
-            
-            let newID = "\(getChat.count + 1)"
-            
-            let model = chat()
-            
-            model.chat_id   = newID
-            model.name      = self.nama
-            model.last_chat = isi
-            model.avatar    = getKontak.first!.gambar
-            model.date      = dateFormatter.string(from: Date())
-            
-            DBHelper.update(obj: model)
-            
-            let model1 = detail_chat()
-            
-            model1.chat_id  = newID
-            model1.user_id  = self.getUser.user_id
-            model1.isi      = isi
-            model1.avatar   = self.getUser.avatar
-            model1.date     = dateFormatter.string(from: Date())
-            model1.read     = "0"
-            
-            DBHelper.insert(obj: model1)
-            
-            self.chatTV.reloadData()
-            
-            self.chatTV.estimatedRowHeight = 80
-            self.chatTV.rowHeight = UITableViewAutomaticDimension
-            
-        }
-        
-        let params = [
-            "to"    : getKontak.registrasi_id,
-            "from"  : "Single Notif",
-            "text"  : isi
-        ]
-        
-        Alamofire.request("\(link().domain)single-notif", method: .post, parameters: params, encoding: JSONEncoding.default)
-            .responseJSON{response in
-        
-                if let jason = response.result.value {
-                    
-                    print(JSON(jason).description)
-                    
-                    
+            if getChat.count > 0 {
                 
-                }
+                let filter = getChat.filter("name = '\(self.nama)'")
+                
+                let model = chat()
+                
+                model.chat_id   = filter.first!.chat_id
+                model.grup_id   = ""
+                model.name      = self.nama
+                model.last_chat = isi
+                model.avatar    = filter.first!.avatar
+                model.date      = dateFormatter.string(from: Date())
+                
+                DBHelper.update(obj: model)
+                
+                let model1 = detail_chat()
+                
+                model1.chat_id  = getChat.first!.chat_id
+                model1.user_id  = self.getUser.user_id
+                model1.isi      = isi
+                model1.avatar   = self.getUser.avatar
+                model1.date     = dateFormatter.string(from: Date())
+                model1.read     = "0"
+                
+                DBHelper.insert(obj: model1)
+                
+                self.chatTV.reloadData()
+                
+                self.chatTV.estimatedRowHeight = 80
+                self.chatTV.rowHeight = UITableViewAutomaticDimension
+                
+                let item = self.tableView(self.chatTV, numberOfRowsInSection: 0) - 1
+                
+                let lastItem = IndexPath.init(row: item, section: 0)
+                
+                self.chatTV.scrollToRow(at: lastItem, at: .bottom, animated: true)
+                
+            }else{
+                
+                let getKontak = try! Realm().objects(kontak.self).filter("nama = '\(self.nama)'")
+                
+                let newID = "\(getChat.count + 1)"
+                
+                let model = chat()
+                
+                model.chat_id   = newID
+                model.grup_id   = ""
+                model.name      = self.nama
+                model.last_chat = isi
+                model.avatar    = getKontak.first!.gambar
+                model.date      = dateFormatter.string(from: Date())
+                
+                DBHelper.update(obj: model)
+                
+                let model1 = detail_chat()
+                
+                model1.chat_id  = newID
+                model1.user_id  = self.getUser.user_id
+                model1.isi      = isi
+                model1.avatar   = self.getUser.avatar
+                model1.date     = dateFormatter.string(from: Date())
+                model1.read     = "0"
+                
+                DBHelper.insert(obj: model1)
+                
+                self.chatTV.reloadData()
+                
+                self.chatTV.estimatedRowHeight = 80
+                self.chatTV.rowHeight = UITableViewAutomaticDimension
+                
+                let item = self.tableView(self.chatTV, numberOfRowsInSection: 0) - 1
+                
+                let lastItem = IndexPath.init(row: item, section: 0)
+                
+                self.chatTV.scrollToRow(at: lastItem, at: .bottom, animated: true)
+                
+            }
+            
+            let params = [
+                "to"    : getKontak.user_id,
+                "from"  : getUser.user_id,
+                "text"  : isi
+            ]
+            
+            self.chatTxt.text = ""
+            
+            Alamofire.request("\(link().domain)single-notif", method: .post, parameters: params, encoding: JSONEncoding.default)
+                .responseJSON{response in
+                    
+                    if let jason = response.result.value {
+                        
+                        print(JSON(jason).description)
+                        
+                        
+                        
+                    }
+                    
+            }
         
         }
         

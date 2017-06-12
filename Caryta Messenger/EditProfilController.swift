@@ -7,11 +7,21 @@
 //
 
 import UIKit
+import RealmSwift
 
 class EditProfilController: UIViewController {
+    
+    @IBOutlet weak var namaTF: UITextField!
+    @IBOutlet weak var infoTF: UILabel!
+    @IBOutlet weak var phoneTF: UILabel!
+    
+    let getUser = try! Realm().objects(user.self).first!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.namaTF.text = getUser.first_name
+        self.phoneTF.text = getUser.no_hp
         
         self.setStatusBarStyle(.lightContent)
 

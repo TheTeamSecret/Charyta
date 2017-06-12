@@ -10,8 +10,6 @@ import UIKit
 import RealmSwift
 
 class SplashScreenController: UIViewController {
-    
-    let getUser = try! Realm().objects(user.self)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +24,8 @@ class SplashScreenController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        let getUser = try! Realm().objects(user.self)
         
         if getUser.count > 0 {
             

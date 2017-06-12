@@ -17,7 +17,7 @@ import SwiftyJSON
 import Alamofire
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     let gcmMessageIDKey = "gcm.message_id"
@@ -25,6 +25,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         FirebaseApp.configure()
+        
+        let schema = Realm.Configuration.defaultConfiguration.schemaVersion.description
+        
+        print("Schema : \(schema)")
+        
+        Realm.Configuration.defaultConfiguration = Realm.Configuration(
+            schemaVersion: 2,
+            migrationBlock: { migration, oldSchemaVersion in
+                if (oldSchemaVersion < 1) {
+                    // The enumerateObjects(ofType:_:) method iterates
+                    // over every Person object stored in the Realm file
+                    migration.enumerateObjects(ofType: kontak.className()) { oldObject, newObject in
+                        // combine name fields into a single field
+                        newObject!["phone"] = String()
+                    }
+                }
+                if (oldSchemaVersion < 2) {
+                    // The enumerateObjects(ofType:_:) method iterates
+                    // over every Person object stored in the Realm file
+                    migration.enumerateObjects(ofType: chat.className()) { oldObject, newObject in
+                        // combine name fields into a single field
+                        newObject!["grup_id"] = String()
+                    }
+                }
+        })
+        
+        _ = try! Realm()
         
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
@@ -44,38 +71,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, PKPushRegistryDelegate {
         
         application.registerForRemoteNotifications()
         
-        voipRegistration()
-        
         // [END register_for_notifications]
         return true
-    }
-    
-    func voipRegistration() {
-        let mainQueue = DispatchQueue.main
-        // Create a push registry object
-        let voipRegistry: PKPushRegistry = PKPushRegistry(queue: mainQueue)
-        // Set the registry's delegate to self
-        voipRegistry.delegate = self
-        // Set the push type to VoIP
-        voipRegistry.desiredPushTypes = [PKPushType.voIP]
-    }
-    
-    func pushRegistry(_ registry: PKPushRegistry, didUpdate credentials: PKPushCredentials, forType type: PKPushType) {
-        
-    }
-    
-    func pushRegistry(_ registry: PKPushRegistry, didReceiveIncomingPushWith payload: PKPushPayload, forType type: PKPushType) {
-        
-        guard type == .voIP else { return }
-        
-        if  let uuidString = payload.dictionaryPayload["UUID"] as? String, let handle = payload.dictionaryPayload["handle"] as? String, let hasVideo = payload.dictionaryPayload["hasVideo"] as? Bool, let uuid = UUID(uuidString: uuidString)
-        {
-            print(uuidString)
-            print(handle)
-            print(hasVideo)
-            print(uuid)
-        }
-        
     }
     
     // [START receive_message]
@@ -173,7 +170,96 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         }
         
         // Print full message.
-        print(userInfo)
+        print(JSON(userInfo).description)
+        
+        let get = JSON(userInfo)
+        let aps = get["aps"]
+        
+        print(aps)
+        
+        if get["gcm.notification.group_id"].stringValue != "" {
+            
+            let getChat     = try! Realm().objects(chat.self).filter("name = '\(aps["alert"]["title"].stringValue)'").first!
+            let getKontak   = try! Realm().objects(kontak.self).filter("nama = '\(aps["alert"]["title"].stringValue)'").first!
+            
+            let modelChat = chat()
+            
+            let dateFormatter:DateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "h:mm a"
+            
+            modelChat.chat_id   = getChat.chat_id
+            modelChat.avatar    = getChat.avatar
+            modelChat.name      = getChat.name
+            modelChat.last_chat = aps["alert"]["body"].stringValue
+            modelChat.date      = dateFormatter.string(from: Date())
+            
+            DBHelper.update(obj: modelChat)
+            
+            let modelDetailChat = detail_chat()
+            
+            modelDetailChat.chat_id  = getChat.chat_id
+            modelDetailChat.user_id  = getKontak.user_id
+            modelDetailChat.isi      = get["gcm.notification.isi"].stringValue
+            modelDetailChat.avatar   = getChat.avatar
+            modelDetailChat.date     = dateFormatter.string(from: Date())
+            modelDetailChat.read     = "0"
+            
+            DBHelper.insert(obj: modelDetailChat)
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let vc = storyboard.instantiateViewController(withIdentifier: "menu") as! MenuBarController
+            let chatVC = storyboard.instantiateViewController(withIdentifier: "detailChat") as! DetailChatController
+            
+            chatVC.chatID = getChat.chat_id
+            chatVC.nama = getChat.name
+            
+            vc.selectedIndex = 1
+            
+            vc.present(chatVC, animated: true, completion: nil)
+        
+        }else{
+            
+            let getChat     = try! Realm().objects(chat.self).filter("name = '\(aps["alert"]["title"].stringValue)'").first!
+            let getKontak   = try! Realm().objects(kontak.self).filter("nama = '\(aps["alert"]["title"].stringValue)'").first!
+            
+            let modelChat = chat()
+            
+            let dateFormatter:DateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "h:mm a"
+            
+            modelChat.chat_id   = getChat.chat_id
+            modelChat.avatar    = getChat.avatar
+            modelChat.name      = getChat.name
+            modelChat.last_chat = aps["alert"]["body"].stringValue
+            modelChat.date      = dateFormatter.string(from: Date())
+            
+            DBHelper.update(obj: modelChat)
+            
+            let modelDetailChat = detail_chat()
+            
+            modelDetailChat.chat_id  = getChat.chat_id
+            modelDetailChat.user_id  = getKontak.user_id
+            modelDetailChat.isi      = aps["alert"]["body"].stringValue
+            modelDetailChat.avatar   = getChat.avatar
+            modelDetailChat.date     = dateFormatter.string(from: Date())
+            modelDetailChat.read     = "0"
+            
+            DBHelper.insert(obj: modelDetailChat)
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            let vc = storyboard.instantiateViewController(withIdentifier: "menu") as! MenuBarController
+            let chatVC = storyboard.instantiateViewController(withIdentifier: "detailChat") as! DetailChatController
+            
+            chatVC.chatID = getChat.chat_id
+            chatVC.nama = getChat.name
+            
+            vc.selectedIndex = 1
+            
+            vc.present(chatVC, animated: true, completion: nil)
+        
+        }
         
         completionHandler()
     }

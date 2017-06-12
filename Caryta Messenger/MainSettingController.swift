@@ -7,15 +7,21 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MainSettingController: UIViewController {
 
     @IBOutlet weak var imgProfil: UIImageView!
+    @IBOutlet weak var nameLbl: UILabel!
+    
+    let getUser = try! Realm().objects(user.self).first!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setStatusBarStyle(.lightContent)
+        
+        nameLbl.text = getUser.first_name
         
         imgProfil.layer.cornerRadius = 25
         imgProfil.clipsToBounds = true

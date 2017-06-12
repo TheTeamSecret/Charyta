@@ -11,6 +11,7 @@ import ContactsUI
 import Alamofire
 import SwiftyJSON
 import RealmSwift
+import Firebase
 
 class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
     
@@ -20,8 +21,26 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
     var getContactNumber = ""
     var getContactName = ""
     
+    let getUser = try! Realm().objects(user.self).first!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let getKontak = try! Realm().objects(kontak.self)
+        
+        if getKontak.count > 0 {
+        
+            for itemKontak in getKontak {
+            
+                if itemKontak.registrasi_id == "" {
+                
+                    DBHelper.delete(obj: itemKontak)
+                
+                }
+            
+            }
+            
+        }
         
         findContacts()
         
@@ -119,15 +138,26 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
                         
                         let data = JSON(jason)["data"]
                         
-                        let i = self.number.index(of: original)!
+                        if data["registrasi_id"].stringValue != "" {
+                            
+                            let i = self.number.index(of: original)!
+                            
+                            model.user_id       =   data["user_id"].stringValue
+                            model.nama          =   self.name[i]
+                            model.gambar        =   data["gambar_small"].stringValue
+                            model.status        =   data["status"].stringValue
+                            model.registrasi_id =   data["registrasi_id"].stringValue
+                            model.phone         =   phoneNumber
+                            
+                            DBHelper.update(obj: model)
+                            
+                            self.setNick(pemberi: self.getUser.user_id, pemilik: data["user_id"].stringValue, nick: self.name[i])
                         
-                        model.user_id       =   data["user_id"].stringValue
-                        model.nama          =   self.name[i]
-                        model.gambar        =   data["gambar_small"].stringValue
-                        model.status        =   data["status"].stringValue
-                        model.registrasi_id =   data["registrasi_id"].stringValue
-                        
-                        DBHelper.update(obj: model)
+                        }else{
+                            
+                            self.checkKontak0(phoneNumber: phoneNumber, original: original)
+                            
+                        }
                         
                     }else{
                         
@@ -156,15 +186,26 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
                         
                         let data = JSON(jason)["data"]
                         
-                        let i = self.number.index(of: original)!
-                        
-                        model.user_id       =   data["user_id"].stringValue
-                        model.nama          =   self.name[i]
-                        model.gambar        =   data["gambar_small"].stringValue
-                        model.status        =   data["status"].stringValue
-                        model.registrasi_id =   data["registrasi_id"].stringValue
-                        
-                        DBHelper.update(obj: model)
+                        if data["registrasi_id"].stringValue != "" {
+                            
+                            let i = self.number.index(of: original)!
+                            
+                            model.user_id       =   data["user_id"].stringValue
+                            model.nama          =   self.name[i]
+                            model.gambar        =   data["gambar_small"].stringValue
+                            model.status        =   data["status"].stringValue
+                            model.registrasi_id =   data["registrasi_id"].stringValue
+                            model.phone         =   "0\(phoneNumber)"
+                            
+                            DBHelper.update(obj: model)
+                            
+                            self.setNick(pemberi: self.getUser.user_id, pemilik: data["user_id"].stringValue, nick: self.name[i])
+                            
+                        }else{
+                            
+                            self.checkKontak62(phoneNumber: phoneNumber, original: original)
+                            
+                        }
                         
                     }else{
                         
@@ -193,15 +234,26 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
                         
                         let data = JSON(jason)["data"]
                         
-                        let i = self.number.index(of: original)!
-                        
-                        model.user_id       =   data["user_id"].stringValue
-                        model.nama          =   self.name[i]
-                        model.gambar        =   data["gambar_small"].stringValue
-                        model.status        =   data["status"].stringValue
-                        model.registrasi_id =   data["registrasi_id"].stringValue
-                        
-                        DBHelper.update(obj: model)
+                        if data["registrasi_id"].stringValue != "" {
+                            
+                            let i = self.number.index(of: original)!
+                            
+                            model.user_id       =   data["user_id"].stringValue
+                            model.nama          =   self.name[i]
+                            model.gambar        =   data["gambar_small"].stringValue
+                            model.status        =   data["status"].stringValue
+                            model.registrasi_id =   data["registrasi_id"].stringValue
+                            model.phone         =   "62\(phoneNumber)"
+                            
+                            DBHelper.update(obj: model)
+                            
+                            self.setNick(pemberi: self.getUser.user_id, pemilik: data["user_id"].stringValue, nick: self.name[i])
+                            
+                        }else{
+                            
+                            self.checkKontakPlus62(phoneNumber: phoneNumber, original: original)
+                            
+                        }
                         
                     }else{
                         
@@ -230,15 +282,22 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
                         
                         let data = JSON(jason)["data"]
                         
-                        let i = self.number.index(of: original)!
-                        
-                        model.user_id       =   data["user_id"].stringValue
-                        model.nama          =   self.name[i]
-                        model.gambar        =   data["gambar_small"].stringValue
-                        model.status        =   data["status"].stringValue
-                        model.registrasi_id =   data["registrasi_id"].stringValue
-                        
-                        DBHelper.update(obj: model)
+                        if data["registrasi_id"].stringValue != "" {
+                            
+                            let i = self.number.index(of: original)!
+                            
+                            model.user_id       =   data["user_id"].stringValue
+                            model.nama          =   self.name[i]
+                            model.gambar        =   data["gambar_small"].stringValue
+                            model.status        =   data["status"].stringValue
+                            model.registrasi_id =   data["registrasi_id"].stringValue
+                            model.phone         =   "+62\(phoneNumber)"
+                            
+                            DBHelper.update(obj: model)
+                            
+                            self.setNick(pemberi: self.getUser.user_id, pemilik: data["user_id"].stringValue, nick: self.name[i])
+                            
+                        }
                         
                     }
                     
@@ -246,6 +305,27 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
                 
         }
         
+    }
+    
+    func setNick(pemberi: String, pemilik: String, nick: String) {
+    
+        let params = [
+            "userPemberi"   : pemberi,
+            "userPemilik"   : pemilik,
+            "name"          : nick
+        ]
+        
+        Alamofire.request("\(link().domain)nickname", method: .post, parameters: params, encoding: JSONEncoding.default)
+            .responseJSON{response in
+        
+                if let jason = response.result.value {
+                
+                    print(JSON(jason).description)
+                
+                }
+        
+        }
+    
     }
 
     /*

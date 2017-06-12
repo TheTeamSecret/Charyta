@@ -12,7 +12,7 @@ import RealmSwift
 
 class link: Object {
 
-    let domain  = "http://api.caryta.com/v2/messenger/"
+    let domain  = "http://api.caryta.com/v1/messenger/"
     let gambar  = "http://www.caryta.com"
     let file    = "https://keep.caryta.com"
     let vid     = "https://drive.caryta.com"
@@ -46,6 +46,7 @@ class kontak: Object {
     dynamic var gambar = String()
     dynamic var status = String()
     dynamic var registrasi_id = String()
+    dynamic var phone = String()
     
     override static func primaryKey() -> String? {
         
@@ -58,6 +59,7 @@ class kontak: Object {
 class chat: Object {
 
     dynamic var chat_id = String()
+    dynamic var grup_id = String()
     dynamic var name = String()
     dynamic var last_chat = String()
     dynamic var avatar = String()

@@ -87,7 +87,7 @@ class CommentController: UIViewController {
             self.view.layoutIfNeeded()
         }, completion: {(finished: Bool) in
             if(finished){
-                self.dismiss(animated: false, completion: nil)
+                self.view.removeFromSuperview()
             }
         })
     }
