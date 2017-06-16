@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "login.png",
+      "filename" : "love merah.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "love merah@2x.png",
       "scale" : "2x"
     },
     {

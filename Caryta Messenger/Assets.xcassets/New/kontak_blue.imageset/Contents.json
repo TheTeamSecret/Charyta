@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "login.png",
+      "filename" : "kontakblue.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "kontakblue@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "kontakblue@3x.png",
       "scale" : "3x"
     }
   ],

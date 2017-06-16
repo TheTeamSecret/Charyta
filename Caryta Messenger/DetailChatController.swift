@@ -95,11 +95,15 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
         
         super.viewDidAppear(animated)
         
-        let item = self.tableView(self.chatTV, numberOfRowsInSection: 0) - 1
-        
-        let lastItem = IndexPath.init(row: item, section: 0)
-        
-        self.chatTV.scrollToRow(at: lastItem, at: .bottom, animated: true)
+        if chatID != "" {
+            
+            let item = self.tableView(self.chatTV, numberOfRowsInSection: 0) - 1
+            
+            let lastItem = IndexPath.init(row: item, section: 0)
+            
+            self.chatTV.scrollToRow(at: lastItem, at: .bottom, animated: true)
+            
+        }
         
     }
 

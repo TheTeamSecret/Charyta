@@ -2,11 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "login.png",
+      "filename" : "edit profil.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "edit profil@2x.png",
       "scale" : "2x"
     },
     {
