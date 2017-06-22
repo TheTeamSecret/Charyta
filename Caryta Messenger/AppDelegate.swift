@@ -24,14 +24,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        
+        UIApplication.shared.statusBarStyle = .lightContent
+        
         FirebaseApp.configure()
         
-        let schema = Realm.Configuration.defaultConfiguration.schemaVersion.description
+        let schema =  Realm.Configuration.defaultConfiguration.schemaVersion.description
         
         print("Schema : \(schema)")
         
         Realm.Configuration.defaultConfiguration = Realm.Configuration(
-            schemaVersion: 2,
+            schemaVersion: 3,
             migrationBlock: { migration, oldSchemaVersion in
                 if (oldSchemaVersion < 1) {
                     // The enumerateObjects(ofType:_:) method iterates
@@ -47,6 +51,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     migration.enumerateObjects(ofType: chat.className()) { oldObject, newObject in
                         // combine name fields into a single field
                         newObject!["grup_id"] = String()
+                    }
+                }
+                if (oldSchemaVersion < 3) {
+                    // The enumerateObjects(ofType:_:) method iterates
+                    // over every Person object stored in the Realm file
+                    migration.enumerateObjects(ofType: user.className()) { oldObject, newObject in
+                        // combine name fields into a single field
+                        newObject!["status"] = String()
                     }
                 }
         })

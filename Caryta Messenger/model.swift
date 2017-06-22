@@ -29,6 +29,7 @@ class user: Object {
     dynamic var sex = String()
     dynamic var avatar = String()
     dynamic var registrasi_id = String()
+    dynamic var status = String()
 
 }
 

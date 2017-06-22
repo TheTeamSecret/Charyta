@@ -97,6 +97,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac/GoogleToolboxForMac.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ImagePicker/ImagePicker.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MapleBacon/MapleBacon.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/NAExpandableTableController/NAExpandableTableController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Protobuf/Protobuf.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Realm/Realm.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RealmSwift/RealmSwift.framework"
@@ -104,6 +105,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Toaster/Toaster.framework"
   install_framework "$BUILT_PRODUCTS_DIR/VisualHumainNumber/VisualHumainNumber.framework"
   install_framework "$BUILT_PRODUCTS_DIR/XMSegmentedControl/XMSegmentedControl.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Zip/Zip.framework"
   install_framework "$BUILT_PRODUCTS_DIR/moa/moa.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -115,6 +117,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/GoogleToolboxForMac/GoogleToolboxForMac.framework"
   install_framework "$BUILT_PRODUCTS_DIR/ImagePicker/ImagePicker.framework"
   install_framework "$BUILT_PRODUCTS_DIR/MapleBacon/MapleBacon.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/NAExpandableTableController/NAExpandableTableController.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Protobuf/Protobuf.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Realm/Realm.framework"
   install_framework "$BUILT_PRODUCTS_DIR/RealmSwift/RealmSwift.framework"
@@ -122,6 +125,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Toaster/Toaster.framework"
   install_framework "$BUILT_PRODUCTS_DIR/VisualHumainNumber/VisualHumainNumber.framework"
   install_framework "$BUILT_PRODUCTS_DIR/XMSegmentedControl/XMSegmentedControl.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Zip/Zip.framework"
   install_framework "$BUILT_PRODUCTS_DIR/moa/moa.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

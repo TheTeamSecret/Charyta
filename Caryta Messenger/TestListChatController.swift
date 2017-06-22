@@ -7,18 +7,30 @@
 //
 
 import UIKit
+import RealmSwift
+import MapleBacon
 
-class TestListChatController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TestListChatController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var chatTV: UITableView!
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var editBtn: UIBarButtonItem!
     @IBOutlet weak var addArchiveBtn: UIBarButtonItem!
     @IBOutlet weak var deleteBtn: UIBarButtonItem!
     var isEdit: Bool = false
+    @IBOutlet weak var emptyLbl: UILabel!
+    
+    var nameDummy = ["Silmy Tama", "Om Bob", "Gustang", "Ari Maulana", "Ilham Sabar", "Caryta.com"]
+    var isiDummy = ["Besok aja yah so...", "Iya Om Bob", "Sundala", "Gustang", "Sebat Yuk", "Semangat", "Progress hari ini"]
+    
+    var sentID = String()
+    var sentNama = String()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.setStatusBarStyle(.lightContent)
 
         // Do any additional setup after loading the view.
     }
@@ -33,7 +45,7 @@ class TestListChatController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return nameDummy.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -42,9 +54,18 @@ class TestListChatController: UIViewController, UITableViewDataSource, UITableVi
         
         cell.initialLbl.layer.cornerRadius = 20
         cell.initialLbl.clipsToBounds = true
+        cell.initialLbl.backgroundColor = UIColor.randomFlat
         
         cell.badgeLbl.layer.cornerRadius = 9
         cell.badgeLbl.clipsToBounds = true
+        
+        cell.nameLbl.text = self.nameDummy[indexPath.row]
+        cell.lastLbl.text = self.isiDummy[indexPath.row]
+        
+        let initIndex = self.nameDummy[indexPath.row].index(self.nameDummy[indexPath.row].startIndex, offsetBy: 1)
+        let initial = self.nameDummy[indexPath.row].substring(to: initIndex).uppercased()
+        
+        cell.initialLbl.text = initial
         
         if isEdit == true {
             
@@ -113,6 +134,19 @@ class TestListChatController: UIViewController, UITableViewDataSource, UITableVi
             sender.setImage(UIImage.init(named: "select"), for: .normal)
             
         }
+        
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        
+        searchBar.setShowsCancelButton(true, animated: true)
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        searchBar.setShowsCancelButton(false, animated: true)
+        self.view.endEditing(true)
         
     }
 

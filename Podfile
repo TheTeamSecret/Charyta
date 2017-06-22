@@ -11,18 +11,20 @@ target 'Caryta Messenger' do
 
   pod 'Alamofire'
   pod 'Auk'
-  pod ‘ChameleonFramework/Swift’, :git => 'https://github.com/ViccAlexander/Chameleon.git'
+  pod 'ChameleonFramework/Swift'
   pod 'DropDown'
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'Firebase/Messaging'
   pod 'ImagePicker'
   pod 'MapleBacon'
+  pod 'NAExpandableTableController’
   pod 'RealmSwift'
   pod 'SwiftyJSON'
   pod 'Toaster'
   pod 'VisualHumainNumber'
   pod 'XMSegmentedControl'
+  pod 'Zip'
   pod 'moa'
 
   post_install do |installer|

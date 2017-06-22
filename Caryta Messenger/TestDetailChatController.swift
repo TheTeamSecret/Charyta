@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TestDetailChatController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TestDetailChatController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate {
     
     @IBOutlet weak var initialLbl: UILabel!
     
@@ -16,6 +16,9 @@ class TestDetailChatController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var detailChatTVHeight: NSLayoutConstraint!
     
     @IBOutlet weak var bottom: NSLayoutConstraint!
+    
+    @IBOutlet weak var chatViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var chatTxt: UITextView!
     
     func keyboardWillShow(_ notification : NSNotification) {
         
@@ -38,6 +41,12 @@ class TestDetailChatController: UIViewController, UITableViewDataSource, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.chatTxt.layer.cornerRadius = 15.0
+        self.chatTxt.layer.borderWidth = 1.0
+        self.chatTxt.layer.borderColor = UIColor.init(hexString: "F1F1F1")!.cgColor
+        
+        self.setStatusBarStyle(.lightContent)
         
         NotificationCenter.default.addObserver(self, selector: #selector(TestDetailChatController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(TestDetailChatController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -195,6 +204,44 @@ class TestDetailChatController: UIViewController, UITableViewDataSource, UITable
     
         self.view.endEditing(true)
     
+    }
+    
+    private func estimateFrameForText(text: String) -> CGRect {
+        let size = CGSize(width: self.chatTxt.frame.size.width, height: 10000)
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)], context: nil)
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        
+        if textView == chatTxt {
+            
+            let height = self.estimateFrameForText(text: chatTxt.text!).height
+            
+            if height > 30 {
+                
+                self.chatViewHeight.constant = height + 33
+                
+                UIView.animate(withDuration: 0.3, animations: {
+                    
+                    self.view.layoutIfNeeded()
+                    
+                })
+                
+            }else if 30 > height {
+                
+                self.chatViewHeight.constant = 46
+                
+                UIView.animate(withDuration: 0.3, animations: {
+                    
+                    self.view.layoutIfNeeded()
+                    
+                })
+                
+            }
+            
+        }
+        
     }
 
     /*

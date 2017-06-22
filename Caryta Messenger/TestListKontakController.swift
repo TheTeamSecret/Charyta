@@ -7,17 +7,71 @@
 //
 
 import UIKit
+import RealmSwift
+import ContactsUI
+import Alamofire
+import SwiftyJSON
+import MapleBacon
+import NAExpandableTableController
 
-class TestListKontakController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class TestListKontakController: UIViewController, NAExpandableTableViewDataSource, NAExpandableTableViewDelegate , UISearchBarDelegate, CNContactViewControllerDelegate, UINavigationControllerDelegate {
+    
+    fileprivate var expendableTableController: NAExpandableTableController!
     
     @IBOutlet weak var kontakTV: UITableView!
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var editBtn: UIBarButtonItem!
     @IBOutlet weak var addDeleteBtn: UIBarButtonItem!
     var isEdit: Bool = false
+    
+    let store = CNContactStore()
+    var name = [String]()
+    var number = [String]()
+    var getContactNumber = ""
+    var getContactName = ""
+    
+    let addContact = CNContactViewController.init(forNewContact: CNContact())
+    
+    var sentChatID = ""
+    var sentName = ""
+    
+    var from = ""
+    
+    var nameDummy = ["Silmy Tama", "Om Bob", "Alga", "Gustang"]
+    var statusDummy = ["Selamat berpuasa", "Sibuk", "Ada", "Sibuk"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.setStatusBarStyle(.lightContent)
+        
+        self.expendableTableController = NAExpandableTableController(dataSource: self, delegate: self)
+        
+        kontakTV.dataSource = self.expendableTableController
+        kontakTV.delegate = self.expendableTableController
+        
+        kontakTV.tableFooterView = UIView(frame: CGRect.zero)
+        
+        findContacts()
+        
+        let getKontak = try! Realm().objects(kontak.self)
+        
+        if getKontak.count > 0 {
+            
+            for itemKontak in getKontak {
+                
+                if itemKontak.registrasi_id == "" {
+                    
+                    DBHelper.delete(obj: itemKontak)
+                    
+                }
+                
+            }
+            
+        }
+        
+        kontakTV.reloadData()
 
         // Do any additional setup after loading the view.
     }
@@ -27,20 +81,127 @@ class TestListKontakController: UIViewController, UITableViewDataSource, UITable
         // Dispose of any resources that can be recreated.
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+    func numberOfSectionsInExpandableTableView(_ tableView: UITableView) -> Int {
+        
+        return 3
+        
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+    func expandableTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        let getKontak = try! Realm().objects(kontak.self).sorted(byKeyPath: "nama")
+        
+         var row = 0
+        
+        if section == 0 {
+        
+            row = 1
+        
+        }
+        
+        if section == 1 {
+            
+            row = 1
+            
+        }
+        
+        if section == 2 {
+            
+            row = 4 + getKontak.count
+            
+        }
+        
+        return row
+        
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func expandableTableView(_ tableView: UITableView, titleCellForSection section: Int, expanded: Bool) -> UITableViewCell {
+        
+        let cell = kontakTV.dequeueReusableCell(withIdentifier: "header") as! TestKontakHeaderCell
+        
+        if section == 0 {
+            
+            cell.headerLbl.text = "Baru di Tambahkan 2"
+            
+        }
+        
+        if section == 1 {
+            
+            cell.headerLbl.text = "Grup 3"
+            
+        }
+        
+        if section == 2 {
+            
+            cell.headerLbl.text = "Teman 28"
+            
+        }
+        
+        return cell
+        
+    }
+    
+    func expandableTableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+        
+        let getKontak = try! Realm().objects(kontak.self).sorted(byKeyPath: "nama")
         
         let cell = kontakTV.dequeueReusableCell(withIdentifier: "kontak", for: indexPath) as! TestListKontakCell
         
         cell.initialLbl.layer.cornerRadius = 20
         cell.initialLbl.clipsToBounds = true
+        cell.initialLbl.backgroundColor = UIColor.randomFlat
+        
+        if indexPath.section == 0 {
+            
+            cell.nameLbl.text = "Verrel Rio"
+            
+            let initIndex = "Verrel Rio".index("Verrel Rio".startIndex, offsetBy: 1)
+            let initial = "Verrel Rio".substring(to: initIndex).uppercased()
+            
+            cell.initialLbl.text = initial
+        
+        }
+        
+        if indexPath.section == 1 {
+            
+            cell.nameLbl.text = "Caryta.com"
+            cell.phoneLbl.isHidden = true
+            cell.msgBtn.isHidden = true
+            cell.callBtn.isHidden = true
+            cell.statusLbl.text = "38 Anggota"
+            
+            let initIndex = "Caryta.com".index("Caryta.com".startIndex, offsetBy: 1)
+            let initial = "Caryta.com".substring(to: initIndex).uppercased()
+            
+            cell.initialLbl.text = initial
+            
+        }
+        
+        if indexPath.section == 2 {
+            
+            if indexPath.row > 3 {
+                
+                cell.nameLbl.text = getKontak[indexPath.row - 4].nama
+                cell.statusLbl.text = getKontak[indexPath.row - 4].status
+                
+                let initIndex = getKontak[indexPath.row - 4].nama.index(getKontak[indexPath.row - 4].nama.startIndex, offsetBy: 1)
+                let initial = getKontak[indexPath.row - 4].nama.substring(to: initIndex).uppercased()
+                
+                cell.initialLbl.text = initial
+            
+            }else{
+                
+                cell.nameLbl.text = nameDummy[indexPath.row]
+                cell.statusLbl.text = statusDummy[indexPath.row]
+                
+                let initIndex = nameDummy[indexPath.row].index(nameDummy[indexPath.row].startIndex, offsetBy: 1)
+                let initial = nameDummy[indexPath.row].substring(to: initIndex).uppercased()
+                
+                cell.initialLbl.text = initial
+            
+            }
+            
+        }
         
         if isEdit == true {
             
@@ -67,6 +228,18 @@ class TestListKontakController: UIViewController, UITableViewDataSource, UITable
         }
         
         return cell
+        
+    }
+    
+    func expandableTableView(_ tableView: UITableView, heightForTitleCellInSection section: Int) -> CGFloat {
+        
+        return 30
+        
+    }
+    
+    func expandableTableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
+        
+        return 56
         
     }
     
@@ -101,6 +274,278 @@ class TestListKontakController: UIViewController, UITableViewDataSource, UITable
             sender.setImage(UIImage.init(named: "select"), for: .normal)
             
         }
+        
+    }
+    
+    func findContacts() -> [CNContact] {
+        let keysToFetch = [CNContactGivenNameKey, CNContactMiddleNameKey, CNContactFamilyNameKey, CNContactEmailAddressesKey, CNContactPhoneNumbersKey]
+        let fetchRequest = CNContactFetchRequest(keysToFetch: keysToFetch as [CNKeyDescriptor])
+        let contacts = [CNContact]()
+        self.name.removeAll()
+        self.number.removeAll()
+        do{
+            try! store.enumerateContacts(with: fetchRequest, usingBlock: { (contact, stop) -> Void in
+                if contact.phoneNumbers.count > 0 {
+                    let get = (contact.phoneNumbers[0].value as CNPhoneNumber).value(forKey: "digits") as! String
+                    
+                    let countNumber = get.characters.count
+                    if countNumber > 9 {
+                        
+                        self.getContactNumber = get
+                        var contName = ""
+                        if contact.givenName != "" {
+                            contName += contact.givenName
+                        }
+                        if contact.middleName != "" {
+                            contName += " " + contact.middleName
+                        }
+                        if contact.familyName != "" {
+                            contName += " " + contact.familyName
+                        }
+                        self.getContactName = contName
+                        self.name.append(self.getContactName)
+                        self.number.append(get)
+                    }
+                }
+            }
+            )
+            return contacts
+        }
+    }
+    
+    func refresh() {
+        
+        for numb in number {
+            
+            let indexStr = numb.index(numb.startIndex, offsetBy: 1)
+            let prefix = numb.substring(to: indexStr)
+            
+            if prefix == "+" {
+                
+                let indexStrNew = numb.index(numb.startIndex, offsetBy: 3)
+                let newNumber = numb.substring(from: indexStrNew)
+                checkKontak(phoneNumber: newNumber, original: numb)
+                
+            }else if prefix == "0" {
+                
+                let indexStrNew = numb.index(numb.startIndex, offsetBy: 1)
+                let newNumber = numb.substring(from: indexStrNew)
+                checkKontak(phoneNumber: newNumber, original: numb)
+                
+            }
+            
+        }
+        
+    }
+    
+    func checkKontak(phoneNumber: String, original: String){
+        
+        Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": phoneNumber], encoding: JSONEncoding.default)
+            .responseJSON{response in
+                
+                if let jason = response.result.value {
+                    
+                    if JSON(jason)["status"].stringValue == "1" {
+                        
+                        print(JSON(jason).description)
+                        
+                        let model = kontak()
+                        
+                        let data = JSON(jason)["data"]
+                        
+                        if data["registrasi_id"].stringValue != "" {
+                            
+                            let i = self.number.index(of: original)!
+                            
+                            model.user_id       =   data["user_id"].stringValue
+                            model.nama          =   self.name[i]
+                            model.gambar        =   data["gambar_small"].stringValue
+                            model.status        =   data["status"].stringValue
+                            model.registrasi_id =   data["registrasi_id"].stringValue
+                            model.phone         =   phoneNumber
+                            
+                            DBHelper.update(obj: model)
+                            
+                            self.kontakTV.reloadData()
+                            
+                        }else{
+                            
+                            self.checkKontak0(phoneNumber: phoneNumber, original: original)
+                            
+                        }
+                        
+                    }else{
+                        
+                        self.checkKontak0(phoneNumber: phoneNumber, original: original)
+                        
+                    }
+                    
+                }
+                
+        }
+        
+    }
+    
+    func checkKontak0(phoneNumber: String, original: String){
+        
+        Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": "0\(phoneNumber)"], encoding: JSONEncoding.default)
+            .responseJSON{response in
+                
+                if let jason = response.result.value {
+                    
+                    if JSON(jason)["status"].stringValue == "1" {
+                        
+                        print(JSON(jason).description)
+                        
+                        let model = kontak()
+                        
+                        let data = JSON(jason)["data"]
+                        
+                        if data["registrasi_id"].stringValue != "" {
+                            
+                            let i = self.number.index(of: original)!
+                            
+                            model.user_id       =   data["user_id"].stringValue
+                            model.nama          =   self.name[i]
+                            model.gambar        =   data["gambar_small"].stringValue
+                            model.status        =   data["status"].stringValue
+                            model.registrasi_id =   data["registrasi_id"].stringValue
+                            model.phone         =   "0\(phoneNumber)"
+                            
+                            DBHelper.update(obj: model)
+                            
+                            self.kontakTV.reloadData()
+                            
+                        }else{
+                            
+                            self.checkKontak62(phoneNumber: phoneNumber, original: original)
+                            
+                        }
+                        
+                    }else{
+                        
+                        self.checkKontak62(phoneNumber: phoneNumber, original: original)
+                        
+                    }
+                    
+                }
+                
+        }
+        
+    }
+    
+    func checkKontak62(phoneNumber: String, original: String){
+        
+        Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": "62\(phoneNumber)"], encoding: JSONEncoding.default)
+            .responseJSON{response in
+                
+                if let jason = response.result.value {
+                    
+                    if JSON(jason)["status"].stringValue == "1" {
+                        
+                        print(JSON(jason).description)
+                        
+                        let model = kontak()
+                        
+                        let data = JSON(jason)["data"]
+                        
+                        if data["registrasi_id"].stringValue != "" {
+                            
+                            let i = self.number.index(of: original)!
+                            
+                            model.user_id       =   data["user_id"].stringValue
+                            model.nama          =   self.name[i]
+                            model.gambar        =   data["gambar_small"].stringValue
+                            model.status        =   data["status"].stringValue
+                            model.registrasi_id =   data["registrasi_id"].stringValue
+                            model.phone         =   "62\(phoneNumber)"
+                            
+                            DBHelper.update(obj: model)
+                            
+                            self.kontakTV.reloadData()
+                            
+                        }else{
+                            
+                            self.checkKontakPlus62(phoneNumber: phoneNumber, original: original)
+                            
+                        }
+                        
+                    }else{
+                        
+                        self.checkKontakPlus62(phoneNumber: phoneNumber, original: original)
+                        
+                    }
+                    
+                }
+                
+        }
+        
+    }
+    
+    func checkKontakPlus62(phoneNumber: String, original: String){
+        
+        Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": "+62\(phoneNumber)"], encoding: JSONEncoding.default)
+            .responseJSON{response in
+                
+                if let jason = response.result.value {
+                    
+                    if JSON(jason)["status"].stringValue == "1" {
+                        
+                        print(JSON(jason).description)
+                        
+                        let model = kontak()
+                        
+                        let data = JSON(jason)["data"]
+                        
+                        if data["registrasi_id"].stringValue != "" {
+                            
+                            let i = self.number.index(of: original)!
+                            
+                            model.user_id       =   data["user_id"].stringValue
+                            model.nama          =   self.name[i]
+                            model.gambar        =   data["gambar_small"].stringValue
+                            model.status        =   data["status"].stringValue
+                            model.registrasi_id =   data["registrasi_id"].stringValue
+                            model.phone         =   "+62\(phoneNumber)"
+                            
+                            DBHelper.update(obj: model)
+                            
+                            self.kontakTV.reloadData()
+                            
+                        }
+                        
+                    }
+                    
+                }
+                
+        }
+        
+    }
+    
+    func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
+        
+        viewController.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func addKontak(_ sender: UIBarButtonItem) {
+        
+        addContact.delegate = self
+        let navController = UINavigationController.init(rootViewController: addContact)
+        self.present(navController, animated: true, completion: nil)
+        
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        
+        searchBar.setShowsCancelButton(true, animated: true)
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        searchBar.setShowsCancelButton(false, animated: true)
+        self.view.endEditing(true)
         
     }
     

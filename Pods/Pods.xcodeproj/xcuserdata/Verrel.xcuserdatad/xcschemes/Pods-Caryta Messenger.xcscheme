@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BA95056B7ABF1E7FEBE207A8620C6714"
+               BlueprintIdentifier = "B3DA2D5CFAC889F0DB29153663C8C8DC"
                BuildableName = "Pods_Caryta_Messenger.framework"
                BlueprintName = "Pods-Caryta Messenger"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "BA95056B7ABF1E7FEBE207A8620C6714"
+            BlueprintIdentifier = "B3DA2D5CFAC889F0DB29153663C8C8DC"
             BuildableName = "Pods_Caryta_Messenger.framework"
             BlueprintName = "Pods-Caryta Messenger"
             ReferencedContainer = "container:Pods.xcodeproj">

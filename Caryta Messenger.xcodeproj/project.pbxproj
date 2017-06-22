@@ -22,6 +22,9 @@
 		0F2324971EDBEB3800C73BFD /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2324961EDBEB3800C73BFD /* LoginController.swift */; };
 		0F5688981EE5309E00F1B408 /* SelectKontakController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5688971EE5309E00F1B408 /* SelectKontakController.swift */; };
 		0F56889A1EE5313700F1B408 /* SelectKontakCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5688991EE5313700F1B408 /* SelectKontakCell.swift */; };
+		0F5AE2ED1EF4E72C00B91B9E /* TestKontakHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5AE2EC1EF4E72C00B91B9E /* TestKontakHeaderCell.swift */; };
+		0F5AE2EF1EF511DD00B91B9E /* TestPopUpUbahDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5AE2EE1EF511DD00B91B9E /* TestPopUpUbahDataController.swift */; };
+		0F98E3231EF8D7360094EF68 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F98E3221EF8D7360094EF68 /* CloudKit.framework */; };
 		0FBF3FAF1EE02406009D41D9 /* SplashScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBF3FAE1EE02406009D41D9 /* SplashScreenController.swift */; };
 		0FC47E341EE2AFA900311B5B /* LoginWithStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC47E331EE2AFA900311B5B /* LoginWithStoreController.swift */; };
 		0FC5594C1EDD2616002F810A /* MasukController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC5594B1EDD2616002F810A /* MasukController.swift */; };
@@ -101,7 +104,10 @@
 		0F2324961EDBEB3800C73BFD /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		0F5688971EE5309E00F1B408 /* SelectKontakController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectKontakController.swift; sourceTree = "<group>"; };
 		0F5688991EE5313700F1B408 /* SelectKontakCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectKontakCell.swift; sourceTree = "<group>"; };
+		0F5AE2EC1EF4E72C00B91B9E /* TestKontakHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestKontakHeaderCell.swift; sourceTree = "<group>"; };
+		0F5AE2EE1EF511DD00B91B9E /* TestPopUpUbahDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPopUpUbahDataController.swift; sourceTree = "<group>"; };
 		0F8526001EEE49EC00FAC280 /* Caryta Messenger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Caryta Messenger-Bridging-Header.h"; sourceTree = "<group>"; };
+		0F98E3221EF8D7360094EF68 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		0FBF3FAE1EE02406009D41D9 /* SplashScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenController.swift; sourceTree = "<group>"; };
 		0FC47E331EE2AFA900311B5B /* LoginWithStoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWithStoreController.swift; sourceTree = "<group>"; };
 		0FC5594B1EDD2616002F810A /* MasukController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasukController.swift; sourceTree = "<group>"; };
@@ -166,6 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F98E3231EF8D7360094EF68 /* CloudKit.framework in Frameworks */,
 				18FF7A09FCD34A20C07151E8 /* Pods_Caryta_Messenger.framework in Frameworks */,
 				7B2AFB1A1ECD81E4007033C5 /* AudioToolbox.framework in Frameworks */,
 			);
@@ -208,6 +215,8 @@
 				0FCF30CF1EF2768400CFF78B /* TestTimelineCell.swift */,
 				0FCF30D11EF2771D00CFF78B /* TestCommentCell.swift */,
 				0FCF30D31EF282BB00CFF78B /* TestProfilController.swift */,
+				0F5AE2EC1EF4E72C00B91B9E /* TestKontakHeaderCell.swift */,
+				0F5AE2EE1EF511DD00B91B9E /* TestPopUpUbahDataController.swift */,
 			);
 			name = Test;
 			sourceTree = "<group>";
@@ -405,6 +414,7 @@
 		9DC8703F157BFE44635B08AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0F98E3221EF8D7360094EF68 /* CloudKit.framework */,
 				7B2AFB191ECD81E4007033C5 /* AudioToolbox.framework */,
 				2BB4AD999016DB7E9C2615C2 /* Pods_Caryta_Messenger.framework */,
 				AFAF9241DD79593FDE75D9C9 /* Pods_Caryta_MessengerTests.framework */,
@@ -504,6 +514,9 @@
 								enabled = 1;
 							};
 							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
@@ -722,6 +735,7 @@
 				7B2AFB171ECD56EB007033C5 /* ListKontakCell.swift in Sources */,
 				7B5552771ECAE99600D50B4D /* ListTeleponCell.swift in Sources */,
 				0FCF30CA1EF23F8100CFF78B /* TestWritePostController.swift in Sources */,
+				0F5AE2EF1EF511DD00B91B9E /* TestPopUpUbahDataController.swift in Sources */,
 				0F03F9741EEFF488003D5B94 /* TestListKontakController.swift in Sources */,
 				7BF924461ED2A48200F89183 /* VerifCodeController.swift in Sources */,
 				0F03F9701EEFF2AC003D5B94 /* TestListChatController.swift in Sources */,
@@ -735,6 +749,7 @@
 				0FE909331ED569FA0005B2DD /* ListDialController.swift in Sources */,
 				0F03F96A1EEFE8B9003D5B94 /* TestMenuBarController.swift in Sources */,
 				0F1E2E081EE9389200B1D43E /* ParticipantCell.swift in Sources */,
+				0F5AE2ED1EF4E72C00B91B9E /* TestKontakHeaderCell.swift in Sources */,
 				7B55526C1ECABA4600D50B4D /* ListChatCell.swift in Sources */,
 				0FCF30CC1EF2663100CFF78B /* TestPopUpKomentarController.swift in Sources */,
 				0F03F9721EEFF33B003D5B94 /* TestListChatCell.swift in Sources */,

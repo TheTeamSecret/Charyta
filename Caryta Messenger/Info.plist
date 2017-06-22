@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -28,13 +30,13 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>This app want to use camera</string>
+	<string>This App Want to Use Camera</string>
 	<key>NSContactsUsageDescription</key>
-	<string>This App Want to Access your contact</string>
+	<string>This App Want to Access Your Contact</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app want to use your location</string>
+	<string>This App Want to Use Your Location</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app want to access photo library</string>
+	<string>This App Want to Access Photo Library</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
@@ -45,13 +47,11 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
+	<string>NewMain</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
 	</array>
-	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleDefault</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

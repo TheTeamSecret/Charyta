@@ -16,8 +16,12 @@ class TestListTeleponController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var addDeleteBtn: UIBarButtonItem!
     var isEdit: Bool = false
     
+    var nameDummy = ["Silmy Tama", "Om Bob", "Gustang", "Gustang", "Ari Maulana", "Ilham Sabar"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.setStatusBarStyle(.lightContent)
 
         // Do any additional setup after loading the view.
     }
@@ -32,7 +36,7 @@ class TestListTeleponController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return nameDummy.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -41,6 +45,27 @@ class TestListTeleponController: UIViewController, UITableViewDataSource, UITabl
         
         cell.initialLbl.layer.cornerRadius = 20
         cell.initialLbl.clipsToBounds = true
+        
+        cell.nameLbl.text = self.nameDummy[indexPath.row]
+        
+        let initIndex = nameDummy[indexPath.row].index(nameDummy[indexPath.row].startIndex, offsetBy: 1)
+        let initial = nameDummy[indexPath.row].substring(to: initIndex).uppercased()
+        
+        let mod = (indexPath.row + 1) % 2
+        
+        if mod == 1 {
+        
+            cell.typeImg.image = UIImage.init(named: "tlpnkeluar")
+        
+        }else{
+            
+            cell.typeImg.image = UIImage.init(named: "telpn merah")
+        
+        }
+        
+        cell.initialLbl.text = initial
+        
+        cell.initialLbl.backgroundColor = UIColor.randomFlat
         
         if isEdit == true {
         

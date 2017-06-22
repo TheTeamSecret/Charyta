@@ -78,6 +78,7 @@ class AddGroupController: UIViewController, UICollectionViewDataSource, UICollec
         
         let imageData = UIImagePNGRepresentation(self.grupImg.image!)
         let base64String = imageData!.base64EncodedString(options: .lineLength64Characters)
+        print(base64String)
         
         let params = [
             "name"  : self.grupSubjek.text!

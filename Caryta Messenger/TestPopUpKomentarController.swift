@@ -38,6 +38,8 @@ class TestPopUpKomentarController: UIViewController, UITableViewDataSource, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setStatusBarStyle(.lightContent)
+        
         self.commentTF.becomeFirstResponder()
         showAnimate()
         

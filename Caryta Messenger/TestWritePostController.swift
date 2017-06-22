@@ -36,6 +36,8 @@ class TestWritePostController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setStatusBarStyle(.lightContent)
+        
         postTxt.becomeFirstResponder()
         
         NotificationCenter.default.addObserver(self, selector: #selector(TestWritePostController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
