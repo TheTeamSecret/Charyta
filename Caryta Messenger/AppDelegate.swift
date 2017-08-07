@@ -37,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Realm.Configuration.defaultConfiguration = Realm.Configuration(
             schemaVersion: 3,
             migrationBlock: { migration, oldSchemaVersion in
-                if (oldSchemaVersion < 1) {
+                if (Int.init(schema)! < 1) {
                     // The enumerateObjects(ofType:_:) method iterates
                     // over every Person object stored in the Realm file
                     migration.enumerateObjects(ofType: kontak.className()) { oldObject, newObject in
@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         newObject!["phone"] = String()
                     }
                 }
-                if (oldSchemaVersion < 2) {
+                if (Int.init(schema)! < 2) {
                     // The enumerateObjects(ofType:_:) method iterates
                     // over every Person object stored in the Realm file
                     migration.enumerateObjects(ofType: chat.className()) { oldObject, newObject in

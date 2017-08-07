@@ -21,6 +21,8 @@ class TestListChatController: UIViewController, UITableViewDataSource, UITableVi
     var isEdit: Bool = false
     @IBOutlet weak var emptyLbl: UILabel!
     
+    //let getChat = try! Realm().objects(chat.self)
+    
     var nameDummy = ["Silmy Tama", "Om Bob", "Gustang", "Ari Maulana", "Ilham Sabar", "Caryta.com"]
     var isiDummy = ["Besok aja yah so...", "Iya Om Bob", "Sundala", "Gustang", "Sebat Yuk", "Semangat", "Progress hari ini"]
     

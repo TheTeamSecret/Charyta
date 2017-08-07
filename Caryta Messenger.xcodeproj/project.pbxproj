@@ -221,13 +221,6 @@
 			name = Test;
 			sourceTree = "<group>";
 		};
-		0FE808CC1ED80AA90085B3D9 /* Call Manager */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Call Manager";
-			sourceTree = "<group>";
-		};
 		2B986E07D51CAE76F07439DD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -276,7 +269,6 @@
 			isa = PBXGroup;
 			children = (
 				0F03F9681EEFE825003D5B94 /* Test */,
-				0FE808CC1ED80AA90085B3D9 /* Call Manager */,
 				7BF9244C1ED2CFBF00F89183 /* Database */,
 				7B2AFB181ECD7579007033C5 /* Caryta Messenger.entitlements */,
 				7B55526A1ECABA3600D50B4D /* Cell */,
@@ -934,7 +926,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PXA5BJAM6Y;
 				INFOPLIST_FILE = "Caryta Messenger/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.caryta.messenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -955,7 +947,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = PXA5BJAM6Y;
 				INFOPLIST_FILE = "Caryta Messenger/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.caryta.messenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";

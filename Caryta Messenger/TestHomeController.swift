@@ -10,7 +10,7 @@ import UIKit
 import XMSegmentedControl
 import ChameleonFramework
 
-class TestHomeController: UIViewController, XMSegmentedControlDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
+class TestHomeController: UIViewController, XMSegmentedControlDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var segment: XMSegmentedControl!
     @IBOutlet weak var timelineTV: UITableView!
@@ -21,6 +21,9 @@ class TestHomeController: UIViewController, XMSegmentedControlDelegate, UITableV
     @IBOutlet weak var timelineView: UIView!
     
     @IBOutlet weak var leftConst: NSLayoutConstraint!
+    @IBOutlet weak var newsHeight: NSLayoutConstraint!
+    
+    var length: CGFloat = 0.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,13 +59,19 @@ class TestHomeController: UIViewController, XMSegmentedControlDelegate, UITableV
         let swipeRight = UIScreenEdgePanGestureRecognizer.init(target: self, action: #selector(ListNewsController.handleSwipeRight(swipeGesture:)))
         swipeRight.edges = UIRectEdge.left
         
-        
         let panRight = UIPanGestureRecognizer.init(target: self, action: #selector(ListNewsController.handleRightPanGesture(panGesture:)))
         
         self.newsView.addGestureRecognizer(panRight)
         self.newsView.addGestureRecognizer(swipeRight)
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        self.newsHeight.constant = self.newsCV.contentSize.height
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -281,6 +290,26 @@ class TestHomeController: UIViewController, XMSegmentedControlDelegate, UITableV
         }
         
         return cell
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        var size = CGSize()
+        
+        if collectionView == topCV {
+            
+            size = CGSize.init(width: self.view.frame.size.width, height: 70)
+            
+        }else if collectionView == newsCV {
+        
+            length = (self.view.frame.size.width - 28) / 2
+            
+            size = CGSize.init(width: length, height: length)
+            
+        }
+        
+        return size
         
     }
 
