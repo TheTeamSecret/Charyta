@@ -17,6 +17,8 @@
 		0F03F9761EEFF4DC003D5B94 /* TestListKontakCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F03F9751EEFF4DC003D5B94 /* TestListKontakCell.swift */; };
 		0F0B83B51EF11331009E8B31 /* TestDetailChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0B83B41EF11331009E8B31 /* TestDetailChatController.swift */; };
 		0F0B83B71EF11CB3009E8B31 /* TestDetailChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0B83B61EF11CB3009E8B31 /* TestDetailChatCell.swift */; };
+		0F1857781F399C3200594433 /* TestNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1857771F399C3200594433 /* TestNewsCell.swift */; };
+		0F18577A1F39A93E00594433 /* TestDetailBeritaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1857791F39A93E00594433 /* TestDetailBeritaController.swift */; };
 		0F1E2E061EE9379700B1D43E /* AddGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1E2E051EE9379700B1D43E /* AddGroupController.swift */; };
 		0F1E2E081EE9389200B1D43E /* ParticipantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1E2E071EE9389200B1D43E /* ParticipantCell.swift */; };
 		0F2324971EDBEB3800C73BFD /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2324961EDBEB3800C73BFD /* LoginController.swift */; };
@@ -99,6 +101,8 @@
 		0F03F9751EEFF4DC003D5B94 /* TestListKontakCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestListKontakCell.swift; sourceTree = "<group>"; };
 		0F0B83B41EF11331009E8B31 /* TestDetailChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDetailChatController.swift; sourceTree = "<group>"; };
 		0F0B83B61EF11CB3009E8B31 /* TestDetailChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDetailChatCell.swift; sourceTree = "<group>"; };
+		0F1857771F399C3200594433 /* TestNewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestNewsCell.swift; sourceTree = "<group>"; };
+		0F1857791F39A93E00594433 /* TestDetailBeritaController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDetailBeritaController.swift; sourceTree = "<group>"; };
 		0F1E2E051EE9379700B1D43E /* AddGroupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupController.swift; sourceTree = "<group>"; };
 		0F1E2E071EE9389200B1D43E /* ParticipantCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantCell.swift; sourceTree = "<group>"; };
 		0F2324961EDBEB3800C73BFD /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -217,6 +221,8 @@
 				0FCF30D31EF282BB00CFF78B /* TestProfilController.swift */,
 				0F5AE2EC1EF4E72C00B91B9E /* TestKontakHeaderCell.swift */,
 				0F5AE2EE1EF511DD00B91B9E /* TestPopUpUbahDataController.swift */,
+				0F1857771F399C3200594433 /* TestNewsCell.swift */,
+				0F1857791F39A93E00594433 /* TestDetailBeritaController.swift */,
 			);
 			name = Test;
 			sourceTree = "<group>";
@@ -739,6 +745,7 @@
 				0FCF30D01EF2768400CFF78B /* TestTimelineCell.swift in Sources */,
 				7BF924541ED3013C00F89183 /* CommentController.swift in Sources */,
 				0FE909331ED569FA0005B2DD /* ListDialController.swift in Sources */,
+				0F18577A1F39A93E00594433 /* TestDetailBeritaController.swift in Sources */,
 				0F03F96A1EEFE8B9003D5B94 /* TestMenuBarController.swift in Sources */,
 				0F1E2E081EE9389200B1D43E /* ParticipantCell.swift in Sources */,
 				0F5AE2ED1EF4E72C00B91B9E /* TestKontakHeaderCell.swift in Sources */,
@@ -759,6 +766,7 @@
 				0FCF30D41EF282BB00CFF78B /* TestProfilController.swift in Sources */,
 				0F56889A1EE5313700F1B408 /* SelectKontakCell.swift in Sources */,
 				7B55523B1ECA93B700D50B4D /* AppDelegate.swift in Sources */,
+				0F1857781F399C3200594433 /* TestNewsCell.swift in Sources */,
 				0FC5594C1EDD2616002F810A /* MasukController.swift in Sources */,
 				0FBF3FAF1EE02406009D41D9 /* SplashScreenController.swift in Sources */,
 				0FCF30CE1EF2686B00CFF78B /* TestHomeController.swift in Sources */,

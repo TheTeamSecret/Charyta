@@ -83,7 +83,7 @@ class TestListKontakController: UIViewController, NAExpandableTableViewDataSourc
     
     func numberOfSectionsInExpandableTableView(_ tableView: UITableView) -> Int {
         
-        return 3
+        return 2
         
     }
     
@@ -101,13 +101,7 @@ class TestListKontakController: UIViewController, NAExpandableTableViewDataSourc
         
         if section == 1 {
             
-            row = 1
-            
-        }
-        
-        if section == 2 {
-            
-            row = 4 + getKontak.count
+            row = getKontak.count
             
         }
         
@@ -119,21 +113,17 @@ class TestListKontakController: UIViewController, NAExpandableTableViewDataSourc
         
         let cell = kontakTV.dequeueReusableCell(withIdentifier: "header") as! TestKontakHeaderCell
         
-        if section == 0 {
-            
-            cell.headerLbl.text = "Baru di Tambahkan 2"
-            
-        }
+        let getKontak = try! Realm().objects(kontak.self).sorted(byKeyPath: "nama")
         
-        if section == 1 {
+        if section == 0 {
             
             cell.headerLbl.text = "Grup 3"
             
         }
         
-        if section == 2 {
+        if section == 1 {
             
-            cell.headerLbl.text = "Teman 28"
+            cell.headerLbl.text = "Teman \(getKontak.count)"
             
         }
         
@@ -153,17 +143,6 @@ class TestListKontakController: UIViewController, NAExpandableTableViewDataSourc
         
         if indexPath.section == 0 {
             
-            cell.nameLbl.text = "Verrel Rio"
-            
-            let initIndex = "Verrel Rio".index("Verrel Rio".startIndex, offsetBy: 1)
-            let initial = "Verrel Rio".substring(to: initIndex).uppercased()
-            
-            cell.initialLbl.text = initial
-        
-        }
-        
-        if indexPath.section == 1 {
-            
             cell.nameLbl.text = "Caryta.com"
             cell.phoneLbl.isHidden = true
             cell.msgBtn.isHidden = true
@@ -177,7 +156,7 @@ class TestListKontakController: UIViewController, NAExpandableTableViewDataSourc
             
         }
         
-        if indexPath.section == 2 {
+        if indexPath.section == 1 {
             
             if indexPath.row > 3 {
                 

@@ -9,6 +9,9 @@
 import UIKit
 import XMSegmentedControl
 import ChameleonFramework
+import Alamofire
+import SwiftyJSON
+import MapleBacon
 
 class TestHomeController: UIViewController, XMSegmentedControlDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -27,6 +30,31 @@ class TestHomeController: UIViewController, XMSegmentedControlDelegate, UITableV
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Alamofire.request("\(link().domain)berita")
+            .responseJSON{response in
+                
+                let jason = response.data!
+                
+                print(JSON.init(data: jason)["articles"].arrayValue)
+                
+                for data in JSON.init(data: jason)["articles"].arrayValue {
+                    
+                    self.sumber.append(data["author"].stringValue)
+                    self.judul.append(data["title"].stringValue)
+                    self.img.append(data["urlToImage"].stringValue)
+                    self.url.append(data["url"].stringValue)
+                    
+                    print(self.sumber)
+                    print(self.judul)
+                    print(self.img)
+                    print(self.url)
+                    
+                    self.newsCV.reloadData()
+                    
+                }
+                
+        }
         
         self.setStatusBarStyle(.lightContent)
         
@@ -63,14 +91,17 @@ class TestHomeController: UIViewController, XMSegmentedControlDelegate, UITableV
         
         self.newsView.addGestureRecognizer(panRight)
         self.newsView.addGestureRecognizer(swipeRight)
-
+        
         // Do any additional setup after loading the view.
     }
     
+    var sumber = [String]()
+    var judul = [String]()
+    var img = [String]()
+    var url = [String]()
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        self.newsHeight.constant = self.newsCV.contentSize.height
         
     }
 
@@ -259,35 +290,17 @@ class TestHomeController: UIViewController, XMSegmentedControlDelegate, UITableV
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        var item = 0
-        
-        if collectionView == topCV {
-        
-            item = 3
-        
-        }else if collectionView == newsCV {
-        
-            item = 4
-        
-        }
-        
-        return item
+        return self.sumber.count
         
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        var cell = UICollectionViewCell()
+        let cell = newsCV.dequeueReusableCell(withReuseIdentifier: "news", for: indexPath) as! TestNewsCell
         
-        if collectionView == topCV {
-            
-            cell = topCV.dequeueReusableCell(withReuseIdentifier: "top", for: indexPath)
-            
-        }else if collectionView == newsCV {
-            
-            cell = newsCV.dequeueReusableCell(withReuseIdentifier: "news", for: indexPath)
-            
-        }
+        cell.img.setImage(withUrl: URL.init(string: self.img[indexPath.item])!, placeholder: nil, crossFadePlaceholder: true, cacheScaled: false, completion: nil)
+        cell.title.text = self.judul[indexPath.item]
+        cell.author.text = self.sumber[indexPath.item]
         
         return cell
         
@@ -297,30 +310,34 @@ class TestHomeController: UIViewController, XMSegmentedControlDelegate, UITableV
         
         var size = CGSize()
         
-        if collectionView == topCV {
-            
-            size = CGSize.init(width: self.view.frame.size.width, height: 70)
-            
-        }else if collectionView == newsCV {
+        length = (self.view.frame.size.width - 28) / 2
         
-            length = (self.view.frame.size.width - 28) / 2
-            
-            size = CGSize.init(width: length, height: length)
-            
-        }
+        size = CGSize.init(width: length, height: length)
         
         return size
         
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    var sentLink = String()
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        sentLink = self.url[indexPath.item]
+        
+        self.performSegue(withIdentifier: "segue_detail_berita", sender: self)
+        
     }
-    */
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "segue_detail_berita" {
+        
+            let next = segue.destination as! TestDetailBeritaController
+            
+            next.link = self.sentLink
+        
+        }
+        
+    }
 
 }
