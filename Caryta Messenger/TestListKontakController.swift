@@ -38,8 +38,7 @@ class TestListKontakController: UIViewController, NAExpandableTableViewDataSourc
     
     var from = ""
     
-    var nameDummy = ["Silmy Tama", "Om Bob", "Alga", "Gustang"]
-    var statusDummy = ["Selamat berpuasa", "Sibuk", "Ada", "Sibuk"]
+    let getUser = try! Realm().objects(user.self).first!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,9 +70,34 @@ class TestListKontakController: UIViewController, NAExpandableTableViewDataSourc
             
         }
         
-        kontakTV.reloadData()
+        getListGroup()
 
         // Do any additional setup after loading the view.
+    }
+    
+    var groupID = [String]()
+    var groupName = [String]()
+    
+    func getListGroup() {
+    
+        Alamofire.request("\(link().domain)user/group", method: .post, parameters: ["kodeUser": getUser.user_id], encoding: JSONEncoding.default)
+            .responseJSON{response in
+        
+                if let jason = response.result.value {
+                
+                    for data in JSON(jason).array! {
+                    
+                        self.groupID.append(data["group_id"].stringValue)
+                        self.groupName.append(data["name"].stringValue)
+                    
+                    }
+                    
+                    self.kontakTV.reloadData()
+                
+                }
+        
+        }
+    
     }
 
     override func didReceiveMemoryWarning() {
@@ -95,7 +119,7 @@ class TestListKontakController: UIViewController, NAExpandableTableViewDataSourc
         
         if section == 0 {
         
-            row = 1
+            row = self.groupID.count
         
         }
         
@@ -117,7 +141,7 @@ class TestListKontakController: UIViewController, NAExpandableTableViewDataSourc
         
         if section == 0 {
             
-            cell.headerLbl.text = "Grup 3"
+            cell.headerLbl.text = "Grup \(self.groupID.count)"
             
         }
         
@@ -143,14 +167,14 @@ class TestListKontakController: UIViewController, NAExpandableTableViewDataSourc
         
         if indexPath.section == 0 {
             
-            cell.nameLbl.text = "Caryta.com"
+            cell.nameLbl.text = self.groupName[indexPath.row]
             cell.phoneLbl.isHidden = true
             cell.msgBtn.isHidden = true
             cell.callBtn.isHidden = true
-            cell.statusLbl.text = "38 Anggota"
+            cell.statusLbl.text = ""
             
-            let initIndex = "Caryta.com".index("Caryta.com".startIndex, offsetBy: 1)
-            let initial = "Caryta.com".substring(to: initIndex).uppercased()
+            let initIndex = self.groupName[indexPath.row].index(self.groupName[indexPath.row].startIndex, offsetBy: 1)
+            let initial = self.groupName[indexPath.row].substring(to: initIndex).uppercased()
             
             cell.initialLbl.text = initial
             
@@ -158,27 +182,13 @@ class TestListKontakController: UIViewController, NAExpandableTableViewDataSourc
         
         if indexPath.section == 1 {
             
-            if indexPath.row > 3 {
-                
-                cell.nameLbl.text = getKontak[indexPath.row - 4].nama
-                cell.statusLbl.text = getKontak[indexPath.row - 4].status
-                
-                let initIndex = getKontak[indexPath.row - 4].nama.index(getKontak[indexPath.row - 4].nama.startIndex, offsetBy: 1)
-                let initial = getKontak[indexPath.row - 4].nama.substring(to: initIndex).uppercased()
-                
-                cell.initialLbl.text = initial
+            cell.nameLbl.text = getKontak[indexPath.row].nama
+            cell.statusLbl.text = getKontak[indexPath.row].status
             
-            }else{
-                
-                cell.nameLbl.text = nameDummy[indexPath.row]
-                cell.statusLbl.text = statusDummy[indexPath.row]
-                
-                let initIndex = nameDummy[indexPath.row].index(nameDummy[indexPath.row].startIndex, offsetBy: 1)
-                let initial = nameDummy[indexPath.row].substring(to: initIndex).uppercased()
-                
-                cell.initialLbl.text = initial
+            let initIndex = getKontak[indexPath.row - 4].nama.index(getKontak[indexPath.row - 4].nama.startIndex, offsetBy: 1)
+            let initial = getKontak[indexPath.row - 4].nama.substring(to: initIndex).uppercased()
             
-            }
+            cell.initialLbl.text = initial
             
         }
         
