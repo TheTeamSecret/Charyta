@@ -26,6 +26,10 @@
 		0F56889A1EE5313700F1B408 /* SelectKontakCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5688991EE5313700F1B408 /* SelectKontakCell.swift */; };
 		0F5AE2ED1EF4E72C00B91B9E /* TestKontakHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5AE2EC1EF4E72C00B91B9E /* TestKontakHeaderCell.swift */; };
 		0F5AE2EF1EF511DD00B91B9E /* TestPopUpUbahDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5AE2EE1EF511DD00B91B9E /* TestPopUpUbahDataController.swift */; };
+		0F7C1AAD1F3C3C9F00079334 /* FirstController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C1AAC1F3C3C9F00079334 /* FirstController.swift */; };
+		0F7C1AAF1F3C4B0F00079334 /* testKodeVerifController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C1AAE1F3C4B0F00079334 /* testKodeVerifController.swift */; };
+		0F7C1AB11F3C5C4800079334 /* DataDiriController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C1AB01F3C5C4800079334 /* DataDiriController.swift */; };
+		0F7C1AB31F3C643D00079334 /* TestLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C1AB21F3C643D00079334 /* TestLoginController.swift */; };
 		0F98E3231EF8D7360094EF68 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F98E3221EF8D7360094EF68 /* CloudKit.framework */; };
 		0FBF3FAF1EE02406009D41D9 /* SplashScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBF3FAE1EE02406009D41D9 /* SplashScreenController.swift */; };
 		0FC47E341EE2AFA900311B5B /* LoginWithStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC47E331EE2AFA900311B5B /* LoginWithStoreController.swift */; };
@@ -110,6 +114,10 @@
 		0F5688991EE5313700F1B408 /* SelectKontakCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectKontakCell.swift; sourceTree = "<group>"; };
 		0F5AE2EC1EF4E72C00B91B9E /* TestKontakHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestKontakHeaderCell.swift; sourceTree = "<group>"; };
 		0F5AE2EE1EF511DD00B91B9E /* TestPopUpUbahDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPopUpUbahDataController.swift; sourceTree = "<group>"; };
+		0F7C1AAC1F3C3C9F00079334 /* FirstController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstController.swift; sourceTree = "<group>"; };
+		0F7C1AAE1F3C4B0F00079334 /* testKodeVerifController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testKodeVerifController.swift; sourceTree = "<group>"; };
+		0F7C1AB01F3C5C4800079334 /* DataDiriController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataDiriController.swift; sourceTree = "<group>"; };
+		0F7C1AB21F3C643D00079334 /* TestLoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLoginController.swift; sourceTree = "<group>"; };
 		0F8526001EEE49EC00FAC280 /* Caryta Messenger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Caryta Messenger-Bridging-Header.h"; sourceTree = "<group>"; };
 		0F98E3221EF8D7360094EF68 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		0FBF3FAE1EE02406009D41D9 /* SplashScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenController.swift; sourceTree = "<group>"; };
@@ -223,6 +231,10 @@
 				0F5AE2EE1EF511DD00B91B9E /* TestPopUpUbahDataController.swift */,
 				0F1857771F399C3200594433 /* TestNewsCell.swift */,
 				0F1857791F39A93E00594433 /* TestDetailBeritaController.swift */,
+				0F7C1AAC1F3C3C9F00079334 /* FirstController.swift */,
+				0F7C1AAE1F3C4B0F00079334 /* testKodeVerifController.swift */,
+				0F7C1AB01F3C5C4800079334 /* DataDiriController.swift */,
+				0F7C1AB21F3C643D00079334 /* TestLoginController.swift */,
 			);
 			name = Test;
 			sourceTree = "<group>";
@@ -736,6 +748,7 @@
 				0F5AE2EF1EF511DD00B91B9E /* TestPopUpUbahDataController.swift in Sources */,
 				0F03F9741EEFF488003D5B94 /* TestListKontakController.swift in Sources */,
 				7BF924461ED2A48200F89183 /* VerifCodeController.swift in Sources */,
+				0F7C1AAD1F3C3C9F00079334 /* FirstController.swift in Sources */,
 				0F03F9701EEFF2AC003D5B94 /* TestListChatController.swift in Sources */,
 				7B55526E1ECAD65900D50B4D /* MenuBarController.swift in Sources */,
 				7BF924481ED2C19000F89183 /* LoginRegisController.swift in Sources */,
@@ -745,6 +758,7 @@
 				0FCF30D01EF2768400CFF78B /* TestTimelineCell.swift in Sources */,
 				7BF924541ED3013C00F89183 /* CommentController.swift in Sources */,
 				0FE909331ED569FA0005B2DD /* ListDialController.swift in Sources */,
+				0F7C1AB11F3C5C4800079334 /* DataDiriController.swift in Sources */,
 				0F18577A1F39A93E00594433 /* TestDetailBeritaController.swift in Sources */,
 				0F03F96A1EEFE8B9003D5B94 /* TestMenuBarController.swift in Sources */,
 				0F1E2E081EE9389200B1D43E /* ParticipantCell.swift in Sources */,
@@ -763,12 +777,14 @@
 				7BF924521ED2E0B900F89183 /* TimelineCell.swift in Sources */,
 				7B8C3D8E1ECEAB8D009EEAE9 /* GantiNomorController.swift in Sources */,
 				7BB3710A1ECC2866005B1B64 /* EditProfilController.swift in Sources */,
+				0F7C1AAF1F3C4B0F00079334 /* testKodeVerifController.swift in Sources */,
 				0FCF30D41EF282BB00CFF78B /* TestProfilController.swift in Sources */,
 				0F56889A1EE5313700F1B408 /* SelectKontakCell.swift in Sources */,
 				7B55523B1ECA93B700D50B4D /* AppDelegate.swift in Sources */,
 				0F1857781F399C3200594433 /* TestNewsCell.swift in Sources */,
 				0FC5594C1EDD2616002F810A /* MasukController.swift in Sources */,
 				0FBF3FAF1EE02406009D41D9 /* SplashScreenController.swift in Sources */,
+				0F7C1AB31F3C643D00079334 /* TestLoginController.swift in Sources */,
 				0FCF30CE1EF2686B00CFF78B /* TestHomeController.swift in Sources */,
 				0F5688981EE5309E00F1B408 /* SelectKontakController.swift in Sources */,
 				7BB371111ECC8AE7005B1B64 /* DetailKontakController.swift in Sources */,

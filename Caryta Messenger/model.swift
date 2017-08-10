@@ -12,10 +12,11 @@ import RealmSwift
 
 class link: Object {
 
-    let domain  = "http://api.caryta.com/v1/messenger/"
-    let gambar  = "http://www.caryta.com"
-    let file    = "https://keep.caryta.com"
-    let vid     = "https://drive.caryta.com"
+    let domain      = "http://api.caryta.com/v1/messenger/"
+    let domainMain  = "http://api.caryta.com/v1/"
+    let gambar      = "http://www.caryta.com"
+    let file        = "https://keep.caryta.com"
+    let vid         = "https://drive.caryta.com"
 
 }
 
