@@ -30,6 +30,7 @@
 		0F7C1AAF1F3C4B0F00079334 /* testKodeVerifController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C1AAE1F3C4B0F00079334 /* testKodeVerifController.swift */; };
 		0F7C1AB11F3C5C4800079334 /* DataDiriController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C1AB01F3C5C4800079334 /* DataDiriController.swift */; };
 		0F7C1AB31F3C643D00079334 /* TestLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C1AB21F3C643D00079334 /* TestLoginController.swift */; };
+		0F8138851F3D894000A11364 /* LoginWithCarytaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8138841F3D894000A11364 /* LoginWithCarytaController.swift */; };
 		0F98E3231EF8D7360094EF68 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F98E3221EF8D7360094EF68 /* CloudKit.framework */; };
 		0FBF3FAF1EE02406009D41D9 /* SplashScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBF3FAE1EE02406009D41D9 /* SplashScreenController.swift */; };
 		0FC47E341EE2AFA900311B5B /* LoginWithStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC47E331EE2AFA900311B5B /* LoginWithStoreController.swift */; };
@@ -118,6 +119,7 @@
 		0F7C1AAE1F3C4B0F00079334 /* testKodeVerifController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testKodeVerifController.swift; sourceTree = "<group>"; };
 		0F7C1AB01F3C5C4800079334 /* DataDiriController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataDiriController.swift; sourceTree = "<group>"; };
 		0F7C1AB21F3C643D00079334 /* TestLoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLoginController.swift; sourceTree = "<group>"; };
+		0F8138841F3D894000A11364 /* LoginWithCarytaController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWithCarytaController.swift; sourceTree = "<group>"; };
 		0F8526001EEE49EC00FAC280 /* Caryta Messenger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Caryta Messenger-Bridging-Header.h"; sourceTree = "<group>"; };
 		0F98E3221EF8D7360094EF68 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		0FBF3FAE1EE02406009D41D9 /* SplashScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenController.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				0F7C1AAE1F3C4B0F00079334 /* testKodeVerifController.swift */,
 				0F7C1AB01F3C5C4800079334 /* DataDiriController.swift */,
 				0F7C1AB21F3C643D00079334 /* TestLoginController.swift */,
+				0F8138841F3D894000A11364 /* LoginWithCarytaController.swift */,
 			);
 			name = Test;
 			sourceTree = "<group>";
@@ -759,6 +762,7 @@
 				7BF924541ED3013C00F89183 /* CommentController.swift in Sources */,
 				0FE909331ED569FA0005B2DD /* ListDialController.swift in Sources */,
 				0F7C1AB11F3C5C4800079334 /* DataDiriController.swift in Sources */,
+				0F8138851F3D894000A11364 /* LoginWithCarytaController.swift in Sources */,
 				0F18577A1F39A93E00594433 /* TestDetailBeritaController.swift in Sources */,
 				0F03F96A1EEFE8B9003D5B94 /* TestMenuBarController.swift in Sources */,
 				0F1E2E081EE9389200B1D43E /* ParticipantCell.swift in Sources */,

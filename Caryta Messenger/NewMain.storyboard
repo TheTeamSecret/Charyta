@@ -817,10 +817,10 @@
             </objects>
             <point key="canvasLocation" x="-1847.2" y="3141.6791604197902"/>
         </scene>
-        <!--View Controller-->
+        <!--Login With Caryta Controller-->
         <scene sceneID="ddf-I8-QHR">
             <objects>
-                <viewController id="w5i-Fh-DI8" sceneMemberID="viewController">
+                <viewController id="w5i-Fh-DI8" customClass="LoginWithCarytaController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oKH-hg-pK1"/>
                         <viewControllerLayoutGuide type="bottom" id="193-qE-JQb"/>
@@ -850,7 +850,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SKP-Ll-V0q">
                                                 <rect key="frame" x="8" y="129" width="327" height="30"/>
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+62" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="stn-TS-lHF">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="+62" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="stn-TS-lHF">
                                                         <rect key="frame" x="8" y="0.0" width="40" height="30"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <nil key="textColor"/>
@@ -934,6 +934,12 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="dialTF" destination="stn-TS-lHF" id="aMV-3D-fEu"/>
+                        <outlet property="heightConst" destination="y1x-Qm-BE5" id="iDS-Yr-zJ3"/>
+                        <outlet property="passwordTF" destination="uMy-hj-v3g" id="xgB-ct-sJE"/>
+                        <outlet property="phoneTF" destination="WOO-Zz-hPC" id="kg2-MX-k0q"/>
+                        <outlet property="topConst" destination="fM1-T6-cHW" id="RXq-k1-ccJ"/>
+                        <outlet property="usernameTF" destination="bR5-G7-ROW" id="GN3-PS-FPO"/>
                         <segue destination="hQD-oY-srQ" kind="showDetail" identifier="segue_main" id="Kih-uK-blI"/>
                     </connections>
                 </viewController>
@@ -3541,6 +3547,6 @@
         <image name="write" width="20" height="20"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Meg-vJ-7oM"/>
+        <segue reference="Kih-uK-blI"/>
     </inferredMetricsTieBreakers>
 </document>
