@@ -125,6 +125,12 @@ class LoginWithCarytaController: UIViewController {
         }
         
     }
+    
+    @IBAction func masuk(_ sender: UIButton) {
+        
+        self.login()
+        
+    }
 
     /*
     // MARK: - Navigation

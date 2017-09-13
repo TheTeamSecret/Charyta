@@ -37,8 +37,6 @@ class TestListKontakController: UIViewController, NAExpandableTableViewDataSourc
     var sentName = ""
     
     var from = ""
-    
-    let getUser = try! Realm().objects(user.self).first!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +77,8 @@ class TestListKontakController: UIViewController, NAExpandableTableViewDataSourc
     var groupName = [String]()
     
     func getListGroup() {
+        
+        let getUser = try! Realm().objects(user.self).first!
     
         Alamofire.request("\(link().domain)user/group", method: .post, parameters: ["kodeUser": getUser.user_id], encoding: JSONEncoding.default)
             .responseJSON{response in

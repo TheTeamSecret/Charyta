@@ -82,6 +82,7 @@ class detail_chat: Object {
     dynamic var isi = String()
     dynamic var avatar = String()
     dynamic var date = String()
+    dynamic var picture = String()
     dynamic var read = String()
 
 }

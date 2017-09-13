@@ -12,6 +12,7 @@ import ChameleonFramework
 import Alamofire
 import SwiftyJSON
 import MapleBacon
+import RealmSwift
 
 class TestHomeController: UIViewController, XMSegmentedControlDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
@@ -27,6 +28,11 @@ class TestHomeController: UIViewController, XMSegmentedControlDelegate, UITableV
     @IBOutlet weak var newsHeight: NSLayoutConstraint!
     
     var length: CGFloat = 0.0
+    
+    var postID = [String]()
+    var userID = [String]()
+    var caption = [String]()
+    var file = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()

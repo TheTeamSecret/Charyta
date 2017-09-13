@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Schema : \(schema)")
         
         Realm.Configuration.defaultConfiguration = Realm.Configuration(
-            schemaVersion: 3,
+            schemaVersion: 4,
             migrationBlock: { migration, oldSchemaVersion in
                 if (Int.init(schema)! < 1) {
                     // The enumerateObjects(ofType:_:) method iterates
@@ -61,6 +61,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         newObject!["status"] = String()
                     }
                 }
+                if (oldSchemaVersion < 4) {
+                    // The enumerateObjects(ofType:_:) method iterates
+                    // over every Person object stored in the Realm file
+                    migration.enumerateObjects(ofType: detail_chat.className()) { oldObject, newObject in
+                        // combine name fields into a single field
+                        newObject!["picture"] = String()
+                    }
+                }
         })
         
         _ = try! Realm()
@@ -83,6 +91,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         application.registerForRemoteNotifications()
         
+        let getUser = try! Realm().objects(user.self)
+        
+        let storyboard = UIStoryboard(name: "NewMain", bundle: nil)
+        
+        if getUser.count > 0 {
+            
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "menu") as! TestMenuBarController
+            
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+            
+        }else{
+            
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "first") as! FirstController
+            
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+            
+        }
+
         // [END register_for_notifications]
         return true
     }
@@ -220,13 +248,13 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
-            let vc = storyboard.instantiateViewController(withIdentifier: "menu") as! MenuBarController
-            let chatVC = storyboard.instantiateViewController(withIdentifier: "detailChat") as! DetailChatController
+            let vc = storyboard.instantiateViewController(withIdentifier: "menu") as! TestMenuBarController
+            let chatVC = storyboard.instantiateViewController(withIdentifier: "detailChat") as! TestDetailChatController
             
             chatVC.chatID = getChat.chat_id
             chatVC.nama = getChat.name
             
-            vc.selectedIndex = 1
+            vc.selectedIndex = 3
             
             vc.present(chatVC, animated: true, completion: nil)
         
@@ -261,13 +289,13 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
-            let vc = storyboard.instantiateViewController(withIdentifier: "menu") as! MenuBarController
-            let chatVC = storyboard.instantiateViewController(withIdentifier: "detailChat") as! DetailChatController
+            let vc = storyboard.instantiateViewController(withIdentifier: "menu") as! TestMenuBarController
+            let chatVC = storyboard.instantiateViewController(withIdentifier: "detailChat") as! TestDetailChatController
             
             chatVC.chatID = getChat.chat_id
             chatVC.nama = getChat.name
             
-            vc.selectedIndex = 1
+            vc.selectedIndex = 3
             
             vc.present(chatVC, animated: true, completion: nil)
         

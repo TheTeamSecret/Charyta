@@ -14,11 +14,15 @@ import Toaster
 
 class FirstController: UIViewController, CLLocationManagerDelegate {
     
+    var name = [String]()
+    var dial = [String]()
+    
     let locManager = CLLocationManager()
 
     @IBOutlet weak var dialCountryView: UIView!
     @IBOutlet weak var numberView: UIView!
     
+    @IBOutlet weak var dialNameLbl: UILabel!
     @IBOutlet weak var dialCodeLbl: UILabel!
     @IBOutlet weak var numberTF: UITextField!
     
@@ -49,6 +53,7 @@ class FirstController: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBOutlet weak var bottom: NSLayoutConstraint!
+    @IBOutlet weak var constDialCode: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -100,9 +105,15 @@ class FirstController: UIViewController, CLLocationManagerDelegate {
                         
                         if data["code"].stringValue == local.regionCode! {
                             
+                            self.dialNameLbl.text = data["name"].stringValue
                             self.dialCodeLbl.text = data["dial_code"].stringValue
                             
+                            self.setWidth()
+                            
                         }
+                        
+                        self.name.append(data["name"].stringValue)
+                        self.dial.append(data["dial_code"].stringValue)
                         
                     }
                     
@@ -167,10 +178,43 @@ class FirstController: UIViewController, CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    func setWidth() {
+    
+        let newWidth = self.estimatewidthForView(text: self.dialCodeLbl.text!).width
+        
+        UIView.animate(withDuration: 0.1, animations: {
+            
+            self.constDialCode.constant = newWidth + 8
+            self.view.layoutIfNeeded()
+            
+        })
+    
+    }
+    
     @IBAction func checkNumber(_ sender: UIButton) {
         
         getToken()
         
+    }
+    
+    @IBAction func chooseCountry(_ sender: UIButton) {
+        
+        let Popover = UIStoryboard(name: "NewMain", bundle: nil).instantiateViewController(withIdentifier: "PopUpListDial") as! PopUpListDialController
+        
+        Popover.name = self.name
+        Popover.dial = self.dial
+        
+        self.addChildViewController(Popover)
+        Popover.view.frame = self.view.frame
+        self.view.addSubview(Popover.view)
+        Popover.didMove(toParentViewController: self)
+        
+    }
+    
+    private func estimatewidthForView(text: String) -> CGRect {
+        let size = CGSize(width: 1000, height: 30)
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16)], context: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
