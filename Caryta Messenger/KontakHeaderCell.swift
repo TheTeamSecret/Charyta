@@ -1,17 +1,16 @@
 //
-//  DialCodeCell.swift
+//  KontakHeaderCell.swift
 //  Caryta Messenger
 //
-//  Created by Verrelio Chandra Rizky on 5/24/17.
+//  Created by Verrelio Chandra Rizky on 6/17/17.
 //  Copyright © 2017 Caryta. All rights reserved.
 //
 
 import UIKit
 
-class DialCodeCell: UITableViewCell {
+class KontakHeaderCell: UITableViewCell {
 
-    @IBOutlet weak var countryName: UILabel!
-    @IBOutlet weak var countryDial: UILabel!
+    @IBOutlet weak var headerLbl: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

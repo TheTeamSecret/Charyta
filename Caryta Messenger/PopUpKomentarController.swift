@@ -1,5 +1,5 @@
 //
-//  TestPopUpKomentarController.swift
+//  PopUpKomentarController.swift
 //  Caryta Messenger
 //
 //  Created by Verrelio Chandra Rizky on 6/15/17.
@@ -9,7 +9,7 @@
 import UIKit
 import ChameleonFramework
 
-class TestPopUpKomentarController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class PopUpKomentarController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var bottom: NSLayoutConstraint!
@@ -43,10 +43,10 @@ class TestPopUpKomentarController: UIViewController, UITableViewDataSource, UITa
         self.commentTF.becomeFirstResponder()
         showAnimate()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(TestPopUpKomentarController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(TestPopUpKomentarController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(PopUpKomentarController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(PopUpKomentarController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
-        let tapBack = UITapGestureRecognizer(target: self, action: #selector(TestPopUpKomentarController.closePopup))
+        let tapBack = UITapGestureRecognizer(target: self, action: #selector(PopUpKomentarController.closePopup))
         tapBack.numberOfTapsRequired = 1
         self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(tapBack)
@@ -101,7 +101,7 @@ class TestPopUpKomentarController: UIViewController, UITableViewDataSource, UITa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = commentTV.dequeueReusableCell(withIdentifier: "komen", for: indexPath) as! TestCommentCell
+        let cell = commentTV.dequeueReusableCell(withIdentifier: "komen", for: indexPath) as! CommentCell
         
         cell.initialLbl.layer.cornerRadius = 20
         cell.initialLbl.clipsToBounds = true

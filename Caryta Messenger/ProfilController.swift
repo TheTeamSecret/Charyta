@@ -1,5 +1,5 @@
 //
-//  TestProfilController.swift
+//  ProfilController.swift
 //  Caryta Messenger
 //
 //  Created by Verrelio Chandra Rizky on 6/15/17.
@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class TestProfilController: UIViewController {
+class ProfilController: UIViewController {
 
     @IBOutlet weak var initialLbl: UILabel!
     @IBOutlet weak var nameLbl: UILabel!
@@ -63,7 +63,7 @@ class TestProfilController: UIViewController {
     
     @IBAction func gantiNama(_ sender: UIButton) {
         
-        let myParent = self.tabBarController as! TestMenuBarController
+        let myParent = self.tabBarController as! MenuBarController
         
         myParent.showEditName(value: self.nameLbl.text!)
         
@@ -71,7 +71,7 @@ class TestProfilController: UIViewController {
     
     @IBAction func gantiStatus(_ sender: UIButton) {
         
-        let myParent = self.tabBarController as! TestMenuBarController
+        let myParent = self.tabBarController as! MenuBarController
         
         myParent.showEditStatus(value: self.nameLbl.text!)
         
@@ -79,7 +79,7 @@ class TestProfilController: UIViewController {
 
     @IBAction func gantiEmail(_ sender: UIButton) {
         
-        let myParent = self.tabBarController as! TestMenuBarController
+        let myParent = self.tabBarController as! MenuBarController
         
         myParent.showEditEmail(value: self.nameLbl.text!)
         

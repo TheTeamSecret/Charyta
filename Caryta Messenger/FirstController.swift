@@ -221,7 +221,7 @@ class FirstController: UIViewController, CLLocationManagerDelegate {
         
         if segue.identifier == "segue_kode_verif" {
             
-            let next = segue.destination as! testKodeVerifController
+            let next = segue.destination as! KodeVerifController
             
             next.params = self.params
             next.pinId = self.pinId
@@ -230,7 +230,7 @@ class FirstController: UIViewController, CLLocationManagerDelegate {
         
         if segue.identifier == "segue_login" {
         
-            let next = segue.destination as! TestLoginController
+            let next = segue.destination as! LoginController
             
             next.number = self.params["phoneNumber"]!
         

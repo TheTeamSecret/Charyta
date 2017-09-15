@@ -1,5 +1,5 @@
 //
-//  TestCommentCell.swift
+//  CommentCell.swift
 //  Caryta Messenger
 //
 //  Created by Verrelio Chandra Rizky on 6/15/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TestCommentCell: UITableViewCell {
+class CommentCell: UITableViewCell {
 
     @IBOutlet weak var initialLbl: UILabel!
     

@@ -1,5 +1,5 @@
 //
-//  testKodeVerifController.swift
+//  KodeVerifController.swift
 //  Caryta Messenger
 //
 //  Created by Verrelio Chandra Rizky on 8/10/17.
@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import Toaster
 
-class testKodeVerifController: UIViewController {
+class KodeVerifController: UIViewController {
 
     @IBOutlet weak var containerView: UIView!
     
@@ -50,8 +50,8 @@ class testKodeVerifController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(testKodeVerifController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(testKodeVerifController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(KodeVerifController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(KodeVerifController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         self.containerView.layer.cornerRadius = 5.0
         self.containerView.clipsToBounds = true

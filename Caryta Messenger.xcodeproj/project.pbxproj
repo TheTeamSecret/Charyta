@@ -8,75 +8,45 @@
 
 /* Begin PBXBuildFile section */
 		0F03F9671EEFC308003D5B94 /* NewMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F03F9661EEFC308003D5B94 /* NewMain.storyboard */; };
-		0F03F96A1EEFE8B9003D5B94 /* TestMenuBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F03F9691EEFE8B9003D5B94 /* TestMenuBarController.swift */; };
-		0F03F96C1EEFF058003D5B94 /* TestListTeleponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F03F96B1EEFF058003D5B94 /* TestListTeleponController.swift */; };
-		0F03F96E1EEFF126003D5B94 /* TestListPhoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F03F96D1EEFF126003D5B94 /* TestListPhoneCell.swift */; };
-		0F03F9701EEFF2AC003D5B94 /* TestListChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F03F96F1EEFF2AC003D5B94 /* TestListChatController.swift */; };
-		0F03F9721EEFF33B003D5B94 /* TestListChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F03F9711EEFF33B003D5B94 /* TestListChatCell.swift */; };
-		0F03F9741EEFF488003D5B94 /* TestListKontakController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F03F9731EEFF488003D5B94 /* TestListKontakController.swift */; };
-		0F03F9761EEFF4DC003D5B94 /* TestListKontakCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F03F9751EEFF4DC003D5B94 /* TestListKontakCell.swift */; };
-		0F0B83B51EF11331009E8B31 /* TestDetailChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0B83B41EF11331009E8B31 /* TestDetailChatController.swift */; };
-		0F0B83B71EF11CB3009E8B31 /* TestDetailChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0B83B61EF11CB3009E8B31 /* TestDetailChatCell.swift */; };
-		0F1857781F399C3200594433 /* TestNewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1857771F399C3200594433 /* TestNewsCell.swift */; };
-		0F18577A1F39A93E00594433 /* TestDetailBeritaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1857791F39A93E00594433 /* TestDetailBeritaController.swift */; };
-		0F1E2E061EE9379700B1D43E /* AddGroupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1E2E051EE9379700B1D43E /* AddGroupController.swift */; };
-		0F1E2E081EE9389200B1D43E /* ParticipantCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1E2E071EE9389200B1D43E /* ParticipantCell.swift */; };
-		0F2324971EDBEB3800C73BFD /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F2324961EDBEB3800C73BFD /* LoginController.swift */; };
-		0F5688981EE5309E00F1B408 /* SelectKontakController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5688971EE5309E00F1B408 /* SelectKontakController.swift */; };
-		0F56889A1EE5313700F1B408 /* SelectKontakCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5688991EE5313700F1B408 /* SelectKontakCell.swift */; };
-		0F5AE2ED1EF4E72C00B91B9E /* TestKontakHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5AE2EC1EF4E72C00B91B9E /* TestKontakHeaderCell.swift */; };
-		0F5AE2EF1EF511DD00B91B9E /* TestPopUpUbahDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5AE2EE1EF511DD00B91B9E /* TestPopUpUbahDataController.swift */; };
+		0F03F96A1EEFE8B9003D5B94 /* MenuBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F03F9691EEFE8B9003D5B94 /* MenuBarController.swift */; };
+		0F03F96C1EEFF058003D5B94 /* ListTeleponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F03F96B1EEFF058003D5B94 /* ListTeleponController.swift */; };
+		0F03F96E1EEFF126003D5B94 /* ListPhoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F03F96D1EEFF126003D5B94 /* ListPhoneCell.swift */; };
+		0F03F9701EEFF2AC003D5B94 /* ListChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F03F96F1EEFF2AC003D5B94 /* ListChatController.swift */; };
+		0F03F9721EEFF33B003D5B94 /* ListChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F03F9711EEFF33B003D5B94 /* ListChatCell.swift */; };
+		0F03F9741EEFF488003D5B94 /* ListKontakController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F03F9731EEFF488003D5B94 /* ListKontakController.swift */; };
+		0F03F9761EEFF4DC003D5B94 /* ListKontakCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F03F9751EEFF4DC003D5B94 /* ListKontakCell.swift */; };
+		0F0B83B51EF11331009E8B31 /* DetailChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0B83B41EF11331009E8B31 /* DetailChatController.swift */; };
+		0F0B83B71EF11CB3009E8B31 /* DetailChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0B83B61EF11CB3009E8B31 /* DetailChatCell.swift */; };
+		0F1857781F399C3200594433 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1857771F399C3200594433 /* NewsCell.swift */; };
+		0F18577A1F39A93E00594433 /* DetailBeritaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1857791F39A93E00594433 /* DetailBeritaController.swift */; };
+		0F5AE2ED1EF4E72C00B91B9E /* KontakHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5AE2EC1EF4E72C00B91B9E /* KontakHeaderCell.swift */; };
+		0F5AE2EF1EF511DD00B91B9E /* PopUpUbahDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5AE2EE1EF511DD00B91B9E /* PopUpUbahDataController.swift */; };
 		0F7C1AAD1F3C3C9F00079334 /* FirstController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C1AAC1F3C3C9F00079334 /* FirstController.swift */; };
-		0F7C1AAF1F3C4B0F00079334 /* testKodeVerifController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C1AAE1F3C4B0F00079334 /* testKodeVerifController.swift */; };
+		0F7C1AAF1F3C4B0F00079334 /* KodeVerifController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C1AAE1F3C4B0F00079334 /* KodeVerifController.swift */; };
 		0F7C1AB11F3C5C4800079334 /* DataDiriController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C1AB01F3C5C4800079334 /* DataDiriController.swift */; };
-		0F7C1AB31F3C643D00079334 /* TestLoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C1AB21F3C643D00079334 /* TestLoginController.swift */; };
+		0F7C1AB31F3C643D00079334 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C1AB21F3C643D00079334 /* LoginController.swift */; };
 		0F8138851F3D894000A11364 /* LoginWithCarytaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8138841F3D894000A11364 /* LoginWithCarytaController.swift */; };
 		0F87DCB01F5547D900C64EE2 /* PopUpListDialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F87DCAF1F5547D900C64EE2 /* PopUpListDialController.swift */; };
 		0F87DCB31F55489700C64EE2 /* PopUpListDialCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F87DCB21F55489700C64EE2 /* PopUpListDialCell.swift */; };
 		0F98E3231EF8D7360094EF68 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F98E3221EF8D7360094EF68 /* CloudKit.framework */; };
-		0FBF3FAF1EE02406009D41D9 /* SplashScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FBF3FAE1EE02406009D41D9 /* SplashScreenController.swift */; };
-		0FC47E341EE2AFA900311B5B /* LoginWithStoreController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC47E331EE2AFA900311B5B /* LoginWithStoreController.swift */; };
-		0FC5594C1EDD2616002F810A /* MasukController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FC5594B1EDD2616002F810A /* MasukController.swift */; };
-		0FCF30CA1EF23F8100CFF78B /* TestWritePostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF30C91EF23F8100CFF78B /* TestWritePostController.swift */; };
-		0FCF30CC1EF2663100CFF78B /* TestPopUpKomentarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF30CB1EF2663100CFF78B /* TestPopUpKomentarController.swift */; };
-		0FCF30CE1EF2686B00CFF78B /* TestHomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF30CD1EF2686B00CFF78B /* TestHomeController.swift */; };
-		0FCF30D01EF2768400CFF78B /* TestTimelineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF30CF1EF2768400CFF78B /* TestTimelineCell.swift */; };
-		0FCF30D21EF2771D00CFF78B /* TestCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF30D11EF2771D00CFF78B /* TestCommentCell.swift */; };
-		0FCF30D41EF282BB00CFF78B /* TestProfilController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF30D31EF282BB00CFF78B /* TestProfilController.swift */; };
-		0FE909311ED569B80005B2DD /* DialCodeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE909301ED569B80005B2DD /* DialCodeCell.swift */; };
-		0FE909331ED569FA0005B2DD /* ListDialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE909321ED569FA0005B2DD /* ListDialController.swift */; };
+		0FCF30CA1EF23F8100CFF78B /* WritePostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF30C91EF23F8100CFF78B /* WritePostController.swift */; };
+		0FCF30CC1EF2663100CFF78B /* PopUpKomentarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF30CB1EF2663100CFF78B /* PopUpKomentarController.swift */; };
+		0FCF30CE1EF2686B00CFF78B /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF30CD1EF2686B00CFF78B /* HomeController.swift */; };
+		0FCF30D01EF2768400CFF78B /* TimelineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF30CF1EF2768400CFF78B /* TimelineCell.swift */; };
+		0FCF30D21EF2771D00CFF78B /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF30D11EF2771D00CFF78B /* CommentCell.swift */; };
+		0FCF30D41EF282BB00CFF78B /* ProfilController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF30D31EF282BB00CFF78B /* ProfilController.swift */; };
 		18FF7A09FCD34A20C07151E8 /* Pods_Caryta_Messenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BB4AD999016DB7E9C2615C2 /* Pods_Caryta_Messenger.framework */; };
 		6512CC38CFFF11887C9B9A61 /* Pods_Caryta_MessengerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4ECE9C80025954618005CCC /* Pods_Caryta_MessengerUITests.framework */; };
-		7B2AFB151ECD4F48007033C5 /* ListKontakController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2AFB141ECD4F48007033C5 /* ListKontakController.swift */; };
-		7B2AFB171ECD56EB007033C5 /* ListKontakCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2AFB161ECD56EB007033C5 /* ListKontakCell.swift */; };
 		7B2AFB1A1ECD81E4007033C5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B2AFB191ECD81E4007033C5 /* AudioToolbox.framework */; };
-		7B2AFB1D1ECD8AF2007033C5 /* ListNewsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2AFB1C1ECD8AF2007033C5 /* ListNewsController.swift */; };
-		7B2AFB211ECD9D2C007033C5 /* NavigationSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2AFB201ECD9D2C007033C5 /* NavigationSettingController.swift */; };
 		7B55523B1ECA93B700D50B4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B55523A1ECA93B700D50B4D /* AppDelegate.swift */; };
-		7B5552401ECA93B700D50B4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B55523E1ECA93B700D50B4D /* Main.storyboard */; };
 		7B5552421ECA93B700D50B4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B5552411ECA93B700D50B4D /* Assets.xcassets */; };
 		7B5552451ECA93B700D50B4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B5552431ECA93B700D50B4D /* LaunchScreen.storyboard */; };
 		7B5552501ECA93B700D50B4D /* Caryta_MessengerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B55524F1ECA93B700D50B4D /* Caryta_MessengerTests.swift */; };
 		7B55525B1ECA93B700D50B4D /* Caryta_MessengerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B55525A1ECA93B700D50B4D /* Caryta_MessengerUITests.swift */; };
-		7B5552691ECAB9FA00D50B4D /* ListChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5552681ECAB9FA00D50B4D /* ListChatController.swift */; };
-		7B55526C1ECABA4600D50B4D /* ListChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B55526B1ECABA4600D50B4D /* ListChatCell.swift */; };
-		7B55526E1ECAD65900D50B4D /* MenuBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B55526D1ECAD65900D50B4D /* MenuBarController.swift */; };
-		7B5552751ECAE84E00D50B4D /* ListTeleponController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5552741ECAE84E00D50B4D /* ListTeleponController.swift */; };
-		7B5552771ECAE99600D50B4D /* ListTeleponCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5552761ECAE99600D50B4D /* ListTeleponCell.swift */; };
-		7B55527A1ECB044100D50B4D /* MainSettingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5552791ECB044100D50B4D /* MainSettingController.swift */; };
-		7B8C3D8E1ECEAB8D009EEAE9 /* GantiNomorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8C3D8D1ECEAB8D009EEAE9 /* GantiNomorController.swift */; };
 		7BB371081ECC052F005B1B64 /* UIView+Borders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB371071ECC052F005B1B64 /* UIView+Borders.swift */; };
-		7BB3710A1ECC2866005B1B64 /* EditProfilController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB371091ECC2866005B1B64 /* EditProfilController.swift */; };
-		7BB3710C1ECC86BC005B1B64 /* DetailChatController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB3710B1ECC86BC005B1B64 /* DetailChatController.swift */; };
-		7BB3710E1ECC8709005B1B64 /* ChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB3710D1ECC8709005B1B64 /* ChatCell.swift */; };
-		7BB371111ECC8AE7005B1B64 /* DetailKontakController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB371101ECC8AE7005B1B64 /* DetailKontakController.swift */; };
 		7BD283C01ED014F40009F755 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7BD283BF1ED014F40009F755 /* GoogleService-Info.plist */; };
-		7BF924461ED2A48200F89183 /* VerifCodeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF924451ED2A48200F89183 /* VerifCodeController.swift */; };
-		7BF924481ED2C19000F89183 /* LoginRegisController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF924471ED2C19000F89183 /* LoginRegisController.swift */; };
 		7BF9244E1ED2CFEA00F89183 /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9244D1ED2CFEA00F89183 /* model.swift */; };
 		7BF924501ED2D06B00F89183 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9244F1ED2D06B00F89183 /* Global.swift */; };
-		7BF924521ED2E0B900F89183 /* TimelineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF924511ED2E0B900F89183 /* TimelineCell.swift */; };
-		7BF924541ED3013C00F89183 /* CommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF924531ED3013C00F89183 /* CommentController.swift */; };
 		A93623FF152921F13A92C992 /* Pods_Caryta_MessengerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFAF9241DD79593FDE75D9C9 /* Pods_Caryta_MessengerTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -99,56 +69,41 @@
 
 /* Begin PBXFileReference section */
 		0F03F9661EEFC308003D5B94 /* NewMain.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = NewMain.storyboard; sourceTree = "<group>"; };
-		0F03F9691EEFE8B9003D5B94 /* TestMenuBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMenuBarController.swift; sourceTree = "<group>"; };
-		0F03F96B1EEFF058003D5B94 /* TestListTeleponController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestListTeleponController.swift; sourceTree = "<group>"; };
-		0F03F96D1EEFF126003D5B94 /* TestListPhoneCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestListPhoneCell.swift; sourceTree = "<group>"; };
-		0F03F96F1EEFF2AC003D5B94 /* TestListChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestListChatController.swift; sourceTree = "<group>"; };
-		0F03F9711EEFF33B003D5B94 /* TestListChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestListChatCell.swift; sourceTree = "<group>"; };
-		0F03F9731EEFF488003D5B94 /* TestListKontakController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestListKontakController.swift; sourceTree = "<group>"; };
-		0F03F9751EEFF4DC003D5B94 /* TestListKontakCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestListKontakCell.swift; sourceTree = "<group>"; };
-		0F0B83B41EF11331009E8B31 /* TestDetailChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDetailChatController.swift; sourceTree = "<group>"; };
-		0F0B83B61EF11CB3009E8B31 /* TestDetailChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDetailChatCell.swift; sourceTree = "<group>"; };
-		0F1857771F399C3200594433 /* TestNewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestNewsCell.swift; sourceTree = "<group>"; };
-		0F1857791F39A93E00594433 /* TestDetailBeritaController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestDetailBeritaController.swift; sourceTree = "<group>"; };
-		0F1E2E051EE9379700B1D43E /* AddGroupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroupController.swift; sourceTree = "<group>"; };
-		0F1E2E071EE9389200B1D43E /* ParticipantCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantCell.swift; sourceTree = "<group>"; };
-		0F2324961EDBEB3800C73BFD /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
-		0F5688971EE5309E00F1B408 /* SelectKontakController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectKontakController.swift; sourceTree = "<group>"; };
-		0F5688991EE5313700F1B408 /* SelectKontakCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectKontakCell.swift; sourceTree = "<group>"; };
-		0F5AE2EC1EF4E72C00B91B9E /* TestKontakHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestKontakHeaderCell.swift; sourceTree = "<group>"; };
-		0F5AE2EE1EF511DD00B91B9E /* TestPopUpUbahDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPopUpUbahDataController.swift; sourceTree = "<group>"; };
+		0F03F9691EEFE8B9003D5B94 /* MenuBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBarController.swift; sourceTree = "<group>"; };
+		0F03F96B1EEFF058003D5B94 /* ListTeleponController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTeleponController.swift; sourceTree = "<group>"; };
+		0F03F96D1EEFF126003D5B94 /* ListPhoneCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListPhoneCell.swift; sourceTree = "<group>"; };
+		0F03F96F1EEFF2AC003D5B94 /* ListChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListChatController.swift; sourceTree = "<group>"; };
+		0F03F9711EEFF33B003D5B94 /* ListChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListChatCell.swift; sourceTree = "<group>"; };
+		0F03F9731EEFF488003D5B94 /* ListKontakController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListKontakController.swift; sourceTree = "<group>"; };
+		0F03F9751EEFF4DC003D5B94 /* ListKontakCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListKontakCell.swift; sourceTree = "<group>"; };
+		0F0B83B41EF11331009E8B31 /* DetailChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailChatController.swift; sourceTree = "<group>"; };
+		0F0B83B61EF11CB3009E8B31 /* DetailChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailChatCell.swift; sourceTree = "<group>"; };
+		0F1857771F399C3200594433 /* NewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
+		0F1857791F39A93E00594433 /* DetailBeritaController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailBeritaController.swift; sourceTree = "<group>"; };
+		0F5AE2EC1EF4E72C00B91B9E /* KontakHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KontakHeaderCell.swift; sourceTree = "<group>"; };
+		0F5AE2EE1EF511DD00B91B9E /* PopUpUbahDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpUbahDataController.swift; sourceTree = "<group>"; };
 		0F7C1AAC1F3C3C9F00079334 /* FirstController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstController.swift; sourceTree = "<group>"; };
-		0F7C1AAE1F3C4B0F00079334 /* testKodeVerifController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testKodeVerifController.swift; sourceTree = "<group>"; };
+		0F7C1AAE1F3C4B0F00079334 /* KodeVerifController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KodeVerifController.swift; sourceTree = "<group>"; };
 		0F7C1AB01F3C5C4800079334 /* DataDiriController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataDiriController.swift; sourceTree = "<group>"; };
-		0F7C1AB21F3C643D00079334 /* TestLoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestLoginController.swift; sourceTree = "<group>"; };
+		0F7C1AB21F3C643D00079334 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		0F8138841F3D894000A11364 /* LoginWithCarytaController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWithCarytaController.swift; sourceTree = "<group>"; };
 		0F8526001EEE49EC00FAC280 /* Caryta Messenger-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Caryta Messenger-Bridging-Header.h"; sourceTree = "<group>"; };
 		0F87DCAF1F5547D900C64EE2 /* PopUpListDialController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpListDialController.swift; sourceTree = "<group>"; };
 		0F87DCB21F55489700C64EE2 /* PopUpListDialCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpListDialCell.swift; sourceTree = "<group>"; };
 		0F98E3221EF8D7360094EF68 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		0FBF3FAE1EE02406009D41D9 /* SplashScreenController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenController.swift; sourceTree = "<group>"; };
-		0FC47E331EE2AFA900311B5B /* LoginWithStoreController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginWithStoreController.swift; sourceTree = "<group>"; };
-		0FC5594B1EDD2616002F810A /* MasukController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasukController.swift; sourceTree = "<group>"; };
-		0FCF30C91EF23F8100CFF78B /* TestWritePostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestWritePostController.swift; sourceTree = "<group>"; };
-		0FCF30CB1EF2663100CFF78B /* TestPopUpKomentarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestPopUpKomentarController.swift; sourceTree = "<group>"; };
-		0FCF30CD1EF2686B00CFF78B /* TestHomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHomeController.swift; sourceTree = "<group>"; };
-		0FCF30CF1EF2768400CFF78B /* TestTimelineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestTimelineCell.swift; sourceTree = "<group>"; };
-		0FCF30D11EF2771D00CFF78B /* TestCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestCommentCell.swift; sourceTree = "<group>"; };
-		0FCF30D31EF282BB00CFF78B /* TestProfilController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestProfilController.swift; sourceTree = "<group>"; };
-		0FE909301ED569B80005B2DD /* DialCodeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DialCodeCell.swift; sourceTree = "<group>"; };
-		0FE909321ED569FA0005B2DD /* ListDialController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListDialController.swift; sourceTree = "<group>"; };
+		0FCF30C91EF23F8100CFF78B /* WritePostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WritePostController.swift; sourceTree = "<group>"; };
+		0FCF30CB1EF2663100CFF78B /* PopUpKomentarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpKomentarController.swift; sourceTree = "<group>"; };
+		0FCF30CD1EF2686B00CFF78B /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		0FCF30CF1EF2768400CFF78B /* TimelineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineCell.swift; sourceTree = "<group>"; };
+		0FCF30D11EF2771D00CFF78B /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		0FCF30D31EF282BB00CFF78B /* ProfilController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilController.swift; sourceTree = "<group>"; };
 		2BB4AD999016DB7E9C2615C2 /* Pods_Caryta_Messenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Caryta_Messenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		61F21453F4B8E8EB59DBBC34 /* Pods-Caryta MessengerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Caryta MessengerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Caryta MessengerTests/Pods-Caryta MessengerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6E67553789C3A38D9F44BB72 /* Pods-Caryta Messenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Caryta Messenger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Caryta Messenger/Pods-Caryta Messenger.debug.xcconfig"; sourceTree = "<group>"; };
-		7B2AFB141ECD4F48007033C5 /* ListKontakController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListKontakController.swift; sourceTree = "<group>"; };
-		7B2AFB161ECD56EB007033C5 /* ListKontakCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListKontakCell.swift; sourceTree = "<group>"; };
 		7B2AFB181ECD7579007033C5 /* Caryta Messenger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Caryta Messenger.entitlements"; sourceTree = "<group>"; };
 		7B2AFB191ECD81E4007033C5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		7B2AFB1C1ECD8AF2007033C5 /* ListNewsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListNewsController.swift; sourceTree = "<group>"; };
-		7B2AFB201ECD9D2C007033C5 /* NavigationSettingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationSettingController.swift; sourceTree = "<group>"; };
 		7B5552371ECA93B700D50B4D /* Caryta Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Caryta Messenger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B55523A1ECA93B700D50B4D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7B55523F1ECA93B700D50B4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7B5552411ECA93B700D50B4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B5552441ECA93B700D50B4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B5552461ECA93B700D50B4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -158,25 +113,10 @@
 		7B5552561ECA93B700D50B4D /* Caryta MessengerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Caryta MessengerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B55525A1ECA93B700D50B4D /* Caryta_MessengerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caryta_MessengerUITests.swift; sourceTree = "<group>"; };
 		7B55525C1ECA93B700D50B4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7B5552681ECAB9FA00D50B4D /* ListChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListChatController.swift; sourceTree = "<group>"; };
-		7B55526B1ECABA4600D50B4D /* ListChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListChatCell.swift; sourceTree = "<group>"; };
-		7B55526D1ECAD65900D50B4D /* MenuBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBarController.swift; sourceTree = "<group>"; };
-		7B5552741ECAE84E00D50B4D /* ListTeleponController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTeleponController.swift; sourceTree = "<group>"; };
-		7B5552761ECAE99600D50B4D /* ListTeleponCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTeleponCell.swift; sourceTree = "<group>"; };
-		7B5552791ECB044100D50B4D /* MainSettingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainSettingController.swift; sourceTree = "<group>"; };
-		7B8C3D8D1ECEAB8D009EEAE9 /* GantiNomorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GantiNomorController.swift; sourceTree = "<group>"; };
 		7BB371071ECC052F005B1B64 /* UIView+Borders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Borders.swift"; sourceTree = "<group>"; };
-		7BB371091ECC2866005B1B64 /* EditProfilController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfilController.swift; sourceTree = "<group>"; };
-		7BB3710B1ECC86BC005B1B64 /* DetailChatController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailChatController.swift; sourceTree = "<group>"; };
-		7BB3710D1ECC8709005B1B64 /* ChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCell.swift; sourceTree = "<group>"; };
-		7BB371101ECC8AE7005B1B64 /* DetailKontakController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailKontakController.swift; sourceTree = "<group>"; };
 		7BD283BF1ED014F40009F755 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		7BF924451ED2A48200F89183 /* VerifCodeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifCodeController.swift; sourceTree = "<group>"; };
-		7BF924471ED2C19000F89183 /* LoginRegisController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginRegisController.swift; sourceTree = "<group>"; };
 		7BF9244D1ED2CFEA00F89183 /* model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = model.swift; sourceTree = "<group>"; };
 		7BF9244F1ED2D06B00F89183 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
-		7BF924511ED2E0B900F89183 /* TimelineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineCell.swift; sourceTree = "<group>"; };
-		7BF924531ED3013C00F89183 /* CommentController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentController.swift; sourceTree = "<group>"; };
 		A4ECE9C80025954618005CCC /* Pods_Caryta_MessengerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Caryta_MessengerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFAF9241DD79593FDE75D9C9 /* Pods_Caryta_MessengerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Caryta_MessengerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAD568A09B3A9562C796798F /* Pods-Caryta Messenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Caryta Messenger.release.xcconfig"; path = "Pods/Target Support Files/Pods-Caryta Messenger/Pods-Caryta Messenger.release.xcconfig"; sourceTree = "<group>"; };
@@ -215,39 +155,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0F03F9681EEFE825003D5B94 /* Test */ = {
-			isa = PBXGroup;
-			children = (
-				0F03F9691EEFE8B9003D5B94 /* TestMenuBarController.swift */,
-				0F03F96B1EEFF058003D5B94 /* TestListTeleponController.swift */,
-				0F03F96D1EEFF126003D5B94 /* TestListPhoneCell.swift */,
-				0F03F96F1EEFF2AC003D5B94 /* TestListChatController.swift */,
-				0F03F9711EEFF33B003D5B94 /* TestListChatCell.swift */,
-				0F03F9731EEFF488003D5B94 /* TestListKontakController.swift */,
-				0F03F9751EEFF4DC003D5B94 /* TestListKontakCell.swift */,
-				0F0B83B41EF11331009E8B31 /* TestDetailChatController.swift */,
-				0F0B83B61EF11CB3009E8B31 /* TestDetailChatCell.swift */,
-				0FCF30C91EF23F8100CFF78B /* TestWritePostController.swift */,
-				0FCF30CB1EF2663100CFF78B /* TestPopUpKomentarController.swift */,
-				0FCF30CD1EF2686B00CFF78B /* TestHomeController.swift */,
-				0FCF30CF1EF2768400CFF78B /* TestTimelineCell.swift */,
-				0FCF30D11EF2771D00CFF78B /* TestCommentCell.swift */,
-				0FCF30D31EF282BB00CFF78B /* TestProfilController.swift */,
-				0F5AE2EC1EF4E72C00B91B9E /* TestKontakHeaderCell.swift */,
-				0F5AE2EE1EF511DD00B91B9E /* TestPopUpUbahDataController.swift */,
-				0F1857771F399C3200594433 /* TestNewsCell.swift */,
-				0F1857791F39A93E00594433 /* TestDetailBeritaController.swift */,
-				0F7C1AAC1F3C3C9F00079334 /* FirstController.swift */,
-				0F7C1AAE1F3C4B0F00079334 /* testKodeVerifController.swift */,
-				0F7C1AB01F3C5C4800079334 /* DataDiriController.swift */,
-				0F7C1AB21F3C643D00079334 /* TestLoginController.swift */,
-				0F8138841F3D894000A11364 /* LoginWithCarytaController.swift */,
-				0F87DCAF1F5547D900C64EE2 /* PopUpListDialController.swift */,
-				0F87DCB21F55489700C64EE2 /* PopUpListDialCell.swift */,
-			);
-			name = Test;
-			sourceTree = "<group>";
-		};
 		2B986E07D51CAE76F07439DD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -264,8 +171,10 @@
 		7B2AFB1B1ECD8AD9007033C5 /* News */ = {
 			isa = PBXGroup;
 			children = (
-				7B2AFB1C1ECD8AF2007033C5 /* ListNewsController.swift */,
-				7BF924531ED3013C00F89183 /* CommentController.swift */,
+				0F1857791F39A93E00594433 /* DetailBeritaController.swift */,
+				0FCF30CD1EF2686B00CFF78B /* HomeController.swift */,
+				0FCF30CB1EF2663100CFF78B /* PopUpKomentarController.swift */,
+				0FCF30C91EF23F8100CFF78B /* WritePostController.swift */,
 			);
 			name = News;
 			sourceTree = "<group>";
@@ -295,16 +204,14 @@
 		7B5552391ECA93B700D50B4D /* Caryta Messenger */ = {
 			isa = PBXGroup;
 			children = (
-				0F03F9681EEFE825003D5B94 /* Test */,
-				7BF9244C1ED2CFBF00F89183 /* Database */,
-				7B2AFB181ECD7579007033C5 /* Caryta Messenger.entitlements */,
 				7B55526A1ECABA3600D50B4D /* Cell */,
 				7B55526F1ECAE7E400D50B4D /* Chat */,
 				7B5552721ECAE81400D50B4D /* Common */,
 				7B5552701ECAE7F900D50B4D /* Config */,
+				7BF9244C1ED2CFBF00F89183 /* Database */,
 				7BB3710F1ECC8AD1005B1B64 /* Kontak */,
 				7B2AFB1B1ECD8AD9007033C5 /* News */,
-				7B5552781ECB042F00D50B4D /* Setting */,
+				7B5552781ECB042F00D50B4D /* Profil */,
 				7B5552711ECAE80500D50B4D /* StoryBoard */,
 				7B5552731ECAE82E00D50B4D /* Telepon */,
 			);
@@ -332,14 +239,15 @@
 		7B55526A1ECABA3600D50B4D /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				7BB3710D1ECC8709005B1B64 /* ChatCell.swift */,
-				7B55526B1ECABA4600D50B4D /* ListChatCell.swift */,
-				7B2AFB161ECD56EB007033C5 /* ListKontakCell.swift */,
-				7B5552761ECAE99600D50B4D /* ListTeleponCell.swift */,
-				7BF924511ED2E0B900F89183 /* TimelineCell.swift */,
-				0FE909301ED569B80005B2DD /* DialCodeCell.swift */,
-				0F5688991EE5313700F1B408 /* SelectKontakCell.swift */,
-				0F1E2E071EE9389200B1D43E /* ParticipantCell.swift */,
+				0F87DCB21F55489700C64EE2 /* PopUpListDialCell.swift */,
+				0FCF30D11EF2771D00CFF78B /* CommentCell.swift */,
+				0F0B83B61EF11CB3009E8B31 /* DetailChatCell.swift */,
+				0F5AE2EC1EF4E72C00B91B9E /* KontakHeaderCell.swift */,
+				0F03F9711EEFF33B003D5B94 /* ListChatCell.swift */,
+				0F03F9751EEFF4DC003D5B94 /* ListKontakCell.swift */,
+				0F03F96D1EEFF126003D5B94 /* ListPhoneCell.swift */,
+				0F1857771F399C3200594433 /* NewsCell.swift */,
+				0FCF30CF1EF2768400CFF78B /* TimelineCell.swift */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -347,10 +255,8 @@
 		7B55526F1ECAE7E400D50B4D /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				7B5552681ECAB9FA00D50B4D /* ListChatController.swift */,
-				7BB3710B1ECC86BC005B1B64 /* DetailChatController.swift */,
-				0F5688971EE5309E00F1B408 /* SelectKontakController.swift */,
-				0F1E2E051EE9379700B1D43E /* AddGroupController.swift */,
+				0F0B83B41EF11331009E8B31 /* DetailChatController.swift */,
+				0F03F96F1EEFF2AC003D5B94 /* ListChatController.swift */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -358,12 +264,13 @@
 		7B5552701ECAE7F900D50B4D /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				7BD283BF1ED014F40009F755 /* GoogleService-Info.plist */,
-				7B55523A1ECA93B700D50B4D /* AppDelegate.swift */,
-				7B5552411ECA93B700D50B4D /* Assets.xcassets */,
-				7B5552461ECA93B700D50B4D /* Info.plist */,
-				7BB371071ECC052F005B1B64 /* UIView+Borders.swift */,
+				7B2AFB181ECD7579007033C5 /* Caryta Messenger.entitlements */,
 				0F8526001EEE49EC00FAC280 /* Caryta Messenger-Bridging-Header.h */,
+				7BD283BF1ED014F40009F755 /* GoogleService-Info.plist */,
+				7B5552461ECA93B700D50B4D /* Info.plist */,
+				7B55523A1ECA93B700D50B4D /* AppDelegate.swift */,
+				7BB371071ECC052F005B1B64 /* UIView+Borders.swift */,
+				7B5552411ECA93B700D50B4D /* Assets.xcassets */,
 			);
 			name = Config;
 			sourceTree = "<group>";
@@ -373,7 +280,6 @@
 			children = (
 				0F03F9661EEFC308003D5B94 /* NewMain.storyboard */,
 				7B5552431ECA93B700D50B4D /* LaunchScreen.storyboard */,
-				7B55523E1ECA93B700D50B4D /* Main.storyboard */,
 			);
 			name = StoryBoard;
 			sourceTree = "<group>";
@@ -381,14 +287,13 @@
 		7B5552721ECAE81400D50B4D /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				7B55526D1ECAD65900D50B4D /* MenuBarController.swift */,
-				7BF924451ED2A48200F89183 /* VerifCodeController.swift */,
-				7BF924471ED2C19000F89183 /* LoginRegisController.swift */,
-				0FE909321ED569FA0005B2DD /* ListDialController.swift */,
-				0F2324961EDBEB3800C73BFD /* LoginController.swift */,
-				0FC5594B1EDD2616002F810A /* MasukController.swift */,
-				0FBF3FAE1EE02406009D41D9 /* SplashScreenController.swift */,
-				0FC47E331EE2AFA900311B5B /* LoginWithStoreController.swift */,
+				0F7C1AB01F3C5C4800079334 /* DataDiriController.swift */,
+				0F7C1AAC1F3C3C9F00079334 /* FirstController.swift */,
+				0F7C1AB21F3C643D00079334 /* LoginController.swift */,
+				0F8138841F3D894000A11364 /* LoginWithCarytaController.swift */,
+				0F87DCAF1F5547D900C64EE2 /* PopUpListDialController.swift */,
+				0F7C1AAE1F3C4B0F00079334 /* KodeVerifController.swift */,
+				0F03F9691EEFE8B9003D5B94 /* MenuBarController.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -396,27 +301,24 @@
 		7B5552731ECAE82E00D50B4D /* Telepon */ = {
 			isa = PBXGroup;
 			children = (
-				7B5552741ECAE84E00D50B4D /* ListTeleponController.swift */,
+				0F03F96B1EEFF058003D5B94 /* ListTeleponController.swift */,
 			);
 			name = Telepon;
 			sourceTree = "<group>";
 		};
-		7B5552781ECB042F00D50B4D /* Setting */ = {
+		7B5552781ECB042F00D50B4D /* Profil */ = {
 			isa = PBXGroup;
 			children = (
-				7B5552791ECB044100D50B4D /* MainSettingController.swift */,
-				7BB371091ECC2866005B1B64 /* EditProfilController.swift */,
-				7B2AFB201ECD9D2C007033C5 /* NavigationSettingController.swift */,
-				7B8C3D8D1ECEAB8D009EEAE9 /* GantiNomorController.swift */,
+				0F5AE2EE1EF511DD00B91B9E /* PopUpUbahDataController.swift */,
+				0FCF30D31EF282BB00CFF78B /* ProfilController.swift */,
 			);
-			name = Setting;
+			name = Profil;
 			sourceTree = "<group>";
 		};
 		7BB3710F1ECC8AD1005B1B64 /* Kontak */ = {
 			isa = PBXGroup;
 			children = (
-				7BB371101ECC8AE7005B1B64 /* DetailKontakController.swift */,
-				7B2AFB141ECD4F48007033C5 /* ListKontakController.swift */,
+				0F03F9731EEFF488003D5B94 /* ListKontakController.swift */,
 			);
 			name = Kontak;
 			sourceTree = "<group>";
@@ -424,8 +326,8 @@
 		7BF9244C1ED2CFBF00F89183 /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				7BF9244D1ED2CFEA00F89183 /* model.swift */,
 				7BF9244F1ED2D06B00F89183 /* Global.swift */,
+				7BF9244D1ED2CFEA00F89183 /* model.swift */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -581,7 +483,6 @@
 				0F03F9671EEFC308003D5B94 /* NewMain.storyboard in Resources */,
 				7BD283C01ED014F40009F755 /* GoogleService-Info.plist in Resources */,
 				7B5552421ECA93B700D50B4D /* Assets.xcassets in Resources */,
-				7B5552401ECA93B700D50B4D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -744,65 +645,36 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B5552751ECAE84E00D50B4D /* ListTeleponController.swift in Sources */,
-				0FC47E341EE2AFA900311B5B /* LoginWithStoreController.swift in Sources */,
-				7B55527A1ECB044100D50B4D /* MainSettingController.swift in Sources */,
-				7BB3710E1ECC8709005B1B64 /* ChatCell.swift in Sources */,
 				0F87DCB01F5547D900C64EE2 /* PopUpListDialController.swift in Sources */,
-				7B2AFB211ECD9D2C007033C5 /* NavigationSettingController.swift in Sources */,
-				0F2324971EDBEB3800C73BFD /* LoginController.swift in Sources */,
 				7BF924501ED2D06B00F89183 /* Global.swift in Sources */,
-				7B2AFB171ECD56EB007033C5 /* ListKontakCell.swift in Sources */,
 				0F87DCB31F55489700C64EE2 /* PopUpListDialCell.swift in Sources */,
-				7B5552771ECAE99600D50B4D /* ListTeleponCell.swift in Sources */,
-				0FCF30CA1EF23F8100CFF78B /* TestWritePostController.swift in Sources */,
-				0F5AE2EF1EF511DD00B91B9E /* TestPopUpUbahDataController.swift in Sources */,
-				0F03F9741EEFF488003D5B94 /* TestListKontakController.swift in Sources */,
-				7BF924461ED2A48200F89183 /* VerifCodeController.swift in Sources */,
+				0FCF30CA1EF23F8100CFF78B /* WritePostController.swift in Sources */,
+				0F5AE2EF1EF511DD00B91B9E /* PopUpUbahDataController.swift in Sources */,
+				0F03F9741EEFF488003D5B94 /* ListKontakController.swift in Sources */,
 				0F7C1AAD1F3C3C9F00079334 /* FirstController.swift in Sources */,
-				0F03F9701EEFF2AC003D5B94 /* TestListChatController.swift in Sources */,
-				7B55526E1ECAD65900D50B4D /* MenuBarController.swift in Sources */,
-				7BF924481ED2C19000F89183 /* LoginRegisController.swift in Sources */,
-				0F03F96E1EEFF126003D5B94 /* TestListPhoneCell.swift in Sources */,
-				0FE909311ED569B80005B2DD /* DialCodeCell.swift in Sources */,
+				0F03F9701EEFF2AC003D5B94 /* ListChatController.swift in Sources */,
+				0F03F96E1EEFF126003D5B94 /* ListPhoneCell.swift in Sources */,
 				7BB371081ECC052F005B1B64 /* UIView+Borders.swift in Sources */,
-				0FCF30D01EF2768400CFF78B /* TestTimelineCell.swift in Sources */,
-				7BF924541ED3013C00F89183 /* CommentController.swift in Sources */,
-				0FE909331ED569FA0005B2DD /* ListDialController.swift in Sources */,
+				0FCF30D01EF2768400CFF78B /* TimelineCell.swift in Sources */,
 				0F7C1AB11F3C5C4800079334 /* DataDiriController.swift in Sources */,
 				0F8138851F3D894000A11364 /* LoginWithCarytaController.swift in Sources */,
-				0F18577A1F39A93E00594433 /* TestDetailBeritaController.swift in Sources */,
-				0F03F96A1EEFE8B9003D5B94 /* TestMenuBarController.swift in Sources */,
-				0F1E2E081EE9389200B1D43E /* ParticipantCell.swift in Sources */,
-				0F5AE2ED1EF4E72C00B91B9E /* TestKontakHeaderCell.swift in Sources */,
-				7B55526C1ECABA4600D50B4D /* ListChatCell.swift in Sources */,
-				0FCF30CC1EF2663100CFF78B /* TestPopUpKomentarController.swift in Sources */,
-				0F03F9721EEFF33B003D5B94 /* TestListChatCell.swift in Sources */,
-				0F0B83B51EF11331009E8B31 /* TestDetailChatController.swift in Sources */,
-				0F03F9761EEFF4DC003D5B94 /* TestListKontakCell.swift in Sources */,
+				0F18577A1F39A93E00594433 /* DetailBeritaController.swift in Sources */,
+				0F03F96A1EEFE8B9003D5B94 /* MenuBarController.swift in Sources */,
+				0F5AE2ED1EF4E72C00B91B9E /* KontakHeaderCell.swift in Sources */,
+				0FCF30CC1EF2663100CFF78B /* PopUpKomentarController.swift in Sources */,
+				0F03F9721EEFF33B003D5B94 /* ListChatCell.swift in Sources */,
+				0F0B83B51EF11331009E8B31 /* DetailChatController.swift in Sources */,
+				0F03F9761EEFF4DC003D5B94 /* ListKontakCell.swift in Sources */,
 				7BF9244E1ED2CFEA00F89183 /* model.swift in Sources */,
-				0F0B83B71EF11CB3009E8B31 /* TestDetailChatCell.swift in Sources */,
-				7BB3710C1ECC86BC005B1B64 /* DetailChatController.swift in Sources */,
-				7B2AFB1D1ECD8AF2007033C5 /* ListNewsController.swift in Sources */,
-				0F1E2E061EE9379700B1D43E /* AddGroupController.swift in Sources */,
-				7B2AFB151ECD4F48007033C5 /* ListKontakController.swift in Sources */,
-				7BF924521ED2E0B900F89183 /* TimelineCell.swift in Sources */,
-				7B8C3D8E1ECEAB8D009EEAE9 /* GantiNomorController.swift in Sources */,
-				7BB3710A1ECC2866005B1B64 /* EditProfilController.swift in Sources */,
-				0F7C1AAF1F3C4B0F00079334 /* testKodeVerifController.swift in Sources */,
-				0FCF30D41EF282BB00CFF78B /* TestProfilController.swift in Sources */,
-				0F56889A1EE5313700F1B408 /* SelectKontakCell.swift in Sources */,
+				0F0B83B71EF11CB3009E8B31 /* DetailChatCell.swift in Sources */,
+				0F7C1AAF1F3C4B0F00079334 /* KodeVerifController.swift in Sources */,
+				0FCF30D41EF282BB00CFF78B /* ProfilController.swift in Sources */,
 				7B55523B1ECA93B700D50B4D /* AppDelegate.swift in Sources */,
-				0F1857781F399C3200594433 /* TestNewsCell.swift in Sources */,
-				0FC5594C1EDD2616002F810A /* MasukController.swift in Sources */,
-				0FBF3FAF1EE02406009D41D9 /* SplashScreenController.swift in Sources */,
-				0F7C1AB31F3C643D00079334 /* TestLoginController.swift in Sources */,
-				0FCF30CE1EF2686B00CFF78B /* TestHomeController.swift in Sources */,
-				0F5688981EE5309E00F1B408 /* SelectKontakController.swift in Sources */,
-				7BB371111ECC8AE7005B1B64 /* DetailKontakController.swift in Sources */,
-				0FCF30D21EF2771D00CFF78B /* TestCommentCell.swift in Sources */,
-				7B5552691ECAB9FA00D50B4D /* ListChatController.swift in Sources */,
-				0F03F96C1EEFF058003D5B94 /* TestListTeleponController.swift in Sources */,
+				0F1857781F399C3200594433 /* NewsCell.swift in Sources */,
+				0F7C1AB31F3C643D00079334 /* LoginController.swift in Sources */,
+				0FCF30CE1EF2686B00CFF78B /* HomeController.swift in Sources */,
+				0FCF30D21EF2771D00CFF78B /* CommentCell.swift in Sources */,
+				0F03F96C1EEFF058003D5B94 /* ListTeleponController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -838,14 +710,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		7B55523E1ECA93B700D50B4D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7B55523F1ECA93B700D50B4D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		7B5552431ECA93B700D50B4D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

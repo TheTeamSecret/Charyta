@@ -2,7 +2,7 @@
 //  MenuBarController.swift
 //  Caryta Messenger
 //
-//  Created by www.caryta.com on 5/16/17.
+//  Created by Verrelio Chandra Rizky on 6/13/17.
 //  Copyright © 2017 Caryta. All rights reserved.
 //
 
@@ -20,37 +20,29 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
     var number = [String]()
     var getContactNumber = ""
     var getContactName = ""
-    
-    let getUser = try! Realm().objects(user.self).first!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.setStatusBarStyle(.lightContent)
         
         let getKontak = try! Realm().objects(kontak.self)
         
         if getKontak.count > 0 {
-        
+            
             for itemKontak in getKontak {
-            
+                
                 if itemKontak.registrasi_id == "" {
-                
+                    
                     DBHelper.delete(obj: itemKontak)
-                
+                    
                 }
-            
+                
             }
             
         }
         
         findContacts()
-        
-        self.setStatusBarStyle(.lightContent)
-        
-        tabBar.items![0].selectedImage = UIImage.init(named: "selected_telepon")
-        tabBar.items![1].selectedImage = UIImage.init(named: "selected_chat")
-        tabBar.items![2].selectedImage = UIImage.init(named: "selected_news")
-        tabBar.items![3].selectedImage = UIImage.init(named: "selected_kontak")
-        tabBar.items![4].selectedImage = UIImage.init(named: "selected_setting")
         
         refresh()
 
@@ -60,6 +52,59 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func showComment() {
+        
+        let Popover = UIStoryboard(name: "NewMain", bundle: nil).instantiateViewController(withIdentifier: "komen") as! PopUpKomentarController
+        
+        self.addChildViewController(Popover)
+        Popover.view.frame = self.view.frame
+        self.view.addSubview(Popover.view)
+        Popover.didMove(toParentViewController: self)
+    
+    }
+    
+    func showEditName(value: String) {
+        
+        let Popover = UIStoryboard(name: "NewMain", bundle: nil).instantiateViewController(withIdentifier: "edit") as! PopUpUbahDataController
+        
+        Popover.oldItem = value
+        Popover.from = "nama"
+        
+        self.addChildViewController(Popover)
+        Popover.view.frame = self.view.frame
+        self.view.addSubview(Popover.view)
+        Popover.didMove(toParentViewController: self)
+    
+    }
+    
+    func showEditStatus(value: String) {
+        
+        let Popover = UIStoryboard(name: "NewMain", bundle: nil).instantiateViewController(withIdentifier: "edit") as! PopUpUbahDataController
+        
+        Popover.oldItem = value
+        Popover.from = "status"
+        
+        self.addChildViewController(Popover)
+        Popover.view.frame = self.view.frame
+        self.view.addSubview(Popover.view)
+        Popover.didMove(toParentViewController: self)
+        
+    }
+    
+    func showEditEmail(value: String) {
+        
+        let Popover = UIStoryboard(name: "NewMain", bundle: nil).instantiateViewController(withIdentifier: "edit") as! PopUpUbahDataController
+        
+        Popover.oldItem = value
+        Popover.from = "email"
+        
+        self.addChildViewController(Popover)
+        Popover.view.frame = self.view.frame
+        self.view.addSubview(Popover.view)
+        Popover.didMove(toParentViewController: self)
+        
     }
     
     func findContacts() -> [CNContact] {
@@ -125,6 +170,8 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
     
     func checkKontak(phoneNumber: String, original: String){
         
+        let getUser = try! Realm().objects(user.self).first!
+        
         Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": phoneNumber], encoding: JSONEncoding.default)
             .responseJSON{response in
                 
@@ -151,8 +198,8 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
                             
                             DBHelper.update(obj: model)
                             
-                            self.setNick(pemberi: self.getUser.user_id, pemilik: data["user_id"].stringValue, nick: self.name[i])
-                        
+                            self.setNick(pemberi: getUser.user_id, pemilik: data["user_id"].stringValue, nick: self.name[i])
+                            
                         }else{
                             
                             self.checkKontak0(phoneNumber: phoneNumber, original: original)
@@ -172,6 +219,8 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
     }
     
     func checkKontak0(phoneNumber: String, original: String){
+        
+        let getUser = try! Realm().objects(user.self).first!
         
         Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": "0\(phoneNumber)"], encoding: JSONEncoding.default)
             .responseJSON{response in
@@ -199,7 +248,7 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
                             
                             DBHelper.update(obj: model)
                             
-                            self.setNick(pemberi: self.getUser.user_id, pemilik: data["user_id"].stringValue, nick: self.name[i])
+                            self.setNick(pemberi: getUser.user_id, pemilik: data["user_id"].stringValue, nick: self.name[i])
                             
                         }else{
                             
@@ -220,6 +269,8 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
     }
     
     func checkKontak62(phoneNumber: String, original: String){
+        
+        let getUser = try! Realm().objects(user.self).first!
         
         Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": "62\(phoneNumber)"], encoding: JSONEncoding.default)
             .responseJSON{response in
@@ -247,7 +298,7 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
                             
                             DBHelper.update(obj: model)
                             
-                            self.setNick(pemberi: self.getUser.user_id, pemilik: data["user_id"].stringValue, nick: self.name[i])
+                            self.setNick(pemberi: getUser.user_id, pemilik: data["user_id"].stringValue, nick: self.name[i])
                             
                         }else{
                             
@@ -268,6 +319,8 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
     }
     
     func checkKontakPlus62(phoneNumber: String, original: String){
+        
+        let getUser = try! Realm().objects(user.self).first!
         
         Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": "+62\(phoneNumber)"], encoding: JSONEncoding.default)
             .responseJSON{response in
@@ -295,7 +348,7 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
                             
                             DBHelper.update(obj: model)
                             
-                            self.setNick(pemberi: self.getUser.user_id, pemilik: data["user_id"].stringValue, nick: self.name[i])
+                            self.setNick(pemberi: getUser.user_id, pemilik: data["user_id"].stringValue, nick: self.name[i])
                             
                         }
                         
@@ -308,7 +361,7 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
     }
     
     func setNick(pemberi: String, pemilik: String, nick: String) {
-    
+        
         let params = [
             "userPemberi"   : pemberi,
             "userPemilik"   : pemilik,
@@ -317,15 +370,15 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
         
         Alamofire.request("\(link().domain)nickname", method: .post, parameters: params, encoding: JSONEncoding.default)
             .responseJSON{response in
-        
+                
                 if let jason = response.result.value {
-                
+                    
                     print(JSON(jason).description)
-                
+                    
                 }
-        
+                
         }
-    
+        
     }
 
     /*

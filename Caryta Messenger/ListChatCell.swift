@@ -2,7 +2,7 @@
 //  ListChatCell.swift
 //  Caryta Messenger
 //
-//  Created by www.caryta.com on 5/16/17.
+//  Created by Verrelio Chandra Rizky on 6/13/17.
 //  Copyright © 2017 Caryta. All rights reserved.
 //
 
@@ -10,11 +10,13 @@ import UIKit
 
 class ListChatCell: UITableViewCell {
 
-    @IBOutlet weak var avatarImg: UIImageView!
+    @IBOutlet weak var selectBtn: UIButton!
+    @IBOutlet weak var initialLbl: UILabel!
     @IBOutlet weak var nameLbl: UILabel!
     @IBOutlet weak var lastLbl: UILabel!
-    @IBOutlet weak var dateLbl: UILabel!
-    @IBOutlet weak var badge: UILabel!
+    @IBOutlet weak var timeLbl: UILabel!
+    @IBOutlet weak var badgeLbl: UILabel!
+    @IBOutlet weak var selectBtnWidth: NSLayoutConstraint!
     
     override func awakeFromNib() {
         super.awakeFromNib()

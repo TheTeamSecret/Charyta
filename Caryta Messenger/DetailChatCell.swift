@@ -1,5 +1,5 @@
 //
-//  TestDetailChatCell.swift
+//  DetailChatCell.swift
 //  Caryta Messenger
 //
 //  Created by Verrelio Chandra Rizky on 6/14/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TestDetailChatCell: UITableViewCell {
+class DetailChatCell: UITableViewCell {
 
     @IBOutlet weak var whiteView: UIView!
     @IBOutlet weak var whiteWidth: NSLayoutConstraint!

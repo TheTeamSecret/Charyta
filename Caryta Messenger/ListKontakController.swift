@@ -2,7 +2,7 @@
 //  ListKontakController.swift
 //  Caryta Messenger
 //
-//  Created by www.caryta.com on 5/18/17.
+//  Created by Verrelio Chandra Rizky on 6/13/17.
 //  Copyright © 2017 Caryta. All rights reserved.
 //
 
@@ -12,8 +12,18 @@ import ContactsUI
 import Alamofire
 import SwiftyJSON
 import MapleBacon
+import NAExpandableTableController
 
-class ListKontakController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, CNContactViewControllerDelegate, UINavigationControllerDelegate {
+class ListKontakController: UIViewController, NAExpandableTableViewDataSource, NAExpandableTableViewDelegate , UISearchBarDelegate, CNContactViewControllerDelegate, UINavigationControllerDelegate {
+    
+    fileprivate var expendableTableController: NAExpandableTableController!
+    
+    @IBOutlet weak var kontakTV: UITableView!
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var editBtn: UIBarButtonItem!
+    @IBOutlet weak var addDeleteBtn: UIBarButtonItem!
+    var isEdit: Bool = false
     
     let store = CNContactStore()
     var name = [String]()
@@ -27,26 +37,18 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
     var sentName = ""
     
     var from = ""
-    
-    @IBOutlet weak var loading: UIActivityIndicatorView!
 
-    @IBOutlet weak var kontakTV: UITableView!
-    @IBOutlet weak var kontakTVHeight: NSLayoutConstraint!
-    @IBOutlet weak var grupImg: UIImageView!
-    @IBOutlet weak var kontakImg: UIImageView!
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var refreshBtn: UIBarButtonItem!
-    
-    var alfabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if from != "" {
+        self.setStatusBarStyle(.lightContent)
         
-            self.refreshBtn.title = "Kembali"
+        self.expendableTableController = NAExpandableTableController(dataSource: self, delegate: self)
         
-        }
+        kontakTV.dataSource = self.expendableTableController
+        kontakTV.delegate = self.expendableTableController
+        
+        kontakTV.tableFooterView = UIView(frame: CGRect.zero)
         
         findContacts()
         
@@ -66,25 +68,36 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
             
         }
         
-        self.setStatusBarStyle(.lightContent)
-        
-        grupImg.layer.borderWidth = 1.0
-        grupImg.layer.borderColor = UIColor.init(hexString: "CCCCCC")?.cgColor
-        grupImg.layer.cornerRadius = 7.5
-        
-        kontakImg.layer.borderWidth = 1.0
-        kontakImg.layer.borderColor = UIColor.init(hexString: "CCCCCC")?.cgColor
-        kontakImg.layer.cornerRadius = 7.5
-        
-        kontakTV.reloadData()
-        kontakTVHeight.constant = kontakTV.contentSize.height
+        getListGroup()
 
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        refresh()
+    var groupID = [String]()
+    var groupName = [String]()
+    
+    func getListGroup() {
+        
+        let getUser = try! Realm().objects(user.self).first!
+    
+        Alamofire.request("\(link().domain)user/group", method: .post, parameters: ["kodeUser": getUser.user_id], encoding: JSONEncoding.default)
+            .responseJSON{response in
+        
+                if let jason = response.result.value {
+                
+                    for data in JSON(jason).array! {
+                    
+                        self.groupID.append(data["group_id"].stringValue)
+                        self.groupName.append(data["name"].stringValue)
+                    
+                    }
+                    
+                    self.kontakTV.reloadData()
+                
+                }
+        
+        }
+    
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,96 +105,164 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
         // Dispose of any resources that can be recreated.
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+    func numberOfSectionsInExpandableTableView(_ tableView: UITableView) -> Int {
+        
+        return 2
+        
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func expandableTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         let getKontak = try! Realm().objects(kontak.self).sorted(byKeyPath: "nama")
         
-//        var row: Int = 1
-//        
-//        let getAllKontak = try! Realm().objects(kontak.self)
-//        
-//        if getAllKontak.count == 0 {
-//        
-//            row = 1
-//        
-//        }else{
-//        
-//            for sect in alfabet {
-//            
-//                let i = alfabet.index(of: sect)!
-//                
-//                if section == i {
-//                    
-//                    let getKontak = try! Realm().objects(kontak.self).filter("nama BEGINSWITH '\(sect)'")
-//                    
-//                    row = getKontak.count + 1
-//                    
-//                }
-//            
-//            }
-//            
-//        }
+         var row = 0
         
-        return getKontak.count
+        if section == 0 {
+        
+            row = self.groupID.count
+        
+        }
+        
+        if section == 1 {
+            
+            row = getKontak.count
+            
+        }
+        
+        return row
+        
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func expandableTableView(_ tableView: UITableView, titleCellForSection section: Int, expanded: Bool) -> UITableViewCell {
+        
+        let cell = kontakTV.dequeueReusableCell(withIdentifier: "header") as! KontakHeaderCell
+        
+        let getKontak = try! Realm().objects(kontak.self).sorted(byKeyPath: "nama")
+        
+        if section == 0 {
+            
+            cell.headerLbl.text = "Grup \(self.groupID.count)"
+            
+        }
+        
+        if section == 1 {
+            
+            cell.headerLbl.text = "Teman \(getKontak.count)"
+            
+        }
+        
+        return cell
+        
+    }
+    
+    func expandableTableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
         
         let getKontak = try! Realm().objects(kontak.self).sorted(byKeyPath: "nama")
         
         let cell = kontakTV.dequeueReusableCell(withIdentifier: "kontak", for: indexPath) as! ListKontakCell
         
-        cell.avaImg.layer.borderWidth = 1.0
-        cell.avaImg.layer.borderColor = UIColor.init(hexString: "CCCCCC")?.cgColor
-        cell.avaImg.layer.cornerRadius = 7.5
+        cell.initialLbl.layer.cornerRadius = 20
+        cell.initialLbl.clipsToBounds = true
+        cell.initialLbl.backgroundColor = UIColor.randomFlat
         
-        cell.avaImg.setImage(withUrl: URL.init(string: "\(link().gambar)\(getKontak[indexPath.row].gambar)")!, placeholder: UIImage.init(named: "Avatar"), crossFadePlaceholder: true, cacheScaled: false, completion: nil)
-        cell.nameLbl.text = getKontak[indexPath.row].nama
-        cell.statusLbl.text = getKontak[indexPath.row].status
+        if indexPath.section == 0 {
+            
+            cell.nameLbl.text = self.groupName[indexPath.row]
+            cell.phoneLbl.isHidden = true
+            cell.msgBtn.isHidden = true
+            cell.callBtn.isHidden = true
+            cell.statusLbl.text = ""
+            
+            let initIndex = self.groupName[indexPath.row].index(self.groupName[indexPath.row].startIndex, offsetBy: 1)
+            let initial = self.groupName[indexPath.row].substring(to: initIndex).uppercased()
+            
+            cell.initialLbl.text = initial
+            
+        }
+        
+        if indexPath.section == 1 {
+            
+            cell.nameLbl.text = getKontak[indexPath.row].nama
+            cell.statusLbl.text = getKontak[indexPath.row].status
+            
+            let initIndex = getKontak[indexPath.row - 4].nama.index(getKontak[indexPath.row - 4].nama.startIndex, offsetBy: 1)
+            let initial = getKontak[indexPath.row - 4].nama.substring(to: initIndex).uppercased()
+            
+            cell.initialLbl.text = initial
+            
+        }
+        
+        if isEdit == true {
+            
+            cell.selectBtnWidth.constant = 0
+            
+            UIView.animate(withDuration: 0.3, animations: {
+                
+                cell.selectBtnWidth.constant = 25
+                self.view.layoutIfNeeded()
+                
+            })
+            
+        }else if isEdit == false {
+            
+            cell.selectBtnWidth.constant = 25
+            
+            UIView.animate(withDuration: 0.3, animations: {
+                
+                cell.selectBtnWidth.constant = 0
+                self.view.layoutIfNeeded()
+                
+            })
+            
+        }
         
         return cell
+        
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func expandableTableView(_ tableView: UITableView, heightForTitleCellInSection section: Int) -> CGFloat {
         
-        let getKontak = try! Realm().objects(kontak.self).sorted(byKeyPath: "nama", ascending: true)
+        return 30
         
-        sentName = getKontak[indexPath.row].nama
+    }
+    
+    func expandableTableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
         
-        let getChat = try! Realm().objects(chat.self).filter("name = '\(sentName)'")
+        return 56
         
-        if getChat.count > 0 {
+    }
+    
+    @IBAction func editAct(_ sender: UIBarButtonItem) {
+        
+        if sender.title == "Edit" {
             
-            print(getChat.first!.chat_id)
+            addDeleteBtn.image = UIImage.init(named: "hapus")
+            isEdit = true
+            editBtn.title = "Cancel"
+            kontakTV.reloadData()
             
-            sentChatID = getChat.first!.chat_id
+        }else if sender.title == "Cancel" {
             
-            self.performSegue(withIdentifier: "segue_detail_chat", sender: self)
-            
-        }else if getChat.count == 0 {
-            
-            sentChatID = ""
-            
-            self.performSegue(withIdentifier: "segue_detail_chat", sender: self)
+            addDeleteBtn.image = UIImage.init(named: "add_kontak")
+            isEdit = false
+            editBtn.title = "Edit"
+            kontakTV.reloadData()
             
         }
         
     }
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    @IBAction func selctDeselect(_ sender: UIButton) {
         
-        searchBar.setShowsCancelButton(true, animated: true)
-        
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
-        searchBar.setShowsCancelButton(false, animated: true)
-        self.view.endEditing(true)
+        if sender.imageView?.image == UIImage.init(named: "select") {
+            
+            sender.setImage(UIImage.init(named: "select_blue"), for: .normal)
+            
+        }else if sender.imageView?.image == UIImage.init(named: "select_blue") {
+            
+            sender.setImage(UIImage.init(named: "select"), for: .normal)
+            
+        }
         
     }
     
@@ -222,7 +303,7 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func refresh() {
-    
+        
         for numb in number {
             
             let indexStr = numb.index(numb.startIndex, offsetBy: 1)
@@ -233,7 +314,7 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
                 let indexStrNew = numb.index(numb.startIndex, offsetBy: 3)
                 let newNumber = numb.substring(from: indexStrNew)
                 checkKontak(phoneNumber: newNumber, original: numb)
-            
+                
             }else if prefix == "0" {
                 
                 let indexStrNew = numb.index(numb.startIndex, offsetBy: 1)
@@ -241,9 +322,9 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
                 checkKontak(phoneNumber: newNumber, original: numb)
                 
             }
-        
+            
         }
-    
+        
     }
     
     func checkKontak(phoneNumber: String, original: String){
@@ -262,7 +343,7 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
                         let data = JSON(jason)["data"]
                         
                         if data["registrasi_id"].stringValue != "" {
-                        
+                            
                             let i = self.number.index(of: original)!
                             
                             model.user_id       =   data["user_id"].stringValue
@@ -275,14 +356,6 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
                             DBHelper.update(obj: model)
                             
                             self.kontakTV.reloadData()
-                            
-                            if original == self.number.last! {
-                                
-                                self.loading.stopAnimating()
-                                self.loading.isHidden = true
-                                self.refreshBtn.isEnabled = true
-                                
-                            }
                             
                         }else{
                             
@@ -332,14 +405,6 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
                             
                             self.kontakTV.reloadData()
                             
-                            if original == self.number.last! {
-                                
-                                self.loading.stopAnimating()
-                                self.loading.isHidden = true
-                                self.refreshBtn.isEnabled = true
-                                
-                            }
-                            
                         }else{
                             
                             self.checkKontak62(phoneNumber: phoneNumber, original: original)
@@ -387,14 +452,6 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
                             DBHelper.update(obj: model)
                             
                             self.kontakTV.reloadData()
-                            
-                            if original == self.number.last! {
-                                
-                                self.loading.stopAnimating()
-                                self.loading.isHidden = true
-                                self.refreshBtn.isEnabled = true
-                                
-                            }
                             
                         }else{
                             
@@ -444,47 +501,12 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
                             
                             self.kontakTV.reloadData()
                             
-                            if original == self.number.last! {
-                                
-                                self.loading.stopAnimating()
-                                self.loading.isHidden = true
-                                self.refreshBtn.isEnabled = true
-                                
-                            }
-                            
                         }
-                        
-                    }
-                    
-                    if original == self.number.last! {
-                        
-                        self.loading.stopAnimating()
-                        self.loading.isHidden = true
-                        self.refreshBtn.isEnabled = true
                         
                     }
                     
                 }
                 
-        }
-        
-    }
-    
-    @IBAction func refreshKontak(_ sender: UIBarButtonItem) {
-        
-        if sender.title == "" {
-            
-            loading.startAnimating()
-            loading.isHidden = false
-            
-            refreshBtn.isEnabled = false
-            
-            refresh()
-        
-        }else{
-        
-            self.dismiss(animated: true, completion: nil)
-        
         }
         
     }
@@ -495,30 +517,36 @@ class ListKontakController: UIViewController, UITableViewDataSource, UITableView
         
     }
     
-    @IBAction func addKontak(_ sender: UIButton) {
+    @IBAction func addKontak(_ sender: UIBarButtonItem) {
         
         addContact.delegate = self
         let navController = UINavigationController.init(rootViewController: addContact)
         self.present(navController, animated: true, completion: nil)
-    
-    }
-    
-    @IBAction func addGrup(_ sender: UIButton) {
-        
-        self.performSegue(withIdentifier: "segue_add_grup", sender: self)
         
     }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        
+        searchBar.setShowsCancelButton(true, animated: true)
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        searchBar.setShowsCancelButton(false, animated: true)
+        self.view.endEditing(true)
+        
+    }
+    
 
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "segue_detail_chat" {
-            let next = segue.destination as! DetailChatController
-            
-            next.chatID = self.sentChatID
-            next.nama = self.sentName
-        
-        }
-        
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
+    */
 
 }

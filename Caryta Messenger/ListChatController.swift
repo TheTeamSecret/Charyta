@@ -2,7 +2,7 @@
 //  ListChatController.swift
 //  Caryta Messenger
 //
-//  Created by www.caryta.com on 5/16/17.
+//  Created by Verrelio Chandra Rizky on 6/13/17.
 //  Copyright © 2017 Caryta. All rights reserved.
 //
 
@@ -12,38 +12,29 @@ import MapleBacon
 
 class ListChatController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
 
-    @IBOutlet weak var listChatTV: UITableView!
-    @IBOutlet weak var listChatTVHeight: NSLayoutConstraint!
+    @IBOutlet weak var chatTV: UITableView!
+    
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var editBtn: UIBarButtonItem!
+    @IBOutlet weak var addArchiveBtn: UIBarButtonItem!
+    @IBOutlet weak var deleteBtn: UIBarButtonItem!
+    var isEdit: Bool = false
     @IBOutlet weak var emptyLbl: UILabel!
+    
+    //let getChat = try! Realm().objects(chat.self)
+    
+    var nameDummy = ["Silmy Tama", "Om Bob", "Gustang", "Ari Maulana", "Ilham Sabar", "Caryta.com"]
+    var isiDummy = ["Besok aja yah so...", "Iya Om Bob", "Sundala", "Gustang", "Sebat Yuk", "Semangat", "Progress hari ini"]
     
     var sentID = String()
     var sentNama = String()
-    
-    let getChat = try! Realm().objects(chat.self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setStatusBarStyle(.lightContent)
-        
-        listChatTV.reloadData()
-        listChatTVHeight.constant = listChatTV.contentSize.height
-        
-        if getChat.count == 0 {
-        
-            self.emptyLbl.isHidden = false
-        
-        }
 
         // Do any additional setup after loading the view.
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        listChatTV.reloadData()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,26 +47,95 @@ class ListChatController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return getChat.count
-        
+        return nameDummy.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = listChatTV.dequeueReusableCell(withIdentifier: "chat", for: indexPath) as! ListChatCell
+        let cell = chatTV.dequeueReusableCell(withIdentifier: "chat", for: indexPath) as! ListChatCell
         
-        cell.avatarImg.layer.cornerRadius = 5.0
-        cell.badge.layer.cornerRadius = 6.0
-        cell.badge.clipsToBounds = true
+        cell.initialLbl.layer.cornerRadius = 20
+        cell.initialLbl.clipsToBounds = true
+        cell.initialLbl.backgroundColor = UIColor.randomFlat
         
-        cell.avatarImg.setImage(withUrl: URL.init(string: "\(link().gambar)\(getChat[indexPath.row].avatar)")!, placeholder: UIImage.init(named: "Avatar"), crossFadePlaceholder: true, cacheScaled: false, completion: nil)
+        cell.badgeLbl.layer.cornerRadius = 9
+        cell.badgeLbl.clipsToBounds = true
         
-        cell.nameLbl.text = getChat[indexPath.row].name
-        cell.lastLbl.text = getChat[indexPath.row].last_chat
-        cell.dateLbl.text = getChat[indexPath.row].date
+        cell.nameLbl.text = self.nameDummy[indexPath.row]
+        cell.lastLbl.text = self.isiDummy[indexPath.row]
+        
+        let initIndex = self.nameDummy[indexPath.row].index(self.nameDummy[indexPath.row].startIndex, offsetBy: 1)
+        let initial = self.nameDummy[indexPath.row].substring(to: initIndex).uppercased()
+        
+        cell.initialLbl.text = initial
+        
+        if isEdit == true {
+            
+            cell.selectBtnWidth.constant = 0
+            
+            UIView.animate(withDuration: 0.3, animations: {
+                
+                cell.selectBtnWidth.constant = 25
+                self.view.layoutIfNeeded()
+                
+            })
+            
+        }else if isEdit == false {
+            
+            cell.selectBtnWidth.constant = 25
+            
+            UIView.animate(withDuration: 0.3, animations: {
+                
+                cell.selectBtnWidth.constant = 0
+                self.view.layoutIfNeeded()
+                
+            })
+            
+        }
         
         return cell
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     
+        self.performSegue(withIdentifier: "segue_detail_chat", sender: self)
+        
+    }
+    
+    @IBAction func editAct(_ sender: UIBarButtonItem) {
+        
+        if sender.title == "Edit" {
+            
+            addArchiveBtn.image = UIImage.init(named: "archive")
+            deleteBtn.image = UIImage.init(named: "hapus")
+            isEdit = true
+            editBtn.title = "Cancel"
+            chatTV.reloadData()
+            
+        }else if sender.title == "Cancel" {
+            
+            addArchiveBtn.image = UIImage.init(named: "add_chat")
+            deleteBtn.image = nil
+            isEdit = false
+            editBtn.title = "Edit"
+            chatTV.reloadData()
+            
+        }
+        
+    }
+    
+    @IBAction func selctDeselect(_ sender: UIButton) {
+        
+        if sender.imageView?.image == UIImage.init(named: "select") {
+            
+            sender.setImage(UIImage.init(named: "select_blue"), for: .normal)
+            
+        }else if sender.imageView?.image == UIImage.init(named: "select_blue") {
+            
+            sender.setImage(UIImage.init(named: "select"), for: .normal)
+            
+        }
         
     }
     
@@ -91,39 +151,15 @@ class ListChatController: UIViewController, UITableViewDataSource, UITableViewDe
         self.view.endEditing(true)
         
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        self.sentID = getChat[indexPath.row].chat_id
-        self.sentNama = getChat[indexPath.row].name
-        
-        self.performSegue(withIdentifier: "segue_detail_chat", sender: self)
-        
-    }
-    
-    @IBAction func addChat(_ sender: UIBarButtonItem) {
-        
-        self.shouldPerformSegue(withIdentifier: "segue_add_chat", sender: self)
-        
-    }
-    
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "segue_detail_chat" {
-        
-            let next = segue.destination as! DetailChatController
-            
-            next.chatID = self.sentID
-            next.nama = self.sentNama
-        
-        }else if segue.identifier == "segue_add_chat" {
-            
-            let next = segue.destination as! ListKontakController
-            
-            next.from = "ListChat"
-            
-        }
-        
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
+    */
 
 }

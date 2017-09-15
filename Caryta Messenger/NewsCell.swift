@@ -1,5 +1,5 @@
 //
-//  TestNewsCell.swift
+//  NewsCell.swift
 //  Caryta Messenger
 //
 //  Created by Verrelio Chandra Rizky on 8/8/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TestNewsCell: UICollectionViewCell {
+class NewsCell: UICollectionViewCell {
     
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var title: UILabel!

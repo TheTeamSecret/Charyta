@@ -12,203 +12,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="f7s-yZ-VdY">
-            <objects>
-                <viewController id="zlw-aT-5bb" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="2kV-Yw-GtP"/>
-                        <viewControllerLayoutGuide type="bottom" id="i0Q-Ha-8EI"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="U3Q-as-n9x">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SuJ-GX-b5S">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
-                                <color key="backgroundColor" red="0.0025340209249999999" green="0.55918234590000004" blue="0.84173887970000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="Gdz-Bl-F8E"/>
-                                </constraints>
-                            </view>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNu-jl-E1d">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="barTintColor" red="0.0039215686274509803" green="0.5607843137254902" blue="0.84313725490196079" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Daftar" id="QUJ-x7-xmA">
-                                        <barButtonItem key="leftBarButtonItem" image="back_arrow" id="EqV-T7-Mot"/>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kami akan mengirimkan Kode verifikasi ke Nomor telepon Anda" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Csa-mQ-xYx">
-                                <rect key="frame" x="40" y="164" width="295" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="eyc-IF-6c3"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.6588235294117647" green="0.65886574983596802" blue="0.65874296426773071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pastikan Nomor yang Anda Masukkan sudah benar" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5mu-Wx-ONN">
-                                <rect key="frame" x="40" y="234" width="295" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="hBG-po-7LT"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.6588235294117647" green="0.65886574983596802" blue="0.65874296426773071" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDs-a2-yIV">
-                                <rect key="frame" x="40" y="304" width="295" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="zuz-sH-aUk"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="Edit Nomor telepon">
-                                    <color key="titleColor" red="0.0039215686269999999" green="0.56078431370000004" blue="0.84313725490000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Masukkan Kode verifikasi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eCF-4K-65f">
-                                <rect key="frame" x="40" y="354" width="295" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="ABv-ZU-Efw"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" red="0.6588235294" green="0.65886574980000001" blue="0.65874296430000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SfB-pn-Arc">
-                                <rect key="frame" x="24" y="384" width="326" height="46"/>
-                                <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="92b-zg-PBC">
-                                        <rect key="frame" x="8" y="8" width="50" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="bxn-LT-Izw"/>
-                                        </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LWo-Hk-q1v">
-                                        <rect key="frame" x="60" y="8" width="50" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="n69-QH-PJ0"/>
-                                        </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jCs-Ey-Tsx">
-                                        <rect key="frame" x="112" y="8" width="50" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="f2n-as-L3g"/>
-                                        </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YIx-iS-6PR">
-                                        <rect key="frame" x="164" y="8" width="50" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="J4M-bJ-YLv"/>
-                                            <constraint firstAttribute="width" constant="50" id="MSA-dg-c1P"/>
-                                        </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1Ox-5h-ntc">
-                                        <rect key="frame" x="216" y="8" width="50" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="Fi3-MK-dMz"/>
-                                            <constraint firstAttribute="height" constant="30" id="SiB-Sm-lqo"/>
-                                        </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="XtU-X6-ZmC">
-                                        <rect key="frame" x="268" y="8" width="50" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="AEP-mp-A9f"/>
-                                        </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstItem="YIx-iS-6PR" firstAttribute="top" secondItem="SfB-pn-Arc" secondAttribute="top" constant="8" id="0LA-9Z-Lf1"/>
-                                    <constraint firstAttribute="bottom" secondItem="YIx-iS-6PR" secondAttribute="bottom" constant="8" id="1ve-DL-f8y"/>
-                                    <constraint firstAttribute="height" constant="46" id="5j7-OS-hbg"/>
-                                    <constraint firstAttribute="bottom" secondItem="1Ox-5h-ntc" secondAttribute="bottom" constant="8" id="ATM-8J-X6Y"/>
-                                    <constraint firstItem="jCs-Ey-Tsx" firstAttribute="top" secondItem="SfB-pn-Arc" secondAttribute="top" constant="8" id="DGI-gE-EBS"/>
-                                    <constraint firstItem="LWo-Hk-q1v" firstAttribute="top" secondItem="SfB-pn-Arc" secondAttribute="top" constant="8" id="I7i-90-V9b"/>
-                                    <constraint firstItem="jCs-Ey-Tsx" firstAttribute="leading" secondItem="LWo-Hk-q1v" secondAttribute="trailing" constant="2" id="Ifu-YU-DYv"/>
-                                    <constraint firstItem="1Ox-5h-ntc" firstAttribute="top" secondItem="SfB-pn-Arc" secondAttribute="top" constant="8" id="MQe-4E-Nwe"/>
-                                    <constraint firstAttribute="bottom" secondItem="jCs-Ey-Tsx" secondAttribute="bottom" constant="8" id="MrD-OM-XhZ"/>
-                                    <constraint firstItem="LWo-Hk-q1v" firstAttribute="leading" secondItem="92b-zg-PBC" secondAttribute="trailing" constant="2" id="Uc3-Ui-sS1"/>
-                                    <constraint firstAttribute="bottom" secondItem="92b-zg-PBC" secondAttribute="bottom" constant="8" id="VQO-iT-Lun"/>
-                                    <constraint firstAttribute="bottom" secondItem="LWo-Hk-q1v" secondAttribute="bottom" constant="8" id="Vly-JC-Bbx"/>
-                                    <constraint firstItem="92b-zg-PBC" firstAttribute="leading" secondItem="SfB-pn-Arc" secondAttribute="leading" constant="8" id="eV8-p2-6oF"/>
-                                    <constraint firstAttribute="width" constant="326" id="ivG-xg-EqX"/>
-                                    <constraint firstAttribute="bottom" secondItem="XtU-X6-ZmC" secondAttribute="bottom" constant="8" id="lGJ-s4-VFT"/>
-                                    <constraint firstAttribute="trailing" secondItem="XtU-X6-ZmC" secondAttribute="trailing" constant="8" id="ldr-Ph-4WW"/>
-                                    <constraint firstItem="XtU-X6-ZmC" firstAttribute="top" secondItem="SfB-pn-Arc" secondAttribute="top" constant="8" id="oHC-rc-7sM"/>
-                                    <constraint firstItem="92b-zg-PBC" firstAttribute="top" secondItem="SfB-pn-Arc" secondAttribute="top" constant="8" id="oLS-y9-fIV"/>
-                                    <constraint firstItem="XtU-X6-ZmC" firstAttribute="leading" secondItem="1Ox-5h-ntc" secondAttribute="trailing" constant="2" id="oZ5-s2-CXt"/>
-                                    <constraint firstItem="1Ox-5h-ntc" firstAttribute="leading" secondItem="YIx-iS-6PR" secondAttribute="trailing" constant="2" id="rFk-FQ-Gzm"/>
-                                </constraints>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CNN-92-5WG">
-                                <rect key="frame" x="40" y="450" width="295" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="GMh-Pc-G0P"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="Kirim ulang Kode verifikasi">
-                                    <color key="titleColor" red="0.0039215686269999999" green="0.56078431370000004" blue="0.84313725490000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.91754716634750366" green="0.91770458221435547" blue="0.91753727197647095" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="SfB-pn-Arc" firstAttribute="top" secondItem="eCF-4K-65f" secondAttribute="bottom" id="1Nr-ze-HEc"/>
-                            <constraint firstItem="5mu-Wx-ONN" firstAttribute="top" secondItem="Csa-mQ-xYx" secondAttribute="bottom" constant="20" id="6Hp-rh-q0h"/>
-                            <constraint firstAttribute="trailing" secondItem="cNu-jl-E1d" secondAttribute="trailing" id="6YC-qO-Bcy"/>
-                            <constraint firstItem="SfB-pn-Arc" firstAttribute="centerX" secondItem="U3Q-as-n9x" secondAttribute="centerX" id="8c9-77-iP3"/>
-                            <constraint firstItem="cNu-jl-E1d" firstAttribute="leading" secondItem="U3Q-as-n9x" secondAttribute="leading" id="AFX-d5-pw6"/>
-                            <constraint firstItem="qDs-a2-yIV" firstAttribute="top" secondItem="5mu-Wx-ONN" secondAttribute="bottom" constant="20" id="APN-Lv-m07"/>
-                            <constraint firstItem="Csa-mQ-xYx" firstAttribute="leading" secondItem="U3Q-as-n9x" secondAttribute="leadingMargin" constant="24" id="Cdh-8v-pjj"/>
-                            <constraint firstItem="eCF-4K-65f" firstAttribute="leading" secondItem="U3Q-as-n9x" secondAttribute="leadingMargin" constant="24" id="Dnh-S9-cfj"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="CNN-92-5WG" secondAttribute="trailing" constant="24" id="Jnc-wc-hZv"/>
-                            <constraint firstItem="cNu-jl-E1d" firstAttribute="top" secondItem="2kV-Yw-GtP" secondAttribute="bottom" id="Ju2-9a-pCk"/>
-                            <constraint firstItem="qDs-a2-yIV" firstAttribute="leading" secondItem="U3Q-as-n9x" secondAttribute="leadingMargin" constant="24" id="NX9-tg-KHm"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="qDs-a2-yIV" secondAttribute="trailing" constant="24" id="Yhg-lZ-GNC"/>
-                            <constraint firstAttribute="trailing" secondItem="SuJ-GX-b5S" secondAttribute="trailing" id="aAF-sS-dWd"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="eCF-4K-65f" secondAttribute="trailing" constant="24" id="ahB-ZW-zzb"/>
-                            <constraint firstItem="SuJ-GX-b5S" firstAttribute="top" secondItem="U3Q-as-n9x" secondAttribute="top" id="h8S-Ri-CC5"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Csa-mQ-xYx" secondAttribute="trailing" constant="24" id="jWP-92-VZS"/>
-                            <constraint firstItem="5mu-Wx-ONN" firstAttribute="leading" secondItem="U3Q-as-n9x" secondAttribute="leadingMargin" constant="24" id="jgw-dj-H0n"/>
-                            <constraint firstItem="SuJ-GX-b5S" firstAttribute="leading" secondItem="U3Q-as-n9x" secondAttribute="leading" id="jxR-9E-4dV"/>
-                            <constraint firstItem="Csa-mQ-xYx" firstAttribute="top" secondItem="cNu-jl-E1d" secondAttribute="bottom" constant="100" id="kUf-P6-GJN"/>
-                            <constraint firstItem="CNN-92-5WG" firstAttribute="top" secondItem="SfB-pn-Arc" secondAttribute="bottom" constant="20" id="kp6-6Y-iwn"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="5mu-Wx-ONN" secondAttribute="trailing" constant="24" id="lDb-yG-bh7"/>
-                            <constraint firstItem="CNN-92-5WG" firstAttribute="leading" secondItem="U3Q-as-n9x" secondAttribute="leadingMargin" constant="24" id="wgi-4j-dye"/>
-                            <constraint firstItem="eCF-4K-65f" firstAttribute="top" secondItem="qDs-a2-yIV" secondAttribute="bottom" constant="20" id="z4Z-L6-OOw"/>
-                        </constraints>
-                    </view>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bP8-SN-IbT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="84" y="5.8470764617691158"/>
-        </scene>
         <!--First Controller-->
         <scene sceneID="oq1-ci-xK2">
             <objects>
@@ -407,10 +210,10 @@
             </objects>
             <point key="canvasLocation" x="-2823.1999999999998" y="1509.8950524737631"/>
         </scene>
-        <!--Test Login Controller-->
+        <!--Login Controller-->
         <scene sceneID="UY8-k9-7Ng">
             <objects>
-                <viewController id="1As-Lm-VrB" customClass="TestLoginController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="1As-Lm-VrB" customClass="LoginController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="O2v-aX-hGM"/>
                         <viewControllerLayoutGuide type="bottom" id="bQZ-Yo-bCf"/>
@@ -508,10 +311,10 @@
             </objects>
             <point key="canvasLocation" x="-1847.2" y="1509.8950524737631"/>
         </scene>
-        <!--Test Kode Verif Controller-->
+        <!--Kode Verif Controller-->
         <scene sceneID="RGj-9H-B3e">
             <objects>
-                <viewController id="tOA-5p-SbA" customClass="testKodeVerifController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="tOA-5p-SbA" customClass="KodeVerifController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y5n-OI-pAQ"/>
                         <viewControllerLayoutGuide type="bottom" id="W13-Qf-qmk"/>
@@ -866,7 +669,7 @@
                                         <rect key="frame" x="0.0" y="28" width="320" height="47"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xLa-0v-ATd" id="rQV-Ci-09U">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="46.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="46"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dial" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6iI-wo-ltm">
@@ -1072,10 +875,10 @@
             </objects>
             <point key="canvasLocation" x="-1847.2" y="2343.7781109445277"/>
         </scene>
-        <!--Test Menu Bar Controller-->
+        <!--Menu Bar Controller-->
         <scene sceneID="jOy-WD-Z0M">
             <objects>
-                <tabBarController storyboardIdentifier="menu" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hQD-oY-srQ" customClass="TestMenuBarController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="menu" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hQD-oY-srQ" customClass="MenuBarController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" translucent="NO" id="4DV-LB-Lvb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
@@ -1095,10 +898,10 @@
             </objects>
             <point key="canvasLocation" x="-879" y="2344"/>
         </scene>
-        <!--Test Home Controller-->
+        <!--Home Controller-->
         <scene sceneID="gPI-JK-8et">
             <objects>
-                <viewController id="smQ-Zr-mG0" customClass="TestHomeController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="smQ-Zr-mG0" customClass="HomeController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="zvq-sy-xlO"/>
                         <viewControllerLayoutGuide type="bottom" id="CI5-Mv-M1w"/>
@@ -1121,7 +924,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="510"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="timeline" rowHeight="123" id="ZYn-n5-MJT" customClass="TestTimelineCell" customModule="Caryta_Messenger" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="timeline" rowHeight="123" id="ZYn-n5-MJT" customClass="TimelineCell" customModule="Caryta_Messenger" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="123"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZYn-n5-MJT" id="zOe-oq-ecP">
@@ -1279,7 +1082,7 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="news" id="yZE-Qd-6Eh" customClass="TestNewsCell" customModule="Caryta_Messenger" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="news" id="yZE-Qd-6Eh" customClass="NewsCell" customModule="Caryta_Messenger" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="170" height="170"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -1400,10 +1203,10 @@
             </objects>
             <point key="canvasLocation" x="832.79999999999995" y="757.87106446776613"/>
         </scene>
-        <!--Test Write Post Controller-->
+        <!--Write Post Controller-->
         <scene sceneID="mdO-l9-3EJ">
             <objects>
-                <viewController id="pzJ-Qt-PNY" customClass="TestWritePostController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="pzJ-Qt-PNY" customClass="WritePostController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7LJ-s0-8qP"/>
                         <viewControllerLayoutGuide type="bottom" id="BdO-Xu-69L"/>
@@ -1541,10 +1344,10 @@
             </objects>
             <point key="canvasLocation" x="1652" y="757.87106446776613"/>
         </scene>
-        <!--Test Pop Up Komentar Controller-->
+        <!--Pop Up Komentar Controller-->
         <scene sceneID="q7l-er-sUr">
             <objects>
-                <viewController storyboardIdentifier="komen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OXM-5h-cfg" customClass="TestPopUpKomentarController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="komen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OXM-5h-cfg" customClass="PopUpKomentarController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="o98-DR-jtW"/>
                         <viewControllerLayoutGuide type="bottom" id="WbR-lU-F6D"/>
@@ -1596,7 +1399,7 @@
                                         <rect key="frame" x="0.0" y="30" width="375" height="170"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="komen" rowHeight="57" id="HRK-BZ-PPM" customClass="TestCommentCell" customModule="Caryta_Messenger" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="komen" rowHeight="57" id="HRK-BZ-PPM" customClass="CommentCell" customModule="Caryta_Messenger" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="57"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HRK-BZ-PPM" id="OM2-hU-fBf">
@@ -1745,10 +1548,10 @@
             </objects>
             <point key="canvasLocation" x="2418.4000000000001" y="757.87106446776613"/>
         </scene>
-        <!--Test Detail Berita Controller-->
+        <!--Detail Berita Controller-->
         <scene sceneID="zJE-QG-rQ1">
             <objects>
-                <viewController id="37x-0o-Dmj" customClass="TestDetailBeritaController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="37x-0o-Dmj" customClass="DetailBeritaController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RJu-g3-vE6"/>
                         <viewControllerLayoutGuide type="bottom" id="lNO-T3-qLx"/>
@@ -1824,137 +1627,6 @@
             </objects>
             <point key="canvasLocation" x="3157.5999999999999" y="757.87106446776613"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="8pf-EE-OJX">
-            <objects>
-                <viewController id="DdT-X1-Nly" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Mnb-eD-SQR"/>
-                        <viewControllerLayoutGuide type="bottom" id="GlB-5e-VF3"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="baN-yT-2AU">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cfi-d3-aV8">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
-                                <color key="backgroundColor" red="0.0025340209249999999" green="0.55918234590000004" blue="0.84173887970000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="28n-Sl-fdX"/>
-                                </constraints>
-                            </view>
-                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qth-0R-0OC">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="barTintColor" red="0.0039215686269999999" green="0.56078431370000004" blue="0.84313725490000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Lengkapi Profil" id="uFL-Ii-W1q"/>
-                                </items>
-                            </navigationBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C4C-5J-6G6">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OBV-KY-Ajs">
-                                        <rect key="frame" x="112" y="50" width="150" height="150"/>
-                                        <color key="backgroundColor" red="0.86254614591598511" green="0.86673682928085327" blue="0.86660873889923096" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="150" id="28z-UM-yFk"/>
-                                            <constraint firstAttribute="width" constant="150" id="Tmv-FE-SGS"/>
-                                        </constraints>
-                                    </imageView>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nama lengkap" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0cN-6b-2lQ">
-                                        <rect key="frame" x="20" y="240" width="335" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="ZFY-QT-iA4"/>
-                                        </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nomor telepon" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="shj-wN-wIc">
-                                        <rect key="frame" x="20" y="290" width="335" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="Jt5-3W-glC"/>
-                                        </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n3Y-jv-gUS">
-                                        <rect key="frame" x="20" y="340" width="335" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="eNL-RC-r1f"/>
-                                        </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wNf-j9-QXD">
-                                        <rect key="frame" x="20" y="390" width="335" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="AlM-zK-Ppf"/>
-                                        </constraints>
-                                        <nil key="textColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wEe-mB-x27">
-                                        <rect key="frame" x="20" y="520" width="335" height="50"/>
-                                        <color key="backgroundColor" red="0.0039215686269999999" green="0.56078431370000004" blue="0.84313725490000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="xPO-rc-dDj"/>
-                                        </constraints>
-                                        <state key="normal" title="Simpan">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="wEe-mB-x27" firstAttribute="top" secondItem="wNf-j9-QXD" secondAttribute="bottom" constant="100" id="Dke-SP-XnS"/>
-                                    <constraint firstItem="0cN-6b-2lQ" firstAttribute="leading" secondItem="C4C-5J-6G6" secondAttribute="leading" constant="20" id="E1V-Ed-Wns"/>
-                                    <constraint firstAttribute="trailing" secondItem="0cN-6b-2lQ" secondAttribute="trailing" constant="20" id="HLo-Xj-SVd"/>
-                                    <constraint firstAttribute="trailing" secondItem="shj-wN-wIc" secondAttribute="trailing" constant="20" id="Il1-in-4W9"/>
-                                    <constraint firstItem="OBV-KY-Ajs" firstAttribute="centerX" secondItem="C4C-5J-6G6" secondAttribute="centerX" id="QZH-n6-vy8"/>
-                                    <constraint firstItem="0cN-6b-2lQ" firstAttribute="centerX" secondItem="C4C-5J-6G6" secondAttribute="centerX" id="R20-SW-B12"/>
-                                    <constraint firstItem="shj-wN-wIc" firstAttribute="top" secondItem="0cN-6b-2lQ" secondAttribute="bottom" constant="20" id="SLG-aP-uyc"/>
-                                    <constraint firstAttribute="bottom" secondItem="wEe-mB-x27" secondAttribute="bottom" constant="20" id="UQ7-Pq-fvJ"/>
-                                    <constraint firstAttribute="trailing" secondItem="wNf-j9-QXD" secondAttribute="trailing" constant="20" id="Usd-AA-wDm"/>
-                                    <constraint firstAttribute="trailing" secondItem="wEe-mB-x27" secondAttribute="trailing" constant="20" id="V73-ld-hzY"/>
-                                    <constraint firstItem="wEe-mB-x27" firstAttribute="leading" secondItem="C4C-5J-6G6" secondAttribute="leading" constant="20" id="WPF-cq-CfM"/>
-                                    <constraint firstItem="shj-wN-wIc" firstAttribute="leading" secondItem="C4C-5J-6G6" secondAttribute="leading" constant="20" id="XDi-fO-3Hw"/>
-                                    <constraint firstItem="n3Y-jv-gUS" firstAttribute="top" secondItem="shj-wN-wIc" secondAttribute="bottom" constant="20" id="lHQ-DE-SjH"/>
-                                    <constraint firstAttribute="trailing" secondItem="n3Y-jv-gUS" secondAttribute="trailing" constant="20" id="mpn-3N-GUk"/>
-                                    <constraint firstItem="n3Y-jv-gUS" firstAttribute="leading" secondItem="C4C-5J-6G6" secondAttribute="leading" constant="20" id="mym-mM-fJk"/>
-                                    <constraint firstItem="0cN-6b-2lQ" firstAttribute="top" secondItem="OBV-KY-Ajs" secondAttribute="bottom" constant="40" id="nEt-pE-wtT"/>
-                                    <constraint firstItem="OBV-KY-Ajs" firstAttribute="top" secondItem="C4C-5J-6G6" secondAttribute="top" constant="50" id="oUJ-0q-0ew"/>
-                                    <constraint firstItem="wNf-j9-QXD" firstAttribute="top" secondItem="n3Y-jv-gUS" secondAttribute="bottom" constant="20" id="rDO-bR-DnP"/>
-                                    <constraint firstItem="wNf-j9-QXD" firstAttribute="leading" secondItem="C4C-5J-6G6" secondAttribute="leading" constant="20" id="soQ-Hn-Rsp"/>
-                                </constraints>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="C4C-5J-6G6" secondAttribute="trailing" id="1Pj-Gp-c8i"/>
-                            <constraint firstItem="GlB-5e-VF3" firstAttribute="top" secondItem="C4C-5J-6G6" secondAttribute="bottom" id="1xC-mb-rhe"/>
-                            <constraint firstItem="cfi-d3-aV8" firstAttribute="leading" secondItem="baN-yT-2AU" secondAttribute="leading" id="UX9-Uq-hWp"/>
-                            <constraint firstItem="Qth-0R-0OC" firstAttribute="leading" secondItem="baN-yT-2AU" secondAttribute="leading" id="XXu-l3-s1z"/>
-                            <constraint firstItem="Qth-0R-0OC" firstAttribute="top" secondItem="Mnb-eD-SQR" secondAttribute="bottom" id="YmJ-D6-UUM"/>
-                            <constraint firstItem="C4C-5J-6G6" firstAttribute="leading" secondItem="baN-yT-2AU" secondAttribute="leading" id="fL1-rp-O8z"/>
-                            <constraint firstItem="cfi-d3-aV8" firstAttribute="top" secondItem="baN-yT-2AU" secondAttribute="top" id="jt6-Gx-XHs"/>
-                            <constraint firstAttribute="trailing" secondItem="Qth-0R-0OC" secondAttribute="trailing" id="pOd-8M-slX"/>
-                            <constraint firstItem="C4C-5J-6G6" firstAttribute="top" secondItem="Qth-0R-0OC" secondAttribute="bottom" id="v9U-Et-vj8"/>
-                            <constraint firstAttribute="trailing" secondItem="cfi-d3-aV8" secondAttribute="trailing" id="znM-eg-pSV"/>
-                        </constraints>
-                    </view>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NXG-ia-XVu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="832.79999999999995" y="5.8470764617691158"/>
-        </scene>
         <!--Home-->
         <scene sceneID="8rz-bY-9X7">
             <objects>
@@ -1980,10 +1652,10 @@
             </objects>
             <point key="canvasLocation" x="84" y="759"/>
         </scene>
-        <!--Test List Telepon Controller-->
+        <!--List Telepon Controller-->
         <scene sceneID="Mit-VC-05O">
             <objects>
-                <viewController id="kfm-2g-alo" customClass="TestListTeleponController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="kfm-2g-alo" customClass="ListTeleponController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FZ2-3D-VGe"/>
                         <viewControllerLayoutGuide type="bottom" id="lSp-Yx-NlB"/>
@@ -1996,7 +1668,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="phone" rowHeight="56" id="bwI-IT-UaE" customClass="TestListPhoneCell" customModule="Caryta_Messenger" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="phone" rowHeight="56" id="bwI-IT-UaE" customClass="ListPhoneCell" customModule="Caryta_Messenger" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bwI-IT-UaE" id="ECN-Ci-5DI">
@@ -2190,10 +1862,10 @@
             </objects>
             <point key="canvasLocation" x="84" y="1510"/>
         </scene>
-        <!--Test List Kontak Controller-->
+        <!--List Kontak Controller-->
         <scene sceneID="h37-Pd-twL">
             <objects>
-                <viewController id="U4y-EJ-oWZ" customClass="TestListKontakController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="U4y-EJ-oWZ" customClass="ListKontakController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="307-4L-E1s"/>
                         <viewControllerLayoutGuide type="bottom" id="cMF-bf-GWs"/>
@@ -2215,7 +1887,7 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="510"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" rowHeight="30" id="ChM-2G-tCG" customClass="TestKontakHeaderCell" customModule="Caryta_Messenger" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="header" rowHeight="30" id="ChM-2G-tCG" customClass="KontakHeaderCell" customModule="Caryta_Messenger" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ChM-2G-tCG" id="xIc-VE-uWu">
@@ -2250,7 +1922,7 @@
                                             <outlet property="headerLbl" destination="wMy-qe-i4P" id="hPq-n1-oID"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="kontak" rowHeight="56" id="znF-ML-duP" customClass="TestListKontakCell" customModule="Caryta_Messenger" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="kontak" rowHeight="56" id="znF-ML-duP" customClass="ListKontakCell" customModule="Caryta_Messenger" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="58" width="375" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="znF-ML-duP" id="Xhy-AW-n9i">
@@ -2441,10 +2113,10 @@
             </objects>
             <point key="canvasLocation" x="84" y="2344"/>
         </scene>
-        <!--Test List Chat Controller-->
+        <!--List Chat Controller-->
         <scene sceneID="KFR-77-dYL">
             <objects>
-                <viewController id="kAf-8Z-24h" customClass="TestListChatController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="kAf-8Z-24h" customClass="ListChatController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="e1U-Em-G0D"/>
                         <viewControllerLayoutGuide type="bottom" id="t3O-SC-IcN"/>
@@ -2470,7 +2142,7 @@
                                 <rect key="frame" x="0.0" y="44" width="375" height="510"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="chat" rowHeight="56" id="WrV-Of-4P9" customClass="TestListChatCell" customModule="Caryta_Messenger" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="chat" rowHeight="56" id="WrV-Of-4P9" customClass="ListChatCell" customModule="Caryta_Messenger" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WrV-Of-4P9" id="O4t-t9-3yI">
@@ -2638,10 +2310,10 @@
             </objects>
             <point key="canvasLocation" x="832.79999999999995" y="3141.6791604197902"/>
         </scene>
-        <!--Test Detail Chat Controller-->
+        <!--Detail Chat Controller-->
         <scene sceneID="AKt-Bm-qFg">
             <objects>
-                <viewController storyboardIdentifier="detailChat" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5k4-Hv-rXF" customClass="TestDetailChatController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="detailChat" useStoryboardIdentifierAsRestorationIdentifier="YES" id="5k4-Hv-rXF" customClass="DetailChatController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1T2-yA-ijV"/>
                         <viewControllerLayoutGuide type="bottom" id="KGZ-jN-Z7G"/>
@@ -2843,7 +2515,7 @@
                                             <constraint firstAttribute="height" constant="461" id="iw6-CV-kSa"/>
                                         </constraints>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="detail" rowHeight="46" id="XB5-rZ-qji" customClass="TestDetailChatCell" customModule="Caryta_Messenger" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="detail" rowHeight="46" id="XB5-rZ-qji" customClass="DetailChatCell" customModule="Caryta_Messenger" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="375" height="46"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XB5-rZ-qji" id="YNf-zz-ewu">
@@ -3014,24 +2686,6 @@
             </objects>
             <point key="canvasLocation" x="1620" y="3141.6791604197902"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="PzJ-dg-yUT">
-            <objects>
-                <viewController id="jez-c2-rcg" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="1gG-WJ-DwV"/>
-                        <viewControllerLayoutGuide type="bottom" id="Pyy-ox-BTj"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="4kA-C2-laq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lEa-oh-OiF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2447" y="3143"/>
-        </scene>
         <!--Chat-->
         <scene sceneID="Jdv-4t-CcO">
             <objects>
@@ -3057,10 +2711,10 @@
             </objects>
             <point key="canvasLocation" x="84" y="3142"/>
         </scene>
-        <!--Test Profil Controller-->
+        <!--Profil Controller-->
         <scene sceneID="Nhv-sA-vkP">
             <objects>
-                <viewController id="Q84-Q3-eVU" customClass="TestProfilController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Q84-Q3-eVU" customClass="ProfilController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gRc-Bk-5Tw"/>
                         <viewControllerLayoutGuide type="bottom" id="mk6-9r-WDu"/>
@@ -3544,10 +3198,10 @@
             </objects>
             <point key="canvasLocation" x="831.20000000000005" y="4009.2953523238384"/>
         </scene>
-        <!--Test Pop Up Ubah Data Controller-->
+        <!--Pop Up Ubah Data Controller-->
         <scene sceneID="glv-bG-ZuR">
             <objects>
-                <viewController storyboardIdentifier="edit" useStoryboardIdentifierAsRestorationIdentifier="YES" id="JRT-Sa-ghx" customClass="TestPopUpUbahDataController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="edit" useStoryboardIdentifierAsRestorationIdentifier="YES" id="JRT-Sa-ghx" customClass="PopUpUbahDataController" customModule="Caryta_Messenger" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Xl7-tB-lQv"/>
                         <viewControllerLayoutGuide type="bottom" id="Ver-ih-Ni5"/>

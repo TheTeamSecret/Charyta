@@ -1,5 +1,5 @@
 //
-//  TestPopUpUbahDataController.swift
+//  PopUpUbahDataController.swift
 //  Caryta Messenger
 //
 //  Created by Verrelio Chandra Rizky on 6/17/17.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TestPopUpUbahDataController: UIViewController {
+class PopUpUbahDataController: UIViewController {
 
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var typeLbl: UILabel!
@@ -47,7 +47,7 @@ class TestPopUpUbahDataController: UIViewController {
             
         }
         
-        let tapBack = UITapGestureRecognizer(target: self, action: #selector(TestPopUpUbahDataController.closePopup))
+        let tapBack = UITapGestureRecognizer(target: self, action: #selector(PopUpUbahDataController.closePopup))
         tapBack.numberOfTapsRequired = 1
         self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(tapBack)
@@ -86,9 +86,9 @@ class TestPopUpUbahDataController: UIViewController {
     
     @IBAction func finish(_ sender: UITextField) {
         
-        let myParent = self.parent as! TestMenuBarController
+        let myParent = self.parent as! MenuBarController
         let profilNC = myParent.selectedViewController as! UINavigationController
-        let profilVC = profilNC.viewControllers.first as! TestProfilController
+        let profilVC = profilNC.viewControllers.first as! ProfilController
         
         if from == "nama" {
         

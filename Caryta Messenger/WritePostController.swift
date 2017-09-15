@@ -1,5 +1,5 @@
 //
-//  TestWritePostController.swift
+//  WritePostController.swift
 //  Caryta Messenger
 //
 //  Created by Verrelio Chandra Rizky on 6/15/17.
@@ -11,7 +11,7 @@ import RealmSwift
 import Alamofire
 import SwiftyJSON
 
-class TestWritePostController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class WritePostController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var bottom: NSLayoutConstraint!
     
@@ -73,8 +73,8 @@ class TestWritePostController: UIViewController, UIImagePickerControllerDelegate
         
         postTxt.becomeFirstResponder()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(TestWritePostController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(TestWritePostController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(WritePostController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(WritePostController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
 
         // Do any additional setup after loading the view.
     }

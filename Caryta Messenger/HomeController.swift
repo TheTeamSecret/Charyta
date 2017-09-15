@@ -1,5 +1,5 @@
 //
-//  TestHomeController.swift
+//  HomeController.swift
 //  Caryta Messenger
 //
 //  Created by Verrelio Chandra Rizky on 6/15/17.
@@ -14,7 +14,7 @@ import SwiftyJSON
 import MapleBacon
 import RealmSwift
 
-class TestHomeController: UIViewController, XMSegmentedControlDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class HomeController: UIViewController, XMSegmentedControlDelegate, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var segment: XMSegmentedControl!
     @IBOutlet weak var timelineTV: UITableView!
@@ -82,18 +82,18 @@ class TestHomeController: UIViewController, XMSegmentedControlDelegate, UITableV
         
         segment.selectedSegment = 0
         
-        let swipeLeft = UIScreenEdgePanGestureRecognizer.init(target: self, action: #selector(ListNewsController.handleSwipeLeft(swipeGesture:)))
+        let swipeLeft = UIScreenEdgePanGestureRecognizer.init(target: self, action: #selector(HomeController.handleSwipeLeft(swipeGesture:)))
         swipeLeft.edges = UIRectEdge.right
         
-        let panLeft = UIPanGestureRecognizer.init(target: self, action: #selector(ListNewsController.handleLeftPanGesture(panGesture:)))
+        let panLeft = UIPanGestureRecognizer.init(target: self, action: #selector(HomeController.handleLeftPanGesture(panGesture:)))
         
         self.timelineView.addGestureRecognizer(panLeft)
         self.timelineView.addGestureRecognizer(swipeLeft)
         
-        let swipeRight = UIScreenEdgePanGestureRecognizer.init(target: self, action: #selector(ListNewsController.handleSwipeRight(swipeGesture:)))
+        let swipeRight = UIScreenEdgePanGestureRecognizer.init(target: self, action: #selector(HomeController.handleSwipeRight(swipeGesture:)))
         swipeRight.edges = UIRectEdge.left
         
-        let panRight = UIPanGestureRecognizer.init(target: self, action: #selector(ListNewsController.handleRightPanGesture(panGesture:)))
+        let panRight = UIPanGestureRecognizer.init(target: self, action: #selector(HomeController.handleRightPanGesture(panGesture:)))
         
         self.newsView.addGestureRecognizer(panRight)
         self.newsView.addGestureRecognizer(swipeRight)
@@ -154,7 +154,7 @@ class TestHomeController: UIViewController, XMSegmentedControlDelegate, UITableV
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = timelineTV.dequeueReusableCell(withIdentifier: "timeline", for: indexPath) as! TestTimelineCell
+        let cell = timelineTV.dequeueReusableCell(withIdentifier: "timeline", for: indexPath) as! TimelineCell
         
         cell.initialLbl.layer.cornerRadius = 20
         cell.initialLbl.clipsToBounds = true
@@ -165,7 +165,7 @@ class TestHomeController: UIViewController, XMSegmentedControlDelegate, UITableV
     
     @IBAction func showComment(_ sender: UIButton) {
         
-        let myParent = self.tabBarController as! TestMenuBarController
+        let myParent = self.tabBarController as! MenuBarController
             
         myParent.showComment()
     }
@@ -302,7 +302,7 @@ class TestHomeController: UIViewController, XMSegmentedControlDelegate, UITableV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = newsCV.dequeueReusableCell(withReuseIdentifier: "news", for: indexPath) as! TestNewsCell
+        let cell = newsCV.dequeueReusableCell(withReuseIdentifier: "news", for: indexPath) as! NewsCell
         
         cell.img.setImage(withUrl: URL.init(string: self.img[indexPath.item])!, placeholder: nil, crossFadePlaceholder: true, cacheScaled: false, completion: nil)
         cell.title.text = self.judul[indexPath.item]
@@ -338,7 +338,7 @@ class TestHomeController: UIViewController, XMSegmentedControlDelegate, UITableV
         
         if segue.identifier == "segue_detail_berita" {
         
-            let next = segue.destination as! TestDetailBeritaController
+            let next = segue.destination as! DetailBeritaController
             
             next.link = self.sentLink
         

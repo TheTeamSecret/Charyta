@@ -2,7 +2,7 @@
 //  LoginController.swift
 //  Caryta Messenger
 //
-//  Created by Verrelio Chandra Rizky on 5/29/17.
+//  Created by Verrelio Chandra Rizky on 8/10/17.
 //  Copyright © 2017 Caryta. All rights reserved.
 //
 
@@ -11,23 +11,43 @@ import Alamofire
 import SwiftyJSON
 import RealmSwift
 import Firebase
-import Toaster
 
 class LoginController: UIViewController {
 
-    var username = String()
+    @IBOutlet weak var imgProfil: UIImageView!
+    @IBOutlet weak var passwordTF: UITextField!
     
-    var code = String()
+    var number = String()
     
-    @IBOutlet weak var passTxt: UITextField!
+    func keyboardWillShow(_ notification : NSNotification) {
+        
+        let keyBoardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.size
+        
+        self.bottom.constant = keyBoardSize.height
+        
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+        })
+        
+    }
     
-    @IBOutlet weak var nextBtn: UIBarButtonItem!
+    func keyboardWillHide(_ notification : Notification) {
+        
+        self.bottom.constant = 0.0
+        
+        self.view.layoutIfNeeded()
+    }
+    
+    @IBOutlet weak var bottom: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let indexStrNew = code.index(code.startIndex, offsetBy: 1)
-        code = code.substring(from: indexStrNew)
+        NotificationCenter.default.addObserver(self, selector: #selector(DataDiriController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(DataDiriController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        self.imgProfil.layer.cornerRadius = 80.0
+        self.imgProfil.clipsToBounds = true
 
         // Do any additional setup after loading the view.
     }
@@ -37,17 +57,11 @@ class LoginController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func masuk(_ sender: UIBarButtonItem) {
-        
-        login()
-        
-    }
-    
-    func login(){
+    @IBAction func login(_ sender: UIButton) {
         
         let params = [
-            "username" : self.username,
-            "password" : passTxt.text!
+            "username" : number,
+            "password" : self.passwordTF.text!
         ]
         
         Alamofire.request("\(link().domain)login", method: .post, parameters: params, encoding: JSONEncoding.default)
@@ -75,145 +89,6 @@ class LoginController: UIViewController {
                         self.updateToken(user_id: JSON(jason)["data"]["user_id"].stringValue, token: token)
                         
                         DBHelper.insert(obj: model)
-                        
-                    }else{
-                        
-                        self.login0()
-                        
-                    }
-                    
-                }
-                
-        }
-    
-    }
-    
-    func login0(){
-        
-        let params = [
-            "username" : "0\(self.username)",
-            "password" : passTxt.text!
-        ]
-        
-        Alamofire.request("\(link().domain)login", method: .post, parameters: params, encoding: JSONEncoding.default)
-            .responseJSON{response in
-                
-                if let jason = response.result.value {
-                    
-                    if JSON(jason)["status"].stringValue == "1" {
-                        
-                        print(JSON(jason).description)
-                        
-                        let token = InstanceID.instanceID().token()!
-                        
-                        let model = user()
-                        
-                        model.user_id       = JSON(jason)["data"]["user_id"].stringValue
-                        model.first_name    = JSON(jason)["data"]["name"].stringValue
-                        model.last_name     = ""
-                        model.email         = JSON(jason)["data"]["email"].stringValue
-                        model.no_hp         = JSON(jason)["data"]["no_hp"].stringValue
-                        model.sex           = JSON(jason)["data"]["sex"].stringValue
-                        model.avatar        = JSON(jason)["data"]["avatar_small"].stringValue
-                        model.registrasi_id = token
-                        
-                        self.updateToken(user_id: JSON(jason)["data"]["user_id"].stringValue, token: token)
-                        
-                        DBHelper.insert(obj: model)
-                        
-                    }else{
-                        
-                        self.loginCode()
-                        
-                    }
-                    
-                }
-                
-        }
-        
-    }
-    
-    func loginCode(){
-        
-        let params = [
-            "username" : "\(self.code)\(self.username)",
-            "password" : passTxt.text!
-        ]
-        
-        Alamofire.request("\(link().domain)login", method: .post, parameters: params, encoding: JSONEncoding.default)
-            .responseJSON{response in
-                
-                if let jason = response.result.value {
-                    
-                    if JSON(jason)["status"].stringValue == "1" {
-                    
-                        print(JSON(jason).description)
-                        
-                        let token = InstanceID.instanceID().token()!
-                        
-                        let model = user()
-                        
-                        model.user_id       = JSON(jason)["data"]["user_id"].stringValue
-                        model.first_name    = JSON(jason)["data"]["name"].stringValue
-                        model.last_name     = ""
-                        model.email         = JSON(jason)["data"]["email"].stringValue
-                        model.no_hp         = JSON(jason)["data"]["no_hp"].stringValue
-                        model.sex           = JSON(jason)["data"]["sex"].stringValue
-                        model.avatar        = JSON(jason)["data"]["avatar_small"].stringValue
-                        model.registrasi_id = token
-                        
-                        self.updateToken(user_id: JSON(jason)["data"]["user_id"].stringValue, token: token)
-                        
-                        DBHelper.insert(obj: model)
-                        
-                    }else{
-                    
-                        self.loginPlusCode()
-                    
-                    }
-                    
-                }
-                
-        }
-        
-    }
-    
-    func loginPlusCode(){
-        
-        let params = [
-            "username" : "+\(self.code)\(self.username)",
-            "password" : passTxt.text!
-        ]
-        
-        Alamofire.request("\(link().domain)login", method: .post, parameters: params, encoding: JSONEncoding.default)
-            .responseJSON{response in
-                
-                if let jason = response.result.value {
-                    
-                    if JSON(jason)["status"].stringValue == "1" {
-                        
-                        print(JSON(jason).description)
-                        
-                        let token = InstanceID.instanceID().token()!
-                        
-                        let model = user()
-                        
-                        model.user_id       = JSON(jason)["data"]["user_id"].stringValue
-                        model.first_name    = JSON(jason)["data"]["name"].stringValue
-                        model.last_name     = ""
-                        model.email         = JSON(jason)["data"]["email"].stringValue
-                        model.no_hp         = JSON(jason)["data"]["no_hp"].stringValue
-                        model.sex           = JSON(jason)["data"]["sex"].stringValue
-                        model.avatar        = JSON(jason)["data"]["avatar_small"].stringValue
-                        model.registrasi_id = token
-                        
-                        self.updateToken(user_id: JSON(jason)["data"]["user_id"].stringValue, token: token)
-                        
-                        DBHelper.insert(obj: model)
-                        
-                    }else{
-                        
-                        Toast.init(text: "Password salah!").show()
                         
                     }
                     
@@ -245,24 +120,6 @@ class LoginController: UIViewController {
                     
                 }
                 
-        }
-        
-    }
-    
-    @IBAction func checkValue(_ sender: UITextField) {
-        
-        if sender == passTxt {
-        
-            if passTxt.text!.characters.count > 0 {
-            
-                self.nextBtn.isEnabled = true
-            
-            }else{
-                
-                self.nextBtn.isEnabled = false
-                
-            }
-        
         }
         
     }

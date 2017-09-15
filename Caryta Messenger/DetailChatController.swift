@@ -2,40 +2,28 @@
 //  DetailChatController.swift
 //  Caryta Messenger
 //
-//  Created by www.caryta.com on 5/17/17.
+//  Created by Verrelio Chandra Rizky on 6/14/17.
 //  Copyright © 2017 Caryta. All rights reserved.
 //
 
 import UIKit
-import Firebase
 import Alamofire
 import SwiftyJSON
 import RealmSwift
-import MapleBacon
 
 class DetailChatController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate {
-
-    @IBOutlet weak var chatTV: UITableView!
+    
+    @IBOutlet weak var initialLbl: UILabel!
+    
+    @IBOutlet weak var detailChatTV: UITableView!
+    @IBOutlet weak var detailChatTVHeight: NSLayoutConstraint!
+    
     @IBOutlet weak var bottom: NSLayoutConstraint!
-    @IBOutlet weak var navItem: UINavigationItem!
     
-    @IBOutlet weak var voiceBtn: UIButton!
-    @IBOutlet weak var addBtn: UIButton!
-    
+    @IBOutlet weak var chatViewHeight: NSLayoutConstraint!
     @IBOutlet weak var chatTxt: UITextView!
     
-    @IBOutlet weak var ChatViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var sentBtn: UIButton!
-    
-    var nama = ""
-    
-    var groupID = ""
-    
-    var row = 0
-    
     var getUser = try! Realm().objects(user.self).first!
-    
-    var chatID = ""
     
     func keyboardWillShow(_ notification : NSNotification) {
         
@@ -56,55 +44,39 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
         self.view.layoutIfNeeded()
     }
     
+    var nama = String()
+    
+    var groupID = String()
+    
+    var row = 0
+    
+    var chatID = String()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(getUser)
-        
-        let getDetailChat = try! Realm().objects(detail_chat.self).filter("chat_id = '\(chatID)'")
-        
-        print(getDetailChat)
-        
-        self.chatTV.estimatedRowHeight = 87
-        self.chatTV.rowHeight = UITableViewAutomaticDimension
-        
-        self.navItem.title = self.nama
         
         self.chatTxt.layer.cornerRadius = 15.0
         self.chatTxt.layer.borderWidth = 1.0
         self.chatTxt.layer.borderColor = UIColor.init(hexString: "F1F1F1")!.cgColor
         
-        voiceBtn.layer.borderWidth = 0.5
-        voiceBtn.layer.borderColor = UIColor.init(hexString: "F1F1F1")!.cgColor
-        voiceBtn.layer.cornerRadius = 7.5
-        
-        sentBtn.layer.cornerRadius = 7.5
-        
-        addBtn.layer.borderWidth = 0.5
-        addBtn.layer.borderColor = UIColor.init(hexString: "F1F1F1")!.cgColor
-        addBtn.layer.cornerRadius = 7.5
+        self.setStatusBarStyle(.lightContent)
         
         NotificationCenter.default.addObserver(self, selector: #selector(DetailChatController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(DetailChatController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
-        self.setStatusBarStyle(.lightContent)
+        initialLbl.layer.cornerRadius = 20
+        
+        initialLbl.clipsToBounds = true
+        
+        self.detailChatTV.estimatedRowHeight = 46
+        self.detailChatTV.rowHeight = UITableViewAutomaticDimension
+        
+        let tapBack = UITapGestureRecognizer(target: self, action: #selector(DetailChatController.endEdit))
+        tapBack.numberOfTapsRequired = 1
+        self.view.isUserInteractionEnabled = true
+        self.view.addGestureRecognizer(tapBack)
 
         // Do any additional setup after loading the view.
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
-        
-        if chatID != "" {
-            
-            let item = self.tableView(self.chatTV, numberOfRowsInSection: 0) - 1
-            
-            let lastItem = IndexPath.init(row: item, section: 0)
-            
-            self.chatTV.scrollToRow(at: lastItem, at: .bottom, animated: true)
-            
-        }
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -123,78 +95,128 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if chatID != "" {
-            
-            let getDetailChat = try! Realm().objects(detail_chat.self)
-            
-            print(getDetailChat.count)
-            
-            row = getDetailChat.count
-            
-        }
-        
-        return row
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let getDetailChat = try! Realm().objects(detail_chat.self).filter("chat_id = '\(chatID)'")
+        let cell = detailChatTV.dequeueReusableCell(withIdentifier: "detail", for: indexPath) as! DetailChatCell
         
-        let cell = chatTV.dequeueReusableCell(withIdentifier: "chatting", for: indexPath) as! ChatCell
+        let row = indexPath.row
         
-        cell.userAva.layer.cornerRadius = 5.0
-        cell.otherAva.layer.cornerRadius = 5.0
-        cell.valueView.layer.cornerRadius = 5.0
-        
-        cell.userAva.clipsToBounds = true
-        cell.otherAva.clipsToBounds = true
-        cell.valueView.clipsToBounds = true
-        
-        let newHeight = self.estimateHeightForView(text: getDetailChat[indexPath.row].isi, width: cell.valueLbl.frame.size.width, PointSize: 14.0).height
-        
-        if newHeight < 25 {
+        if row == 0 {
             
-            cell.valueViewHeight.constant = 25 + 18
-        
-        }else if newHeight > 25 {
+            cell.blueView.removeFromSuperview()
+            cell.readReceipt.removeFromSuperview()
             
-            cell.valueViewHeight.constant = newHeight + 18
+            let txt = "Lagi dimana bro?"
+            
+            cell.whiteLbl.text = txt
+            
+            let newWidth = self.estimatewidthForView(text: txt).width
+            let newHeight = self.estimateHeightForView(text: txt).height
+            
+            cell.whiteWidth.constant = 20 + newWidth
+            
+            cell.whiteHeight.constant = 20 + newHeight
+            
+            cell.whiteView.layer.cornerRadius = 0.0
+            
+            let maskPath = UIBezierPath(roundedRect: CGRect.init(origin: cell.whiteView.bounds.origin, size: CGSize.init(width: 16 + newWidth, height: 16 + newHeight)), byRoundingCorners: [.topLeft, .topRight, .bottomRight], cornerRadii: CGSize(width: 15.0, height: 15.0))
+            let maskLayer = CAShapeLayer()
+            maskLayer.path = maskPath.cgPath
+            cell.whiteView.layer.mask = maskLayer
         
+        }else if row == 1 {
+            
+            cell.whiteView.removeFromSuperview()
+            
+            let txt = "Di mes bareng ari, al, dimas, silmy lu dimana? ga ke mes"
+            
+            cell.blueLbl.text = txt
+            
+            let newWidth = self.estimatewidthForView(text: txt).width
+            let newHeight = self.estimateHeightForView(text: txt).height
+            
+            cell.blueWidth.constant = 20 + newWidth
+            
+            cell.blueHeight.constant = 20 + newHeight
+            
+            cell.blueView.layer.cornerRadius = 0.0
+            
+            let maskPath = UIBezierPath(roundedRect: CGRect.init(origin: cell.blueView.bounds.origin, size: CGSize.init(width: 16 + newWidth, height: 16 + newHeight)), byRoundingCorners: [.topLeft, .topRight, .bottomLeft], cornerRadii: CGSize(width: 15.0, height: 15.0))
+            let maskLayer = CAShapeLayer()
+            maskLayer.path = maskPath.cgPath
+            cell.blueView.layer.mask = maskLayer
+            
+        }else if row == 2 {
+            
+            cell.whiteView.removeFromSuperview()
+            
+            let txt = "Oke udah di jalan"
+            
+            cell.blueLbl.text = txt
+            
+            let newWidth = self.estimatewidthForView(text: txt).width
+            let newHeight = self.estimateHeightForView(text: txt).height
+            
+            cell.blueWidth.constant = 20 + newWidth
+            
+            cell.blueHeight.constant = 20 + newHeight
+            
+            cell.blueView.layer.cornerRadius = 0.0
+            
+            let maskPath = UIBezierPath(roundedRect: CGRect.init(origin: cell.blueView.bounds.origin, size: CGSize.init(width: 16 + newWidth, height: 16 + newHeight)), byRoundingCorners: [.topLeft, .topRight, .bottomLeft], cornerRadii: CGSize(width: 15.0, height: 15.0))
+            let maskLayer = CAShapeLayer()
+            maskLayer.path = maskPath.cgPath
+            cell.blueView.layer.mask = maskLayer
+            
+        }else if row == 3 {
+            
+            cell.whiteView.removeFromSuperview()
+            
+            let txt = "Macet banget laper lagi"
+            
+            cell.blueLbl.text = txt
+            
+            let newWidth = self.estimatewidthForView(text: txt).width
+            let newHeight = self.estimateHeightForView(text: txt).height
+            
+            cell.blueWidth.constant = 20 + newWidth
+            
+            cell.blueHeight.constant = 20 + newHeight
+            
+            cell.blueView.layer.cornerRadius = 0.0
+            
+            let maskPath = UIBezierPath(roundedRect: CGRect.init(origin: cell.blueView.bounds.origin, size: CGSize.init(width: 16 + newWidth, height: 16 + newHeight)), byRoundingCorners: [.topLeft, .topRight, .bottomLeft], cornerRadii: CGSize(width: 15.0, height: 15.0))
+            let maskLayer = CAShapeLayer()
+            maskLayer.path = maskPath.cgPath
+            cell.blueView.layer.mask = maskLayer
+            
         }
         
-        if getUser.user_id != getDetailChat[indexPath.row].user_id {
-            
-            cell.otherAva.setImage(withUrl: URL.init(string: "\(link().gambar)\(getDetailChat[indexPath.row].avatar)")!, placeholder: UIImage.init(named: "Avatar"), crossFadePlaceholder: true, cacheScaled: false, completion: nil)
-        
-            cell.userAva.isHidden = true
-            cell.valueView.backgroundColor = UIColor.white
-            cell.dateLbl.textAlignment = .right
-            cell.statusImg.isHidden = true
-            
-        }
-        
-        if getUser.user_id == getDetailChat[indexPath.row].user_id  {
-            
-            cell.userAva.setImage(withUrl: URL.init(string: "\(link().gambar)\(getUser.avatar)")!, placeholder: UIImage.init(named: "Avatar"), crossFadePlaceholder: true, cacheScaled: false, completion: nil)
-            
-            cell.otherAva.isHidden = true
-            cell.valueView.backgroundColor = UIColor.init(hexString: "91D4F6")
-            cell.dateLbl.textAlignment = .left
-        
-        }
-        
-        cell.valueLbl.text = getDetailChat[indexPath.row].isi
-        cell.dateLbl.text = getDetailChat[indexPath.row].date
+        detailChatTVHeight.constant = detailChatTV.contentSize.height
         
         return cell
         
     }
     
-    @IBAction func goToDetailProfil(_ sender: UIBarButtonItem) {
-        
-        self.performSegue(withIdentifier: "segue_detail_profil", sender: self)
-        
+    private func estimatewidthForView(text: String) -> CGRect {
+        let size = CGSize(width: (self.view.frame.size.width - 100), height: 14)
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 13)], context: nil)
+    }
+    
+    private func estimateHeightForView(text: String) -> CGRect {
+        let size = CGSize(width: (self.view.frame.size.width - 100), height: 10000)
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 13)], context: nil)
+    }
+    
+    func endEdit() {
+    
+        self.view.endEditing(true)
+    
     }
     
     private func estimateFrameForText(text: String) -> CGRect {
@@ -203,58 +225,42 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
         return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14)], context: nil)
     }
     
-    private func estimateHeightForView(text: String, width: CGFloat, PointSize: CGFloat) -> CGRect {
-        let size = CGSize(width: width, height: 10000)
-        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-        return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: PointSize)], context: nil)
-    }
-    
     func textViewDidChange(_ textView: UITextView) {
         
         if textView == chatTxt {
-        
+            
             let height = self.estimateFrameForText(text: chatTxt.text!).height
             
             if height > 30 {
-            
-                self.ChatViewHeight.constant = height + 33
+                
+                self.chatViewHeight.constant = height + 33
                 
                 UIView.animate(withDuration: 0.3, animations: {
-                
+                    
                     self.view.layoutIfNeeded()
-                
+                    
                 })
-            
+                
             }else if 30 > height {
-            
-                self.ChatViewHeight.constant = 46
+                
+                self.chatViewHeight.constant = 46
                 
                 UIView.animate(withDuration: 0.3, animations: {
                     
                     self.view.layoutIfNeeded()
                     
                 })
-            
-            }
-            
-            if chatTxt.text!.characters.count > 0 {
-            
-                self.sentBtn.isHidden = false
-            
-            }else if chatTxt.text!.characters.count == 0 {
-                
-                self.sentBtn.isHidden = true
                 
             }
-        
+            
         }
         
     }
     
-    @IBAction func sentMessage(_ sender: UIButton) {
+    func sentMesssage() {
         
         let isi = self.chatTxt.text!
-
+        
         let getKontak = try! Realm().objects(kontak.self).filter("nama = '\(self.nama)'").first!
         
         let getChat = try! Realm().objects(chat.self)
@@ -290,16 +296,16 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
             
             DBHelper.insert(obj: model1)
             
-            self.chatTV.reloadData()
+            self.detailChatTV.reloadData()
             
-            self.chatTV.estimatedRowHeight = 80
-            self.chatTV.rowHeight = UITableViewAutomaticDimension
+            self.detailChatTV.estimatedRowHeight = 80
+            self.detailChatTV.rowHeight = UITableViewAutomaticDimension
             
-            let item = self.tableView(self.chatTV, numberOfRowsInSection: 0) - 1
+            let item = self.tableView(self.detailChatTV, numberOfRowsInSection: 0) - 1
             
             let lastItem = IndexPath.init(row: item, section: 0)
             
-            self.chatTV.scrollToRow(at: lastItem, at: .bottom, animated: true)
+            self.detailChatTV.scrollToRow(at: lastItem, at: .bottom, animated: true)
             
             let headers = [
                 "Content-Type": "application/json",
@@ -317,7 +323,7 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
                     "no_hp" : self.getUser.no_hp,
                     "isi" : isi
                 ]
-            ] as [String : Any]
+                ] as [String : Any]
             
             self.chatTxt.text = ""
             
@@ -329,9 +335,9 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
                         print(JSON(jason).description)
                         
                     }
-            
+                    
             }
-        
+            
         }else{
             
             if getChat.count > 0 {
@@ -360,16 +366,16 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
                 
                 DBHelper.insert(obj: model1)
                 
-                self.chatTV.reloadData()
+                self.detailChatTV.reloadData()
                 
-                self.chatTV.estimatedRowHeight = 80
-                self.chatTV.rowHeight = UITableViewAutomaticDimension
+                self.detailChatTV.estimatedRowHeight = 80
+                self.detailChatTV.rowHeight = UITableViewAutomaticDimension
                 
-                let item = self.tableView(self.chatTV, numberOfRowsInSection: 0) - 1
+                let item = self.tableView(self.detailChatTV, numberOfRowsInSection: 0) - 1
                 
                 let lastItem = IndexPath.init(row: item, section: 0)
                 
-                self.chatTV.scrollToRow(at: lastItem, at: .bottom, animated: true)
+                self.detailChatTV.scrollToRow(at: lastItem, at: .bottom, animated: true)
                 
             }else{
                 
@@ -399,16 +405,16 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
                 
                 DBHelper.insert(obj: model1)
                 
-                self.chatTV.reloadData()
+                self.detailChatTV.reloadData()
                 
-                self.chatTV.estimatedRowHeight = 80
-                self.chatTV.rowHeight = UITableViewAutomaticDimension
+                self.detailChatTV.estimatedRowHeight = 80
+                self.detailChatTV.rowHeight = UITableViewAutomaticDimension
                 
-                let item = self.tableView(self.chatTV, numberOfRowsInSection: 0) - 1
+                let item = self.tableView(self.detailChatTV, numberOfRowsInSection: 0) - 1
                 
                 let lastItem = IndexPath.init(row: item, section: 0)
                 
-                self.chatTV.scrollToRow(at: lastItem, at: .bottom, animated: true)
+                self.detailChatTV.scrollToRow(at: lastItem, at: .bottom, animated: true)
                 
             }
             
@@ -427,26 +433,13 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
                         
                         print(JSON(jason).description)
                         
-                        
-                        
                     }
                     
             }
-        
-        }
-        
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == "segue_detail_profil" {
-        
-            let next = segue.destination as! DetailKontakController
             
-            next.userName = self.nama
-        
         }
-        
+    
     }
+    
 
 }

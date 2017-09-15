@@ -97,7 +97,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if getUser.count > 0 {
             
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: "menu") as! TestMenuBarController
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "menu") as! MenuBarController
             
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
@@ -248,8 +248,8 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
-            let vc = storyboard.instantiateViewController(withIdentifier: "menu") as! TestMenuBarController
-            let chatVC = storyboard.instantiateViewController(withIdentifier: "detailChat") as! TestDetailChatController
+            let vc = storyboard.instantiateViewController(withIdentifier: "menu") as! MenuBarController
+            let chatVC = storyboard.instantiateViewController(withIdentifier: "detailChat") as! DetailChatController
             
             chatVC.chatID = getChat.chat_id
             chatVC.nama = getChat.name
@@ -289,8 +289,8 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             
-            let vc = storyboard.instantiateViewController(withIdentifier: "menu") as! TestMenuBarController
-            let chatVC = storyboard.instantiateViewController(withIdentifier: "detailChat") as! TestDetailChatController
+            let vc = storyboard.instantiateViewController(withIdentifier: "menu") as! MenuBarController
+            let chatVC = storyboard.instantiateViewController(withIdentifier: "detailChat") as! DetailChatController
             
             chatVC.chatID = getChat.chat_id
             chatVC.nama = getChat.name

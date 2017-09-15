@@ -1,20 +1,30 @@
 //
-//  NavigationSettingController.swift
+//  DetailBeritaController.swift
 //  Caryta Messenger
 //
-//  Created by www.caryta.com on 5/18/17.
+//  Created by Verrelio Chandra Rizky on 8/8/17.
 //  Copyright © 2017 Caryta. All rights reserved.
 //
 
 import UIKit
 
-class NavigationSettingController: UINavigationController {
+class DetailBeritaController: UIViewController, UIWebViewDelegate {
+    
+    var link = String()
+    @IBOutlet weak var wv: UIWebView!
+    @IBOutlet weak var loading: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.setStatusBarStyle(.lightContent)
+        self.loading.startAnimating()
 
+        let url = URL.init(string: link)!
+        
+        let urlReq = URLRequest.init(url: url)
+        
+        wv.loadRequest(urlReq)
+        
         // Do any additional setup after loading the view.
     }
 
@@ -23,6 +33,17 @@ class NavigationSettingController: UINavigationController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func back(_ sender: UIBarButtonItem) {
+        
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    
+    func webViewDidFinishLoad(_ webView: UIWebView) {
+        
+        self.loading.stopAnimating()
+        
+    }
 
     /*
     // MARK: - Navigation

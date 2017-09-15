@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TestListPhoneCell: UITableViewCell {
+class ListPhoneCell: UITableViewCell {
 
     @IBOutlet weak var selectBtn: UIButton!
     @IBOutlet weak var initialLbl: UILabel!

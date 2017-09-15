@@ -2,21 +2,21 @@
 //  ListTeleponController.swift
 //  Caryta Messenger
 //
-//  Created by www.caryta.com on 5/16/17.
+//  Created by Verrelio Chandra Rizky on 6/13/17.
 //  Copyright © 2017 Caryta. All rights reserved.
 //
 
 import UIKit
-import ChameleonFramework
-import Firebase
 
-class ListTeleponController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class ListTeleponController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
-    @IBOutlet weak var segment: UISegmentedControl!
-    @IBOutlet weak var listTeleponTV: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var phoneTV: UITableView!
     
-    var isAll: Bool = true
+    @IBOutlet weak var editBtn: UIBarButtonItem!
+    @IBOutlet weak var addDeleteBtn: UIBarButtonItem!
+    var isEdit: Bool = false
+    
+    var nameDummy = ["Silmy Tama", "Om Bob", "Gustang", "Gustang", "Ari Maulana", "Ilham Sabar"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,100 +36,96 @@ class ListTeleponController: UIViewController, UITableViewDataSource, UITableVie
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        var row = 0
-        
-        if isAll == true {
-        
-            row = 4
-        
-        }else if isAll == false {
-        
-            row = 2
-        
-        }
-        
-        return row
+        return nameDummy.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = listTeleponTV.dequeueReusableCell(withIdentifier: "telepon", for: indexPath) as! ListTeleponCell
+        let cell = phoneTV.dequeueReusableCell(withIdentifier: "phone", for: indexPath) as! ListPhoneCell
         
-        cell.nameLbl.text = "Abi Tampilang"
-        cell.fromLbl.text = "Ponsel"
+        cell.initialLbl.layer.cornerRadius = 20
+        cell.initialLbl.clipsToBounds = true
         
-        if isAll == true {
+        cell.nameLbl.text = self.nameDummy[indexPath.row]
+        
+        let initIndex = nameDummy[indexPath.row].index(nameDummy[indexPath.row].startIndex, offsetBy: 1)
+        let initial = nameDummy[indexPath.row].substring(to: initIndex).uppercased()
+        
+        let mod = (indexPath.row + 1) % 2
+        
+        if mod == 1 {
+        
+            cell.typeImg.image = UIImage.init(named: "tlpnkeluar")
+        
+        }else{
             
-            if indexPath.row > 1 {
-                
-                cell.nameLbl.textColor = UIColor.flatRed
-                cell.typeImg.isHidden = true
-                
-            }else{
-                cell.typeImg.isHidden = false
-                
-                if indexPath.row == 0 {
-                
-                    cell.typeImg.image = UIImage.init(named: "Telepon Keluar")
-                
-                }else if indexPath.row == 1 {
-                    
-                    cell.typeImg.image = UIImage.init(named: "Telepon masuk")
-                    
-                }
-                
-                cell.nameLbl.textColor = UIColor.init(hexString: "929292")
+            cell.typeImg.image = UIImage.init(named: "telpn merah")
+        
+        }
+        
+        cell.initialLbl.text = initial
+        
+        cell.initialLbl.backgroundColor = UIColor.randomFlat
+        
+        if isEdit == true {
+        
+            cell.selectBtnWidth.constant = 0
             
-            }
+            UIView.animate(withDuration: 0.3, animations: {
+                
+                cell.selectBtnWidth.constant = 25
+                self.view.layoutIfNeeded()
             
-        }else if isAll == false {
+            })
+        
+        }else if isEdit == false {
             
-            cell.nameLbl.textColor = UIColor.flatRed
-            cell.typeImg.isHidden = true
+            cell.selectBtnWidth.constant = 25
             
+            UIView.animate(withDuration: 0.3, animations: {
+                
+                cell.selectBtnWidth.constant = 0
+                self.view.layoutIfNeeded()
+                
+            })
+        
         }
         
         return cell
         
     }
     
-    @IBAction func changeList(_ sender: UISegmentedControl) {
+    @IBAction func editAct(_ sender: UIBarButtonItem) {
         
-        if sender == segment {
+        if sender.title == "Edit" {
         
-            if sender.selectedSegmentIndex == 0 {
+            addDeleteBtn.image = UIImage.init(named: "hapus")
+            isEdit = true
+            editBtn.title = "Cancel"
+            phoneTV.reloadData()
+        
+        }else if sender.title == "Cancel" {
             
-                isAll = true
-                listTeleponTV.reloadData()
-            
-            }else if sender.selectedSegmentIndex == 1 {
-            
-                isAll = false
-                listTeleponTV.reloadData()
-            
-            }
+            addDeleteBtn.image = UIImage.init(named: "make_a_call")
+            isEdit = false
+            editBtn.title = "Edit"
+            phoneTV.reloadData()
             
         }
         
     }
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    @IBAction func selctDeselect(_ sender: UIButton) {
         
-        searchBar.setShowsCancelButton(true, animated: true)
+        if sender.imageView?.image == UIImage.init(named: "select") {
         
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+            sender.setImage(UIImage.init(named: "select_blue"), for: .normal)
         
-        searchBar.setShowsCancelButton(false, animated: true)
-        self.view.endEditing(true)
-        
-    }
-    
-    @IBAction func goToInfoKontak(_ sender: UIButton) {
-        
-        self.performSegue(withIdentifier: "segue_detail_kontak", sender: self)
+        }else if sender.imageView?.image == UIImage.init(named: "select_blue") {
+            
+            sender.setImage(UIImage.init(named: "select"), for: .normal)
+            
+        }
         
     }
 
