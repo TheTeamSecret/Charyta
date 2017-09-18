@@ -20,12 +20,13 @@ class HomeController: UIViewController, XMSegmentedControlDelegate, UITableViewD
     @IBOutlet weak var timelineTV: UITableView!
     @IBOutlet weak var topCV: UICollectionView!
     @IBOutlet weak var newsCV: UICollectionView!
+    @IBOutlet weak var storyCV: UICollectionView!
     
     @IBOutlet weak var newsView: UIView!
     @IBOutlet weak var timelineView: UIView!
     
     @IBOutlet weak var leftConst: NSLayoutConstraint!
-    @IBOutlet weak var newsHeight: NSLayoutConstraint!
+    @IBOutlet weak var timelineHeight: NSLayoutConstraint!
     
     var length: CGFloat = 0.0
     
@@ -37,7 +38,7 @@ class HomeController: UIViewController, XMSegmentedControlDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Alamofire.request("\(link().domain)berita")
+        Alamofire.request("\(link().domainMain)messenger/berita")
             .responseJSON{response in
                 
                 let jason = response.data!
@@ -114,6 +115,20 @@ class HomeController: UIViewController, XMSegmentedControlDelegate, UITableViewD
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func getTimeline() {
+        
+    }
+    
+    func getStory() {
+        let getUser = try! Realm().objects(user.self).first!
+        Alamofire.request("\(link().subDomain)user/story", method: .post, encoding: JSONEncoding.default, headers: ["kodeUser": getUser.user_id, "Content-Type": "application/json"])
+            .responseJSON{response in
+                if let jason = response.result.value {
+                    print(JSON(jason).description)
+                }
+        }
     }
     
     func xmSegmentedControl(_ xmSegmentedControl: XMSegmentedControl, selectedSegment: Int) {

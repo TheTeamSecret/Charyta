@@ -142,7 +142,7 @@ class WritePostController: UIViewController, UIImagePickerControllerDelegate, UI
                 multipartFormData.append(getUser.user_id.data(using: String.Encoding.utf8)!, withName: "kode_user")
                 multipartFormData.append(self.postTxt.text.data(using: String.Encoding.utf8)!, withName: "caption")
                 
-            }, to: URL(string: "\(link().domain)add-timeline")!, encodingCompletion: { encodingResult in
+            }, to: URL(string: "\(link().domainMain)messenger/add-timeline")!, encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.responseJSON { response in
@@ -161,7 +161,7 @@ class WritePostController: UIViewController, UIImagePickerControllerDelegate, UI
                 multipartFormData.append(getUser.user_id.data(using: String.Encoding.utf8)!, withName: "kode_user")
                 multipartFormData.append(self.postTxt.text.data(using: String.Encoding.utf8)!, withName: "caption")
                 
-            }, to: URL(string: "\(link().domain)add-timeline")!, encodingCompletion: { encodingResult in
+            }, to: URL(string: "\(link().domainMain)messenger/add-timeline")!, encodingCompletion: { encodingResult in
                 switch encodingResult {
                 case .success(let upload, _, _):
                     upload.responseJSON { response in
@@ -177,14 +177,9 @@ class WritePostController: UIViewController, UIImagePickerControllerDelegate, UI
     
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func postAct(_ sender: UIBarButtonItem) {
+        self.post()
     }
-    */
+    
 
 }

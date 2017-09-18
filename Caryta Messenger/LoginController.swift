@@ -64,7 +64,7 @@ class LoginController: UIViewController {
             "password" : self.passwordTF.text!
         ]
         
-        Alamofire.request("\(link().domain)login", method: .post, parameters: params, encoding: JSONEncoding.default)
+        Alamofire.request("\(link().domainMain)messenger/login", method: .post, parameters: params, encoding: JSONEncoding.default)
             .responseJSON{response in
                 
                 if let jason = response.result.value {
@@ -105,7 +105,7 @@ class LoginController: UIViewController {
             "registrasiId"  : token
         ]
         
-        Alamofire.request("\(link().domain)registrasi-refresh", method: .post, parameters: params, encoding: JSONEncoding.default)
+        Alamofire.request("\(link().domainMain)messenger/registrasi-refresh", method: .post, parameters: params, encoding: JSONEncoding.default)
             .responseJSON{response in
                 
                 if let jason = response.result.value {

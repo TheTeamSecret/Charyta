@@ -107,7 +107,7 @@ class LoginWithCarytaController: UIViewController {
             "registrasiId"  : token
         ]
         
-        Alamofire.request("\(link().domain)registrasi-refresh", method: .post, parameters: params, encoding: JSONEncoding.default)
+        Alamofire.request("\(link().domainMain)messenger/registrasi-refresh", method: .post, parameters: params, encoding: JSONEncoding.default)
             .responseJSON{response in
                 
                 if let jason = response.result.value {

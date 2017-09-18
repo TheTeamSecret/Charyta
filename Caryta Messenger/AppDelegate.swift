@@ -95,21 +95,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let storyboard = UIStoryboard(name: "NewMain", bundle: nil)
         
-        if getUser.count > 0 {
-            
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: "menu") as! MenuBarController
-            
-            self.window?.rootViewController = initialViewController
-            self.window?.makeKeyAndVisible()
-            
-        }else{
-            
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: "first") as! FirstController
-            
-            self.window?.rootViewController = initialViewController
-            self.window?.makeKeyAndVisible()
-            
-        }
+//        if getUser.count > 0 {
+//            
+//            let initialViewController = storyboard.instantiateViewController(withIdentifier: "menu") as! MenuBarController
+//            
+//            self.window?.rootViewController = initialViewController
+//            self.window?.makeKeyAndVisible()
+//            
+//        }else{
+//            
+//            let initialViewController = storyboard.instantiateViewController(withIdentifier: "first") as! FirstController
+//            
+//            self.window?.rootViewController = initialViewController
+//            self.window?.makeKeyAndVisible()
+//            
+//        }
 
         // [END register_for_notifications]
         return true
@@ -198,6 +198,155 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
         
         print(aps)
         
+        if var topController = UIApplication.shared.keyWindow?.rootViewController {
+            while let presentedViewController = topController.presentedViewController {
+                topController = presentedViewController
+                if topController == DetailChatController() {
+                    print("detail")
+                    
+                    if get["gcm.notification.group_id"].stringValue != "" {
+                        
+                        let getChat     = try! Realm().objects(chat.self).filter("name = '\(aps["alert"]["title"].stringValue)'").first!
+                        let getKontak   = try! Realm().objects(kontak.self).filter("nama = '\(aps["alert"]["title"].stringValue)'").first!
+                        
+                        let modelChat = chat()
+                        
+                        let dateFormatter:DateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "h:mm a"
+                        
+                        modelChat.chat_id   = getChat.chat_id
+                        modelChat.avatar    = getChat.avatar
+                        modelChat.name      = getChat.name
+                        modelChat.last_chat = aps["alert"]["body"].stringValue
+                        modelChat.date      = dateFormatter.string(from: Date())
+                        
+                        DBHelper.update(obj: modelChat)
+                        
+                        let modelDetailChat = detail_chat()
+                        
+                        modelDetailChat.chat_id  = getChat.chat_id
+                        modelDetailChat.user_id  = getKontak.user_id
+                        modelDetailChat.isi      = get["gcm.notification.isi"].stringValue
+                        modelDetailChat.avatar   = getChat.avatar
+                        modelDetailChat.date     = dateFormatter.string(from: Date())
+                        modelDetailChat.read     = "1"
+                        
+                        DBHelper.insert(obj: modelDetailChat)
+                        
+                        let storyboard = UIStoryboard(name: "NewMain", bundle: nil)
+                        
+                        let vc = storyboard.instantiateViewController(withIdentifier: "menu") as! MenuBarController
+                        
+                    }else{
+                        
+                        let getChat     = try! Realm().objects(chat.self).filter("name = '\(aps["alert"]["title"].stringValue)'").first!
+                        let getKontak   = try! Realm().objects(kontak.self).filter("nama = '\(aps["alert"]["title"].stringValue)'").first!
+                        
+                        let modelChat = chat()
+                        
+                        let dateFormatter:DateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "h:mm a"
+                        
+                        modelChat.chat_id   = getChat.chat_id
+                        modelChat.avatar    = getChat.avatar
+                        modelChat.name      = getChat.name
+                        modelChat.last_chat = aps["alert"]["body"].stringValue
+                        modelChat.date      = dateFormatter.string(from: Date())
+                        
+                        DBHelper.update(obj: modelChat)
+                        
+                        let modelDetailChat = detail_chat()
+                        
+                        modelDetailChat.chat_id  = getChat.chat_id
+                        modelDetailChat.user_id  = getKontak.user_id
+                        modelDetailChat.isi      = aps["alert"]["body"].stringValue
+                        modelDetailChat.avatar   = getChat.avatar
+                        modelDetailChat.date     = dateFormatter.string(from: Date())
+                        modelDetailChat.read     = "1"
+                        
+                        DBHelper.insert(obj: modelDetailChat)
+                        
+                        let storyboard = UIStoryboard(name: "NewMain", bundle: nil)
+                        
+                        let vc = storyboard.instantiateViewController(withIdentifier: "menu") as! MenuBarController
+                        
+                    }
+                }
+                
+                if topController == ListChatController() {
+                    print("list")
+                    
+                    if get["gcm.notification.group_id"].stringValue != "" {
+                        
+                        let getChat     = try! Realm().objects(chat.self).filter("name = '\(aps["alert"]["title"].stringValue)'").first!
+                        let getKontak   = try! Realm().objects(kontak.self).filter("nama = '\(aps["alert"]["title"].stringValue)'").first!
+                        
+                        let modelChat = chat()
+                        
+                        let dateFormatter:DateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "h:mm a"
+                        
+                        modelChat.chat_id   = getChat.chat_id
+                        modelChat.avatar    = getChat.avatar
+                        modelChat.name      = getChat.name
+                        modelChat.last_chat = aps["alert"]["body"].stringValue
+                        modelChat.date      = dateFormatter.string(from: Date())
+                        
+                        DBHelper.update(obj: modelChat)
+                        
+                        let modelDetailChat = detail_chat()
+                        
+                        modelDetailChat.chat_id  = getChat.chat_id
+                        modelDetailChat.user_id  = getKontak.user_id
+                        modelDetailChat.isi      = get["gcm.notification.isi"].stringValue
+                        modelDetailChat.avatar   = getChat.avatar
+                        modelDetailChat.date     = dateFormatter.string(from: Date())
+                        modelDetailChat.read     = "0"
+                        
+                        DBHelper.insert(obj: modelDetailChat)
+                        
+                        let storyboard = UIStoryboard(name: "NewMain", bundle: nil)
+                        
+                        let vc = storyboard.instantiateViewController(withIdentifier: "menu") as! MenuBarController
+                        
+                    }else{
+                        
+                        let getChat     = try! Realm().objects(chat.self).filter("name = '\(aps["alert"]["title"].stringValue)'").first!
+                        let getKontak   = try! Realm().objects(kontak.self).filter("nama = '\(aps["alert"]["title"].stringValue)'").first!
+                        
+                        let modelChat = chat()
+                        
+                        let dateFormatter:DateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "h:mm a"
+                        
+                        modelChat.chat_id   = getChat.chat_id
+                        modelChat.avatar    = getChat.avatar
+                        modelChat.name      = getChat.name
+                        modelChat.last_chat = aps["alert"]["body"].stringValue
+                        modelChat.date      = dateFormatter.string(from: Date())
+                        
+                        DBHelper.update(obj: modelChat)
+                        
+                        let modelDetailChat = detail_chat()
+                        
+                        modelDetailChat.chat_id  = getChat.chat_id
+                        modelDetailChat.user_id  = getKontak.user_id
+                        modelDetailChat.isi      = aps["alert"]["body"].stringValue
+                        modelDetailChat.avatar   = getChat.avatar
+                        modelDetailChat.date     = dateFormatter.string(from: Date())
+                        modelDetailChat.read     = "0"
+                        
+                        DBHelper.insert(obj: modelDetailChat)
+                        
+                        let storyboard = UIStoryboard(name: "NewMain", bundle: nil)
+                        
+                        let vc = storyboard.instantiateViewController(withIdentifier: "menu") as! MenuBarController
+                        
+                    }
+                }
+            }
+        }
+        
         // Change this to your preferred presentation option
         completionHandler([])
     }
@@ -242,11 +391,11 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             modelDetailChat.isi      = get["gcm.notification.isi"].stringValue
             modelDetailChat.avatar   = getChat.avatar
             modelDetailChat.date     = dateFormatter.string(from: Date())
-            modelDetailChat.read     = "0"
+            modelDetailChat.read     = "1"
             
             DBHelper.insert(obj: modelDetailChat)
             
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let storyboard = UIStoryboard(name: "NewMain", bundle: nil)
             
             let vc = storyboard.instantiateViewController(withIdentifier: "menu") as! MenuBarController
             let chatVC = storyboard.instantiateViewController(withIdentifier: "detailChat") as! DetailChatController
@@ -283,11 +432,11 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
             modelDetailChat.isi      = aps["alert"]["body"].stringValue
             modelDetailChat.avatar   = getChat.avatar
             modelDetailChat.date     = dateFormatter.string(from: Date())
-            modelDetailChat.read     = "0"
+            modelDetailChat.read     = "1"
             
             DBHelper.insert(obj: modelDetailChat)
             
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let storyboard = UIStoryboard(name: "NewMain", bundle: nil)
             
             let vc = storyboard.instantiateViewController(withIdentifier: "menu") as! MenuBarController
             let chatVC = storyboard.instantiateViewController(withIdentifier: "detailChat") as! DetailChatController

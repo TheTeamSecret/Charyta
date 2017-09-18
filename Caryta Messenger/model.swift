@@ -12,7 +12,8 @@ import RealmSwift
 
 class link: Object {
 
-    let domain      = "http://api.caryta.com/v1/messenger/"
+    let domain      = "http://api.charytamessenger.com/"
+    let subDomain   = "http://api.charytamessenger.com/v1/"
     let domainMain  = "http://api.caryta.com/v1/"
     let gambar      = "http://www.caryta.com"
     let file        = "https://keep.caryta.com"

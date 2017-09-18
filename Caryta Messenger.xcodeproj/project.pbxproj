@@ -19,6 +19,8 @@
 		0F0B83B71EF11CB3009E8B31 /* DetailChatCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0B83B61EF11CB3009E8B31 /* DetailChatCell.swift */; };
 		0F1857781F399C3200594433 /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1857771F399C3200594433 /* NewsCell.swift */; };
 		0F18577A1F39A93E00594433 /* DetailBeritaController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F1857791F39A93E00594433 /* DetailBeritaController.swift */; };
+		0F584F781F702C3E00EDC1CB /* MainStoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F584F771F702C3E00EDC1CB /* MainStoryController.swift */; };
+		0F584F7A1F702C9900EDC1CB /* MyStoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F584F791F702C9900EDC1CB /* MyStoryCell.swift */; };
 		0F5AE2ED1EF4E72C00B91B9E /* KontakHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5AE2EC1EF4E72C00B91B9E /* KontakHeaderCell.swift */; };
 		0F5AE2EF1EF511DD00B91B9E /* PopUpUbahDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F5AE2EE1EF511DD00B91B9E /* PopUpUbahDataController.swift */; };
 		0F7C1AAD1F3C3C9F00079334 /* FirstController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F7C1AAC1F3C3C9F00079334 /* FirstController.swift */; };
@@ -29,6 +31,8 @@
 		0F87DCB01F5547D900C64EE2 /* PopUpListDialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F87DCAF1F5547D900C64EE2 /* PopUpListDialController.swift */; };
 		0F87DCB31F55489700C64EE2 /* PopUpListDialCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F87DCB21F55489700C64EE2 /* PopUpListDialCell.swift */; };
 		0F98E3231EF8D7360094EF68 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F98E3221EF8D7360094EF68 /* CloudKit.framework */; };
+		0FA99DB91F6ECDC800ECD012 /* StoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA99DB81F6ECDC800ECD012 /* StoryCell.swift */; };
+		0FA99DBB1F6EEC9B00ECD012 /* CreateStoryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA99DBA1F6EEC9A00ECD012 /* CreateStoryController.swift */; };
 		0FCF30CA1EF23F8100CFF78B /* WritePostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF30C91EF23F8100CFF78B /* WritePostController.swift */; };
 		0FCF30CC1EF2663100CFF78B /* PopUpKomentarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF30CB1EF2663100CFF78B /* PopUpKomentarController.swift */; };
 		0FCF30CE1EF2686B00CFF78B /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FCF30CD1EF2686B00CFF78B /* HomeController.swift */; };
@@ -80,6 +84,8 @@
 		0F0B83B61EF11CB3009E8B31 /* DetailChatCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailChatCell.swift; sourceTree = "<group>"; };
 		0F1857771F399C3200594433 /* NewsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		0F1857791F39A93E00594433 /* DetailBeritaController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailBeritaController.swift; sourceTree = "<group>"; };
+		0F584F771F702C3E00EDC1CB /* MainStoryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainStoryController.swift; sourceTree = "<group>"; };
+		0F584F791F702C9900EDC1CB /* MyStoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyStoryCell.swift; sourceTree = "<group>"; };
 		0F5AE2EC1EF4E72C00B91B9E /* KontakHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KontakHeaderCell.swift; sourceTree = "<group>"; };
 		0F5AE2EE1EF511DD00B91B9E /* PopUpUbahDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpUbahDataController.swift; sourceTree = "<group>"; };
 		0F7C1AAC1F3C3C9F00079334 /* FirstController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstController.swift; sourceTree = "<group>"; };
@@ -91,6 +97,8 @@
 		0F87DCAF1F5547D900C64EE2 /* PopUpListDialController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpListDialController.swift; sourceTree = "<group>"; };
 		0F87DCB21F55489700C64EE2 /* PopUpListDialCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpListDialCell.swift; sourceTree = "<group>"; };
 		0F98E3221EF8D7360094EF68 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		0FA99DB81F6ECDC800ECD012 /* StoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoryCell.swift; sourceTree = "<group>"; };
+		0FA99DBA1F6EEC9A00ECD012 /* CreateStoryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateStoryController.swift; sourceTree = "<group>"; };
 		0FCF30C91EF23F8100CFF78B /* WritePostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WritePostController.swift; sourceTree = "<group>"; };
 		0FCF30CB1EF2663100CFF78B /* PopUpKomentarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpKomentarController.swift; sourceTree = "<group>"; };
 		0FCF30CD1EF2686B00CFF78B /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -171,8 +179,10 @@
 		7B2AFB1B1ECD8AD9007033C5 /* News */ = {
 			isa = PBXGroup;
 			children = (
+				0FA99DBA1F6EEC9A00ECD012 /* CreateStoryController.swift */,
 				0F1857791F39A93E00594433 /* DetailBeritaController.swift */,
 				0FCF30CD1EF2686B00CFF78B /* HomeController.swift */,
+				0F584F771F702C3E00EDC1CB /* MainStoryController.swift */,
 				0FCF30CB1EF2663100CFF78B /* PopUpKomentarController.swift */,
 				0FCF30C91EF23F8100CFF78B /* WritePostController.swift */,
 			);
@@ -248,6 +258,8 @@
 				0F03F96D1EEFF126003D5B94 /* ListPhoneCell.swift */,
 				0F1857771F399C3200594433 /* NewsCell.swift */,
 				0FCF30CF1EF2768400CFF78B /* TimelineCell.swift */,
+				0FA99DB81F6ECDC800ECD012 /* StoryCell.swift */,
+				0F584F791F702C9900EDC1CB /* MyStoryCell.swift */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -653,12 +665,15 @@
 				0F03F9741EEFF488003D5B94 /* ListKontakController.swift in Sources */,
 				0F7C1AAD1F3C3C9F00079334 /* FirstController.swift in Sources */,
 				0F03F9701EEFF2AC003D5B94 /* ListChatController.swift in Sources */,
+				0FA99DB91F6ECDC800ECD012 /* StoryCell.swift in Sources */,
 				0F03F96E1EEFF126003D5B94 /* ListPhoneCell.swift in Sources */,
 				7BB371081ECC052F005B1B64 /* UIView+Borders.swift in Sources */,
 				0FCF30D01EF2768400CFF78B /* TimelineCell.swift in Sources */,
 				0F7C1AB11F3C5C4800079334 /* DataDiriController.swift in Sources */,
+				0F584F781F702C3E00EDC1CB /* MainStoryController.swift in Sources */,
 				0F8138851F3D894000A11364 /* LoginWithCarytaController.swift in Sources */,
 				0F18577A1F39A93E00594433 /* DetailBeritaController.swift in Sources */,
+				0FA99DBB1F6EEC9B00ECD012 /* CreateStoryController.swift in Sources */,
 				0F03F96A1EEFE8B9003D5B94 /* MenuBarController.swift in Sources */,
 				0F5AE2ED1EF4E72C00B91B9E /* KontakHeaderCell.swift in Sources */,
 				0FCF30CC1EF2663100CFF78B /* PopUpKomentarController.swift in Sources */,
@@ -673,6 +688,7 @@
 				0F1857781F399C3200594433 /* NewsCell.swift in Sources */,
 				0F7C1AB31F3C643D00079334 /* LoginController.swift in Sources */,
 				0FCF30CE1EF2686B00CFF78B /* HomeController.swift in Sources */,
+				0F584F7A1F702C9900EDC1CB /* MyStoryCell.swift in Sources */,
 				0FCF30D21EF2771D00CFF78B /* CommentCell.swift in Sources */,
 				0F03F96C1EEFF058003D5B94 /* ListTeleponController.swift in Sources */,
 			);

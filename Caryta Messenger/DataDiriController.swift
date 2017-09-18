@@ -71,7 +71,7 @@ class DataDiriController: UIViewController {
         params["password"] = self.passwordTF.text!
         params["registrasiId"] = token
         
-        Alamofire.request("\(link().domain)registrasi", method: .post, parameters: params, encoding: JSONEncoding.default)
+        Alamofire.request("\(link().domainMain)messenger/registrasi", method: .post, parameters: params, encoding: JSONEncoding.default)
             .responseJSON{response in
                 
                 if let jason = response.result.value {

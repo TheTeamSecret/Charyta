@@ -80,7 +80,7 @@ class ListKontakController: UIViewController, NAExpandableTableViewDataSource, N
         
         let getUser = try! Realm().objects(user.self).first!
     
-        Alamofire.request("\(link().domain)user/group", method: .post, parameters: ["kodeUser": getUser.user_id], encoding: JSONEncoding.default)
+        Alamofire.request("\(link().domainMain)messenger/user/group", method: .post, parameters: ["kodeUser": getUser.user_id], encoding: JSONEncoding.default)
             .responseJSON{response in
         
                 if let jason = response.result.value {

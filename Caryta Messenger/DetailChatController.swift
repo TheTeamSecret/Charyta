@@ -257,6 +257,10 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
         
     }
     
+    @IBAction func sentAct(_ sender: UIButton) {
+        self.sentMesssage()
+    }
+    
     func sentMesssage() {
         
         let isi = self.chatTxt.text!
