@@ -24,25 +24,21 @@ class DataDiriController: UIViewController {
     var params = [String:String]()
     
     func keyboardWillShow(_ notification : NSNotification) {
-        
         let keyBoardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.size
-        
         self.bottom.constant = keyBoardSize.height
-        
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
             self.view.layoutIfNeeded()
         })
-        
     }
     
     func keyboardWillHide(_ notification : Notification) {
-        
         self.bottom.constant = 0.0
-        
         self.view.layoutIfNeeded()
     }
     
     @IBOutlet weak var bottom: NSLayoutConstraint!
+    
+    var noTelpon = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,9 +58,39 @@ class DataDiriController: UIViewController {
     }
     
     @IBAction func selesai(_ sender: UIButton) {
-        
+        self.registrasi()
+    }
+    
+    func registrasi(){
+        let url = "\(link().subDomain)auth/register"
+        let head = [
+            "Content-Type" : "application/json"
+        ]
         let token = InstanceID.instanceID().token()!
-        
+        let params = [
+            "phoneNumber" : self.noTelpon,
+            "firstName" : self.firstNameTF.text!,
+            "lastName" : self.lastNameTF.text!,
+            "sex" : self.genderTF.text!,
+            "password" : self.passwordTF.text!,
+            "firebaseToken" : token
+        ]
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: head)
+            .responseJSON{response in
+                if let jason = response.result.value {
+                    let data = JSON(jason)
+                    if data["status"].intValue == 0 {
+                        print(data["message"].stringValue)
+                    }else{
+                        print(data["message"].stringValue)
+                    }
+                }
+        }
+    }
+    
+    //Yang Sebelumnya
+    func registerSebelumnya(){
+        let token = InstanceID.instanceID().token()!
         params["firstName"] = self.firstNameTF.text!
         params["lastName"] = self.lastNameTF.text!
         params["sex"] = self.genderTF.text!
@@ -95,7 +121,6 @@ class DataDiriController: UIViewController {
                 }
                 
         }
-        
     }
 
     /*

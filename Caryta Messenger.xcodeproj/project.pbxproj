@@ -48,7 +48,7 @@
 		7B5552501ECA93B700D50B4D /* Caryta_MessengerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B55524F1ECA93B700D50B4D /* Caryta_MessengerTests.swift */; };
 		7B55525B1ECA93B700D50B4D /* Caryta_MessengerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B55525A1ECA93B700D50B4D /* Caryta_MessengerUITests.swift */; };
 		7BB371081ECC052F005B1B64 /* UIView+Borders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BB371071ECC052F005B1B64 /* UIView+Borders.swift */; };
-		7BD283C01ED014F40009F755 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7BD283BF1ED014F40009F755 /* GoogleService-Info.plist */; };
+		7BD4B9891F850C03007BE0C3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7BD4B9881F850C03007BE0C3 /* GoogleService-Info.plist */; };
 		7BF9244E1ED2CFEA00F89183 /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9244D1ED2CFEA00F89183 /* model.swift */; };
 		7BF924501ED2D06B00F89183 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9244F1ED2D06B00F89183 /* Global.swift */; };
 		A93623FF152921F13A92C992 /* Pods_Caryta_MessengerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFAF9241DD79593FDE75D9C9 /* Pods_Caryta_MessengerTests.framework */; };
@@ -122,7 +122,7 @@
 		7B55525A1ECA93B700D50B4D /* Caryta_MessengerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Caryta_MessengerUITests.swift; sourceTree = "<group>"; };
 		7B55525C1ECA93B700D50B4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7BB371071ECC052F005B1B64 /* UIView+Borders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Borders.swift"; sourceTree = "<group>"; };
-		7BD283BF1ED014F40009F755 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7BD4B9881F850C03007BE0C3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7BF9244D1ED2CFEA00F89183 /* model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = model.swift; sourceTree = "<group>"; };
 		7BF9244F1ED2D06B00F89183 /* Global.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		A4ECE9C80025954618005CCC /* Pods_Caryta_MessengerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Caryta_MessengerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -215,12 +215,12 @@
 			isa = PBXGroup;
 			children = (
 				7B55526A1ECABA3600D50B4D /* Cell */,
-				7B55526F1ECAE7E400D50B4D /* Chat */,
 				7B5552721ECAE81400D50B4D /* Common */,
 				7B5552701ECAE7F900D50B4D /* Config */,
 				7BF9244C1ED2CFBF00F89183 /* Database */,
-				7BB3710F1ECC8AD1005B1B64 /* Kontak */,
 				7B2AFB1B1ECD8AD9007033C5 /* News */,
+				7BB3710F1ECC8AD1005B1B64 /* Kontak */,
+				7B55526F1ECAE7E400D50B4D /* Chat */,
 				7B5552781ECB042F00D50B4D /* Profil */,
 				7B5552711ECAE80500D50B4D /* StoryBoard */,
 				7B5552731ECAE82E00D50B4D /* Telepon */,
@@ -278,7 +278,7 @@
 			children = (
 				7B2AFB181ECD7579007033C5 /* Caryta Messenger.entitlements */,
 				0F8526001EEE49EC00FAC280 /* Caryta Messenger-Bridging-Header.h */,
-				7BD283BF1ED014F40009F755 /* GoogleService-Info.plist */,
+				7BD4B9881F850C03007BE0C3 /* GoogleService-Info.plist */,
 				7B5552461ECA93B700D50B4D /* Info.plist */,
 				7B55523A1ECA93B700D50B4D /* AppDelegate.swift */,
 				7BB371071ECC052F005B1B64 /* UIView+Borders.swift */,
@@ -493,7 +493,7 @@
 			files = (
 				7B5552451ECA93B700D50B4D /* LaunchScreen.storyboard in Resources */,
 				0F03F9671EEFC308003D5B94 /* NewMain.storyboard in Resources */,
-				7BD283C01ED014F40009F755 /* GoogleService-Info.plist in Resources */,
+				7BD4B9891F850C03007BE0C3 /* GoogleService-Info.plist in Resources */,
 				7B5552421ECA93B700D50B4D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

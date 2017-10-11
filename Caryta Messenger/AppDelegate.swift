@@ -92,24 +92,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerForRemoteNotifications()
         
         let getUser = try! Realm().objects(user.self)
-        
         let storyboard = UIStoryboard(name: "NewMain", bundle: nil)
-        
-//        if getUser.count > 0 {
-//            
-//            let initialViewController = storyboard.instantiateViewController(withIdentifier: "menu") as! MenuBarController
-//            
-//            self.window?.rootViewController = initialViewController
-//            self.window?.makeKeyAndVisible()
-//            
-//        }else{
-//            
-//            let initialViewController = storyboard.instantiateViewController(withIdentifier: "first") as! FirstController
-//            
-//            self.window?.rootViewController = initialViewController
-//            self.window?.makeKeyAndVisible()
-//            
-//        }
+        if getUser.count > 0 {
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "menu") as! MenuBarController
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+        }else{
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "first") as! FirstController
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+        }
 
         // [END register_for_notifications]
         return true

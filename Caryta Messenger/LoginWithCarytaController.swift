@@ -39,97 +39,77 @@ class LoginWithCarytaController: UIViewController {
     }
     
     func login(){
-        
-        let params = [
-            "username" : usernameTF.text!,
-            "password" : passwordTF.text!
+        let url = "\(link().subDomain)auth/login"
+        let head = [
+            "Content-Type" : "application/json"
         ]
-        
-        Alamofire.request("\(link().domain)login", method: .post, parameters: params, encoding: JSONEncoding.default)
-            .responseJSON{response in
-                
+        let params = [
+            "username" : self.usernameTF.text!,
+            "password" : self.passwordTF.text!
+        ]
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: head)
+            .responseJSON {response in
                 if let jason = response.result.value {
-                    
-                    if JSON(jason)["status"].stringValue == "1" {
-                        
-                        print(JSON(jason).description)
-                        
-                        let token = InstanceID.instanceID().token()!
-                        
-                        if JSON(jason)["data"]["no_hp"].stringValue == "" {
-                            
-                            let model = user()
-                            
-                            model.user_id       = JSON(jason)["data"]["user_id"].stringValue
-                            model.first_name    = JSON(jason)["data"]["name"].stringValue
-                            model.last_name     = ""
-                            model.email         = JSON(jason)["data"]["email"].stringValue
-                            model.no_hp         = "\(self.dialTF.placeholder!)\(self.phoneTF.text!)"
-                            model.sex           = JSON(jason)["data"]["sex"].stringValue
-                            model.avatar        = JSON(jason)["data"]["avatar_small"].stringValue
-                            model.registrasi_id = token
-                            
-                            self.updateToken(user_id: JSON(jason)["data"]["user_id"].stringValue, token: token)
-                            
-                            DBHelper.insert(obj: model)
-                            
-                        }else{
-                            
-                            let model = user()
-                            
-                            model.user_id       = JSON(jason)["data"]["user_id"].stringValue
-                            model.first_name    = JSON(jason)["data"]["name"].stringValue
-                            model.last_name     = ""
-                            model.email         = JSON(jason)["data"]["email"].stringValue
-                            model.no_hp         = JSON(jason)["data"]["no_hp"].stringValue
-                            model.sex           = JSON(jason)["data"]["sex"].stringValue
-                            model.avatar        = JSON(jason)["data"]["avatar_small"].stringValue
-                            model.registrasi_id = token
-                            
-                            self.updateToken(user_id: JSON(jason)["data"]["user_id"].stringValue, token: token)
-                            
-                            DBHelper.insert(obj: model)
-                            
-                        }
-                        
-                    }
-                    
+                    print(jason)
+                    let token = InstanceID.instanceID().token()!
+                    let data = JSON(jason)["user"]
+                    //if JSON(jason)["data"]["no_hp"].stringValue == "" {
+                        //Yang sebelumnya
+//                        let model = user()
+//                        model.user_id       = JSON(jason)["data"]["user_id"].stringValue
+//                        model.first_name    = JSON(jason)["data"]["name"].stringValue
+//                        model.last_name     = ""
+//                        model.email         = JSON(jason)["data"]["email"].stringValue
+//                        model.no_hp         = "\(self.dialTF.placeholder!)\(self.phoneTF.text!)"
+//                        model.sex           = JSON(jason)["data"]["sex"].stringValue
+//                        model.avatar        = JSON(jason)["data"]["avatar_small"].stringValue
+//                        model.registrasi_id = token
+//                        self.updateToken(JSON(jason)["data"]["user_id"].stringValue, token: token)
+//                        DBHelper.insert(obj: model)
+//                    }else{
+                        //Yg Sekarang
+                        let model = user()
+                        model.user_id       = data["kode_user"].stringValue
+                        model.first_name    = data["nama_depan"].stringValue
+                        model.last_name     = data["nama_belakang"].stringValue
+                        model.email         = data["email"].stringValue
+                        model.no_hp         = data["telepon"].stringValue
+                        model.sex           = data["jk"].stringValue
+                        model.avatar        = data["gambar"].stringValue
+                        model.registrasi_id = token
+                        DBHelper.insert(obj: model)
+                        self.updateToken(data["kode_user"].stringValue, token: token)
+                    //}
+                }else{
+                    print("Request Gagal")
                 }
-                
         }
-        
     }
     
-    func updateToken(user_id: String, token: String) {
-        
+    func updateToken(_ user_id: String, token: String) {
         let params = [
-            "userId"        : user_id,
-            "registrasiId"  : token
+            "kodeUser"       : user_id,
+            "firebaseToken"  : token
         ]
-        
-        Alamofire.request("\(link().domainMain)messenger/registrasi-refresh", method: .post, parameters: params, encoding: JSONEncoding.default)
+        let head = [
+            "Content-Type" : "application/json"
+        ]
+        Alamofire.request("\(link().subDomain)auth/register-refresh", method: .post, parameters: params, encoding: JSONEncoding.default, headers: head)
             .responseJSON{response in
-                
                 if let jason = response.result.value {
-                    
                     print(JSON(jason).description)
-                    
                     if JSON(jason)["status"].stringValue == "1" {
-                        
                         self.performSegue(withIdentifier: "segue_main", sender: self)
-                        
                     }
-                    
+                }else{
+                    print("Request Gagal")
                 }
-                
         }
-        
     }
     
     @IBAction func masuk(_ sender: UIButton) {
-        
+        print("login???")
         self.login()
-        
     }
 
     /*

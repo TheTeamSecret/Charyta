@@ -105,7 +105,6 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
         let row = indexPath.row
         
         if row == 0 {
-            
             cell.blueView.removeFromSuperview()
             cell.readReceipt.removeFromSuperview()
             
