@@ -52,6 +52,7 @@
 		7BF9244E1ED2CFEA00F89183 /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9244D1ED2CFEA00F89183 /* model.swift */; };
 		7BF924501ED2D06B00F89183 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BF9244F1ED2D06B00F89183 /* Global.swift */; };
 		A93623FF152921F13A92C992 /* Pods_Caryta_MessengerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFAF9241DD79593FDE75D9C9 /* Pods_Caryta_MessengerTests.framework */; };
+		E3F2857C1F8FBB0F00D4BA97 /* DaftarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F2857B1F8FBB0F00D4BA97 /* DaftarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +131,7 @@
 		CAD568A09B3A9562C796798F /* Pods-Caryta Messenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Caryta Messenger.release.xcconfig"; path = "Pods/Target Support Files/Pods-Caryta Messenger/Pods-Caryta Messenger.release.xcconfig"; sourceTree = "<group>"; };
 		D7107B0AE8B87109A3AB4234 /* Pods-Caryta MessengerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Caryta MessengerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Caryta MessengerTests/Pods-Caryta MessengerTests.release.xcconfig"; sourceTree = "<group>"; };
 		DFDDE7E0184C6CACAD6A2E8D /* Pods-Caryta MessengerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Caryta MessengerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Caryta MessengerUITests/Pods-Caryta MessengerUITests.release.xcconfig"; sourceTree = "<group>"; };
+		E3F2857B1F8FBB0F00D4BA97 /* DaftarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DaftarController.swift; sourceTree = "<group>"; };
 		F28460020756379277008CCB /* Pods-Caryta MessengerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Caryta MessengerUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Caryta MessengerUITests/Pods-Caryta MessengerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -215,7 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				7B55526A1ECABA3600D50B4D /* Cell */,
-				7B5552721ECAE81400D50B4D /* Common */,
+				7B5552721ECAE81400D50B4D /* Masuk,Daftar,Menu */,
 				7B5552701ECAE7F900D50B4D /* Config */,
 				7BF9244C1ED2CFBF00F89183 /* Database */,
 				7B2AFB1B1ECD8AD9007033C5 /* News */,
@@ -296,18 +298,17 @@
 			name = StoryBoard;
 			sourceTree = "<group>";
 		};
-		7B5552721ECAE81400D50B4D /* Common */ = {
+		7B5552721ECAE81400D50B4D /* Masuk,Daftar,Menu */ = {
 			isa = PBXGroup;
 			children = (
-				0F7C1AB01F3C5C4800079334 /* DataDiriController.swift */,
-				0F7C1AAC1F3C3C9F00079334 /* FirstController.swift */,
-				0F7C1AB21F3C643D00079334 /* LoginController.swift */,
 				0F8138841F3D894000A11364 /* LoginWithCarytaController.swift */,
-				0F87DCAF1F5547D900C64EE2 /* PopUpListDialController.swift */,
+				E3F2857B1F8FBB0F00D4BA97 /* DaftarController.swift */,
 				0F7C1AAE1F3C4B0F00079334 /* KodeVerifController.swift */,
+				0F7C1AB01F3C5C4800079334 /* DataDiriController.swift */,
 				0F03F9691EEFE8B9003D5B94 /* MenuBarController.swift */,
+				E3F2857A1F8FBA8200D4BA97 /* GaKepake */,
 			);
-			name = Common;
+			name = "Masuk,Daftar,Menu";
 			sourceTree = "<group>";
 		};
 		7B5552731ECAE82E00D50B4D /* Telepon */ = {
@@ -354,6 +355,16 @@
 				A4ECE9C80025954618005CCC /* Pods_Caryta_MessengerUITests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E3F2857A1F8FBA8200D4BA97 /* GaKepake */ = {
+			isa = PBXGroup;
+			children = (
+				0F7C1AAC1F3C3C9F00079334 /* FirstController.swift */,
+				0F7C1AB21F3C643D00079334 /* LoginController.swift */,
+				0F87DCAF1F5547D900C64EE2 /* PopUpListDialController.swift */,
+			);
+			name = GaKepake;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -670,6 +681,7 @@
 				7BB371081ECC052F005B1B64 /* UIView+Borders.swift in Sources */,
 				0FCF30D01EF2768400CFF78B /* TimelineCell.swift in Sources */,
 				0F7C1AB11F3C5C4800079334 /* DataDiriController.swift in Sources */,
+				E3F2857C1F8FBB0F00D4BA97 /* DaftarController.swift in Sources */,
 				0F584F781F702C3E00EDC1CB /* MainStoryController.swift in Sources */,
 				0F8138851F3D894000A11364 /* LoginWithCarytaController.swift in Sources */,
 				0F18577A1F39A93E00594433 /* DetailBeritaController.swift in Sources */,

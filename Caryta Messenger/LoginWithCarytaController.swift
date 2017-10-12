@@ -15,27 +15,35 @@ import Toaster
 
 class LoginWithCarytaController: UIViewController {
 
+    @IBOutlet weak var viewUsername: UIView!
     @IBOutlet weak var usernameTF: UITextField!
+    @IBOutlet weak var viewPassword: UIView!
     @IBOutlet weak var passwordTF: UITextField!
-    @IBOutlet weak var dialTF: UITextField!
-    @IBOutlet weak var phoneTF: UITextField!
-    
-    @IBOutlet weak var topConst: NSLayoutConstraint!
-    @IBOutlet weak var heightConst: NSLayoutConstraint!
+    @IBOutlet weak var btnMasuk: UIButton!
+    @IBOutlet weak var btnDaftar: UIButton!
     
     var isFill: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setDesign()
         
-        self.topConst.constant = (self.view.frame.size.height - 50 - 167) / 2
-        
-        // Do any additional setup after loading the view.
+        //self.topConst.constant = (self.view.frame.size.height - 50 - 167) / 2
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+    
+    func setDesign(){
+        self.viewUsername.layer.cornerRadius = 5
+        self.viewPassword.layer.cornerRadius = 5
+        self.btnMasuk.layer.cornerRadius = 5
+        self.btnDaftar.layer.cornerRadius = 5
+    }
+    
+    @IBAction func masuk(_ sender: UIButton) {
+        self.login()
     }
     
     func login(){
@@ -53,32 +61,17 @@ class LoginWithCarytaController: UIViewController {
                     print(jason)
                     let token = InstanceID.instanceID().token()!
                     let data = JSON(jason)["user"]
-                    //if JSON(jason)["data"]["no_hp"].stringValue == "" {
-                        //Yang sebelumnya
-//                        let model = user()
-//                        model.user_id       = JSON(jason)["data"]["user_id"].stringValue
-//                        model.first_name    = JSON(jason)["data"]["name"].stringValue
-//                        model.last_name     = ""
-//                        model.email         = JSON(jason)["data"]["email"].stringValue
-//                        model.no_hp         = "\(self.dialTF.placeholder!)\(self.phoneTF.text!)"
-//                        model.sex           = JSON(jason)["data"]["sex"].stringValue
-//                        model.avatar        = JSON(jason)["data"]["avatar_small"].stringValue
-//                        model.registrasi_id = token
-//                        self.updateToken(JSON(jason)["data"]["user_id"].stringValue, token: token)
-//                        DBHelper.insert(obj: model)
-//                    }else{
-                        //Yg Sekarang
-                        let model = user()
-                        model.user_id       = data["kode_user"].stringValue
-                        model.first_name    = data["nama_depan"].stringValue
-                        model.last_name     = data["nama_belakang"].stringValue
-                        model.email         = data["email"].stringValue
-                        model.no_hp         = data["telepon"].stringValue
-                        model.sex           = data["jk"].stringValue
-                        model.avatar        = data["gambar"].stringValue
-                        model.registrasi_id = token
-                        DBHelper.insert(obj: model)
-                        self.updateToken(data["kode_user"].stringValue, token: token)
+                    let model = user()
+                    model.user_id       = data["kode_user"].stringValue
+                    model.first_name    = data["nama_depan"].stringValue
+                    model.last_name     = data["nama_belakang"].stringValue
+                    model.email         = data["email"].stringValue
+                    model.no_hp         = data["telepon"].stringValue
+                    model.sex           = data["jk"].stringValue
+                    model.avatar        = data["gambar"].stringValue
+                    model.registrasi_id = token
+                    DBHelper.insert(obj: model)
+                    self.updateToken(data["kode_user"].stringValue, token: token)
                     //}
                 }else{
                     print("Request Gagal")
@@ -106,20 +99,4 @@ class LoginWithCarytaController: UIViewController {
                 }
         }
     }
-    
-    @IBAction func masuk(_ sender: UIButton) {
-        print("login???")
-        self.login()
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

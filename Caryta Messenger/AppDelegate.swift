@@ -98,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
         }else{
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: "first") as! FirstController
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "showLogin") as! LoginWithCarytaController
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
         }
