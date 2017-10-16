@@ -20,7 +20,7 @@ class LoginWithCarytaController: UIViewController {
     @IBOutlet weak var viewPassword: UIView!
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var btnMasuk: UIButton!
-    @IBOutlet weak var btnDaftar: UIButton!
+    @IBOutlet weak var btnDaftar: UIButton!    
     
     var isFill: Bool = false
     

@@ -23,7 +23,11 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var chatViewHeight: NSLayoutConstraint!
     @IBOutlet weak var chatTxt: UITextView!
     
-    var getUser = try! Realm().objects(user.self).first!
+    var nama = ""
+    var row = 0
+    var getUser = try! Realm().objects(user.self)[0]
+    var groupID = ""
+    var chatID = ""
     
     func keyboardWillShow(_ notification : NSNotification) {
         
@@ -44,14 +48,6 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
         self.view.layoutIfNeeded()
     }
     
-    var nama = String()
-    
-    var groupID = String()
-    
-    var row = 0
-    
-    var chatID = String()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,7 +61,6 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
         NotificationCenter.default.addObserver(self, selector: #selector(DetailChatController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         initialLbl.layer.cornerRadius = 20
-        
         initialLbl.clipsToBounds = true
         
         self.detailChatTV.estimatedRowHeight = 46
@@ -75,8 +70,11 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
         tapBack.numberOfTapsRequired = 1
         self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(tapBack)
-
-        // Do any additional setup after loading the view.
+        
+        if chatID != "" {
+            let getDetailChat = try! Realm().objects(detail_chat.self)
+            row = getDetailChat.count
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -98,55 +98,38 @@ class ListChatController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-     
         self.performSegue(withIdentifier: "segue_detail_chat", sender: self)
-        
     }
     
     @IBAction func editAct(_ sender: UIBarButtonItem) {
-        
         if sender.title == "Edit" {
-            
             addArchiveBtn.image = UIImage.init(named: "archive")
             deleteBtn.image = UIImage.init(named: "hapus")
             isEdit = true
             editBtn.title = "Cancel"
             chatTV.reloadData()
-            
         }else if sender.title == "Cancel" {
-            
             addArchiveBtn.image = UIImage.init(named: "add_chat")
             deleteBtn.image = nil
             isEdit = false
             editBtn.title = "Edit"
             chatTV.reloadData()
-            
         }
-        
     }
     
     @IBAction func selctDeselect(_ sender: UIButton) {
-        
         if sender.imageView?.image == UIImage.init(named: "select") {
-            
             sender.setImage(UIImage.init(named: "select_blue"), for: .normal)
-            
         }else if sender.imageView?.image == UIImage.init(named: "select_blue") {
-            
             sender.setImage(UIImage.init(named: "select"), for: .normal)
-            
         }
-        
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        
         searchBar.setShowsCancelButton(true, animated: true)
-        
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
         searchBar.setShowsCancelButton(false, animated: true)
         self.view.endEditing(true)
         

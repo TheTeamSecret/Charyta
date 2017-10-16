@@ -23,11 +23,8 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.setStatusBarStyle(.lightContent)
-        
         let getKontak = try! Realm().objects(kontak.self)
-        
         if getKontak.count > 0 {
             
             for itemKontak in getKontak {
@@ -219,53 +216,32 @@ class MenuBarController: UITabBarController, CNContactViewControllerDelegate {
     }
     
     func checkKontak0(phoneNumber: String, original: String){
-        
         let getUser = try! Realm().objects(user.self).first!
-        
         Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": "0\(phoneNumber)"], encoding: JSONEncoding.default)
             .responseJSON{response in
-                
                 if let jason = response.result.value {
-                    
                     if JSON(jason)["status"].stringValue == "1" {
-                        
                         print(JSON(jason).description)
-                        
                         let model = kontak()
-                        
                         let data = JSON(jason)["data"]
-                        
                         if data["registrasi_id"].stringValue != "" {
-                            
                             let i = self.number.index(of: original)!
-                            
                             model.user_id       =   data["user_id"].stringValue
                             model.nama          =   self.name[i]
                             model.gambar        =   data["gambar_small"].stringValue
                             model.status        =   data["status"].stringValue
                             model.registrasi_id =   data["registrasi_id"].stringValue
                             model.phone         =   "0\(phoneNumber)"
-                            
                             DBHelper.update(obj: model)
-                            
                             self.setNick(pemberi: getUser.user_id, pemilik: data["user_id"].stringValue, nick: self.name[i])
-                            
                         }else{
-                            
                             self.checkKontak62(phoneNumber: phoneNumber, original: original)
-                            
                         }
-                        
                     }else{
-                        
                         self.checkKontak62(phoneNumber: phoneNumber, original: original)
-                        
                     }
-                    
                 }
-                
         }
-        
     }
     
     func checkKontak62(phoneNumber: String, original: String){

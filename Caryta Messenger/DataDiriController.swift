@@ -30,6 +30,7 @@ class DataDiriController: UIViewController, UINavigationControllerDelegate, UIIm
     
     let imgPicker = UIImagePickerController()
     var noTelpon = ""
+    var fotoSelected = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,6 +103,15 @@ class DataDiriController: UIViewController, UINavigationControllerDelegate, UIIm
         }
         self.imgProfil.contentMode = .scaleToFill
         self.imgProfil.image = pickedImage
+        //Save to local
+        let imageData:NSData = UIImageJPEGRepresentation(pickedImage!, 0.5)! as NSData
+        let imageExt = imageData.imageFormat
+        let imageUrl = Helper.getDocumentsDirectory().appendingPathComponent("profil.\(imageExt)")
+        try? imageData.write(to: URL(fileURLWithPath: imageUrl), options: [.atomic])
+        //Encode to Base64
+        let imageNsData = NSData(contentsOf: URL(fileURLWithPath: imageUrl))
+        let imgBase64 = imageNsData!.base64EncodedString(options: .init(rawValue: 0))
+        self.fotoSelected = "data:image/\(imageExt);base64,\(imgBase64)"
         
         dismiss(animated: true, completion: nil)
     }
@@ -140,15 +150,16 @@ class DataDiriController: UIViewController, UINavigationControllerDelegate, UIIm
         let url = "\(link().subDomain)auth/register"
         let head = [
             "Content-Type" : "application/json"
-        ]
-        let token = InstanceID.instanceID().token()!
+        ]        
         let params = [
             "phoneNumber" : self.noTelpon,
+            "photo" : self.fotoSelected,
             "firstName" : self.firstNameTF.text!,
             "lastName" : self.lastNameTF.text!,
             "sex" : self.genderTF.text!,
             "password" : self.passwordTF.text!,
-            "firebaseToken" : token
+            "firebaseToken" : Helper.token,
+            "gambar" : self.fotoSelected
         ]
         Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: head)
             .responseJSON{response in
@@ -158,7 +169,61 @@ class DataDiriController: UIViewController, UINavigationControllerDelegate, UIIm
                         print(data["message"].stringValue)
                     }else{
                         print(data["message"].stringValue)
+                        self.login()
                     }
+                }
+        }
+    }
+    
+    func login(){
+        let url = "\(link().subDomain)auth/login"
+        let head = [
+            "Content-Type" : "application/json"
+        ]
+        let params = [
+            "username" : self.noTelpon,
+            "password" : self.passwordTF.text!
+        ]
+        Alamofire.request(url, method: .post, parameters: params, encoding: JSONEncoding.default, headers: head)
+            .responseJSON {response in
+                if let jason = response.result.value {
+                    print(jason)
+                    let token = InstanceID.instanceID().token()!
+                    let data = JSON(jason)["user"]
+                    let model = user()
+                    model.user_id       = data["kode_user"].stringValue
+                    model.first_name    = data["nama_depan"].stringValue
+                    model.last_name     = data["nama_belakang"].stringValue
+                    model.email         = data["email"].stringValue
+                    model.no_hp         = data["telepon"].stringValue
+                    model.sex           = data["jk"].stringValue
+                    model.avatar        = data["gambar"].stringValue
+                    model.registrasi_id = token
+                    DBHelper.insert(obj: model)
+                    self.updateToken(data["kode_user"].stringValue, token: token)
+                }else{
+                    print("Request Gagal")
+                }
+        }
+    }
+    
+    func updateToken(_ user_id: String, token: String) {
+        let params = [
+            "kodeUser"       : user_id,
+            "firebaseToken"  : token
+        ]
+        let head = [
+            "Content-Type" : "application/json"
+        ]
+        Alamofire.request("\(link().subDomain)auth/register-refresh", method: .post, parameters: params, encoding: JSONEncoding.default, headers: head)
+            .responseJSON{response in
+                if let jason = response.result.value {
+                    print(JSON(jason).description)
+                    if JSON(jason)["status"].stringValue == "1" {
+                        self.performSegue(withIdentifier: "segue_main", sender: self)
+                    }
+                }else{
+                    print("Request Gagal")
                 }
         }
     }
