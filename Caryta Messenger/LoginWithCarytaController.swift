@@ -20,7 +20,7 @@ class LoginWithCarytaController: UIViewController {
     @IBOutlet weak var viewPassword: UIView!
     @IBOutlet weak var passwordTF: UITextField!
     @IBOutlet weak var btnMasuk: UIButton!
-    @IBOutlet weak var btnDaftar: UIButton!
+    @IBOutlet weak var btnDaftar: UIButton!    
     
     var isFill: Bool = false
     
@@ -72,9 +72,11 @@ class LoginWithCarytaController: UIViewController {
                     model.registrasi_id = token
                     DBHelper.insert(obj: model)
                     self.updateToken(data["kode_user"].stringValue, token: token)
-                    //}
                 }else{
                     print("Request Gagal")
+                    let alert = UIAlertController(title: "Error", message: "Terjadi kesalahan, selahkan coba beberapa saat lagi", preferredStyle: UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { action in }))
+                    self.present(alert, animated: true, completion: nil)
                 }
         }
     }

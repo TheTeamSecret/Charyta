@@ -42,6 +42,8 @@
 		18FF7A09FCD34A20C07151E8 /* Pods_Caryta_Messenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BB4AD999016DB7E9C2615C2 /* Pods_Caryta_Messenger.framework */; };
 		6512CC38CFFF11887C9B9A61 /* Pods_Caryta_MessengerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4ECE9C80025954618005CCC /* Pods_Caryta_MessengerUITests.framework */; };
 		7B2AFB1A1ECD81E4007033C5 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B2AFB191ECD81E4007033C5 /* AudioToolbox.framework */; };
+		7B2F0A6F1F94539F00B49F74 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2F0A6E1F94539F00B49F74 /* Helper.swift */; };
+		7B2F0A711F94541600B49F74 /* Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B2F0A701F94541600B49F74 /* Extention.swift */; };
 		7B55523B1ECA93B700D50B4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B55523A1ECA93B700D50B4D /* AppDelegate.swift */; };
 		7B5552421ECA93B700D50B4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B5552411ECA93B700D50B4D /* Assets.xcassets */; };
 		7B5552451ECA93B700D50B4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7B5552431ECA93B700D50B4D /* LaunchScreen.storyboard */; };
@@ -111,6 +113,8 @@
 		6E67553789C3A38D9F44BB72 /* Pods-Caryta Messenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Caryta Messenger.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Caryta Messenger/Pods-Caryta Messenger.debug.xcconfig"; sourceTree = "<group>"; };
 		7B2AFB181ECD7579007033C5 /* Caryta Messenger.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Caryta Messenger.entitlements"; sourceTree = "<group>"; };
 		7B2AFB191ECD81E4007033C5 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		7B2F0A6E1F94539F00B49F74 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		7B2F0A701F94541600B49F74 /* Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extention.swift; sourceTree = "<group>"; };
 		7B5552371ECA93B700D50B4D /* Caryta Messenger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Caryta Messenger.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B55523A1ECA93B700D50B4D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B5552411ECA93B700D50B4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -269,8 +273,8 @@
 		7B55526F1ECAE7E400D50B4D /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				0F0B83B41EF11331009E8B31 /* DetailChatController.swift */,
 				0F03F96F1EEFF2AC003D5B94 /* ListChatController.swift */,
+				0F0B83B41EF11331009E8B31 /* DetailChatController.swift */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -285,6 +289,8 @@
 				7B55523A1ECA93B700D50B4D /* AppDelegate.swift */,
 				7BB371071ECC052F005B1B64 /* UIView+Borders.swift */,
 				7B5552411ECA93B700D50B4D /* Assets.xcassets */,
+				7B2F0A6E1F94539F00B49F74 /* Helper.swift */,
+				7B2F0A701F94541600B49F74 /* Extention.swift */,
 			);
 			name = Config;
 			sourceTree = "<group>";
@@ -691,7 +697,9 @@
 				0FCF30CC1EF2663100CFF78B /* PopUpKomentarController.swift in Sources */,
 				0F03F9721EEFF33B003D5B94 /* ListChatCell.swift in Sources */,
 				0F0B83B51EF11331009E8B31 /* DetailChatController.swift in Sources */,
+				7B2F0A6F1F94539F00B49F74 /* Helper.swift in Sources */,
 				0F03F9761EEFF4DC003D5B94 /* ListKontakCell.swift in Sources */,
+				7B2F0A711F94541600B49F74 /* Extention.swift in Sources */,
 				7BF9244E1ED2CFEA00F89183 /* model.swift in Sources */,
 				0F0B83B71EF11CB3009E8B31 /* DetailChatCell.swift in Sources */,
 				0F7C1AAF1F3C4B0F00079334 /* KodeVerifController.swift in Sources */,

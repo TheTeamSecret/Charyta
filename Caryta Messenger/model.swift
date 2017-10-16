@@ -15,14 +15,13 @@ class link: Object {
     let domain      = "http://api.charytamessenger.com/"
     let subDomain   = "http://api.charytamessenger.com/v1/"
     let domainMain  = "http://api.caryta.com/v1/"
-    let gambar      = "http://www.caryta.com"
+    let gambar      = "http://api.charytamessenger.com/public/images/user/"
     let file        = "https://keep.caryta.com"
     let vid         = "https://drive.caryta.com"
 
 }
 
 class user: Object {
-
     dynamic var user_id = String()
     dynamic var first_name = String()
     dynamic var last_name = String()

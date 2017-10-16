@@ -21,20 +21,21 @@ class ListChatController: UIViewController, UITableViewDataSource, UITableViewDe
     var isEdit: Bool = false
     @IBOutlet weak var emptyLbl: UILabel!
     
-    //let getChat = try! Realm().objects(chat.self)
-    
-    var nameDummy = ["Silmy Tama", "Om Bob", "Gustang", "Ari Maulana", "Ilham Sabar", "Caryta.com"]
-    var isiDummy = ["Besok aja yah so...", "Iya Om Bob", "Sundala", "Gustang", "Sebat Yuk", "Semangat", "Progress hari ini"]
-    
-    var sentID = String()
-    var sentNama = String()
+    var sentID = ""
+    var sentNama = ""
+    let getChat = try! Realm().objects(chat.self)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.setStatusBarStyle(.lightContent)
-
-        // Do any additional setup after loading the view.
+        
+        chatTV.reloadData()
+        //chatTVHeight.constant = chatTV.contentSize.height
+        
+        if getChat.count == 0 {
+//            self.emptyLbl.isHidden = false
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -47,109 +48,93 @@ class ListChatController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return nameDummy.count
+        return getChat.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = chatTV.dequeueReusableCell(withIdentifier: "chat", for: indexPath) as! ListChatCell
         
-        cell.initialLbl.layer.cornerRadius = 20
+        cell.initialLbl.layer.cornerRadius = cell.initialLbl.frame.height / 2
         cell.initialLbl.clipsToBounds = true
         cell.initialLbl.backgroundColor = UIColor.randomFlat
         
-        cell.badgeLbl.layer.cornerRadius = 9
+        cell.badgeLbl.layer.cornerRadius = cell.badgeLbl.frame.height / 2
         cell.badgeLbl.clipsToBounds = true
         
-        cell.nameLbl.text = self.nameDummy[indexPath.row]
-        cell.lastLbl.text = self.isiDummy[indexPath.row]
+        let data = self.getChat[indexPath.row]
         
-        let initIndex = self.nameDummy[indexPath.row].index(self.nameDummy[indexPath.row].startIndex, offsetBy: 1)
-        let initial = self.nameDummy[indexPath.row].substring(to: initIndex).uppercased()
+        cell.nameLbl.text = data.name
+        cell.lastLbl.text = data.last_chat
+        cell.timeLbl.text = getChat[indexPath.row].date
+        
+        let initIndex = data.name.index(data.name.startIndex, offsetBy: 1)
+        let initial = data.name.substring(to: initIndex).uppercased()
         
         cell.initialLbl.text = initial
         
         if isEdit == true {
-            
             cell.selectBtnWidth.constant = 0
-            
             UIView.animate(withDuration: 0.3, animations: {
-                
                 cell.selectBtnWidth.constant = 25
                 self.view.layoutIfNeeded()
-                
             })
-            
         }else if isEdit == false {
-            
             cell.selectBtnWidth.constant = 25
-            
             UIView.animate(withDuration: 0.3, animations: {
-                
                 cell.selectBtnWidth.constant = 0
                 self.view.layoutIfNeeded()
-                
             })
-            
         }
-        
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-     
+        self.sentID = getChat[indexPath.row].chat_id
+        self.sentNama = getChat[indexPath.row].name
         self.performSegue(withIdentifier: "segue_detail_chat", sender: self)
-        
     }
     
     @IBAction func editAct(_ sender: UIBarButtonItem) {
-        
         if sender.title == "Edit" {
-            
             addArchiveBtn.image = UIImage.init(named: "archive")
             deleteBtn.image = UIImage.init(named: "hapus")
             isEdit = true
             editBtn.title = "Cancel"
             chatTV.reloadData()
-            
         }else if sender.title == "Cancel" {
-            
             addArchiveBtn.image = UIImage.init(named: "add_chat")
             deleteBtn.image = nil
             isEdit = false
             editBtn.title = "Edit"
             chatTV.reloadData()
-            
         }
-        
     }
     
     @IBAction func selctDeselect(_ sender: UIButton) {
-        
         if sender.imageView?.image == UIImage.init(named: "select") {
-            
             sender.setImage(UIImage.init(named: "select_blue"), for: .normal)
-            
         }else if sender.imageView?.image == UIImage.init(named: "select_blue") {
-            
             sender.setImage(UIImage.init(named: "select"), for: .normal)
-            
         }
-        
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        
         searchBar.setShowsCancelButton(true, animated: true)
-        
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
         searchBar.setShowsCancelButton(false, animated: true)
         self.view.endEditing(true)
         
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "segue_detail_chat" {
+            let next = segue.destination as! DetailChatController
+            next.chatID = self.sentID
+            next.nama = self.sentNama
+        }
     }
 
     /*

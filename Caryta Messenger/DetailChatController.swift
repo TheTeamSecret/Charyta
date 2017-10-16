@@ -23,7 +23,11 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var chatViewHeight: NSLayoutConstraint!
     @IBOutlet weak var chatTxt: UITextView!
     
-    var getUser = try! Realm().objects(user.self).first!
+    var nama = ""
+    var row = 0
+    var getUser = try! Realm().objects(user.self)[0]
+    var groupID = ""
+    var chatID = ""
     
     func keyboardWillShow(_ notification : NSNotification) {
         
@@ -44,14 +48,6 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
         self.view.layoutIfNeeded()
     }
     
-    var nama = String()
-    
-    var groupID = String()
-    
-    var row = 0
-    
-    var chatID = String()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,13 +55,20 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
         self.chatTxt.layer.borderWidth = 1.0
         self.chatTxt.layer.borderColor = UIColor.init(hexString: "F1F1F1")!.cgColor
         
+//        self.voiceBtn.layer.borderWidth = 0.5
+//        self.voiceBtn.layer.borderColor = UIColor.init(hexString: "F1F1F1")!.cgColor
+//        self.voiceBtn.layer.cornerRadius = 7.5
+//        self.sentBtn.layer.cornerRadius = 7.5
+//        self.addBtn.layer.borderWidth = 0.5
+//        self.addBtn.layer.borderColor = UIColor.init(hexString: "F1F1F1")!.cgColor
+//        self.addBtn.layer.cornerRadius = 7.5
+        
         self.setStatusBarStyle(.lightContent)
         
         NotificationCenter.default.addObserver(self, selector: #selector(DetailChatController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(DetailChatController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         initialLbl.layer.cornerRadius = 20
-        
         initialLbl.clipsToBounds = true
         
         self.detailChatTV.estimatedRowHeight = 46
@@ -75,8 +78,11 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
         tapBack.numberOfTapsRequired = 1
         self.view.isUserInteractionEnabled = true
         self.view.addGestureRecognizer(tapBack)
-
-        // Do any additional setup after loading the view.
+        
+        if chatID != "" {
+            let getDetailChat = try! Realm().objects(detail_chat.self)
+            row = getDetailChat.count
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -85,9 +91,7 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
     }
     
     @IBAction func back(_ sender: UIBarButtonItem) {
-        
         self.dismiss(animated: true, completion: nil)
-        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -95,109 +99,68 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return self.row
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = detailChatTV.dequeueReusableCell(withIdentifier: "detail", for: indexPath) as! DetailChatCell
         
-        let row = indexPath.row
+        let getDetailChat = try! Realm().objects(detail_chat.self).filter("chat_id = '\(chatID)'").sorted(byKeyPath: "date")
         
-        if row == 0 {
+        let txt = getDetailChat[indexPath.row].isi
+        cell.timeLbl.text = getDetailChat[indexPath.row].date
+        
+        if getUser.user_id != getDetailChat[indexPath.row].user_id {
             cell.blueView.removeFromSuperview()
             cell.readReceipt.removeFromSuperview()
-            
-            let txt = "Lagi dimana bro?"
-            
             cell.whiteLbl.text = txt
-            
             let newWidth = self.estimatewidthForView(text: txt).width
             let newHeight = self.estimateHeightForView(text: txt).height
-            
             cell.whiteWidth.constant = 20 + newWidth
-            
             cell.whiteHeight.constant = 20 + newHeight
-            
             cell.whiteView.layer.cornerRadius = 0.0
-            
             let maskPath = UIBezierPath(roundedRect: CGRect.init(origin: cell.whiteView.bounds.origin, size: CGSize.init(width: 16 + newWidth, height: 16 + newHeight)), byRoundingCorners: [.topLeft, .topRight, .bottomRight], cornerRadii: CGSize(width: 15.0, height: 15.0))
             let maskLayer = CAShapeLayer()
             maskLayer.path = maskPath.cgPath
             cell.whiteView.layer.mask = maskLayer
-        
-        }else if row == 1 {
-            
+        }
+        if getUser.user_id == getDetailChat[indexPath.row].user_id  {
             cell.whiteView.removeFromSuperview()
-            
-            let txt = "Di mes bareng ari, al, dimas, silmy lu dimana? ga ke mes"
-            
             cell.blueLbl.text = txt
-            
             let newWidth = self.estimatewidthForView(text: txt).width
             let newHeight = self.estimateHeightForView(text: txt).height
-            
             cell.blueWidth.constant = 20 + newWidth
-            
             cell.blueHeight.constant = 20 + newHeight
-            
             cell.blueView.layer.cornerRadius = 0.0
-            
             let maskPath = UIBezierPath(roundedRect: CGRect.init(origin: cell.blueView.bounds.origin, size: CGSize.init(width: 16 + newWidth, height: 16 + newHeight)), byRoundingCorners: [.topLeft, .topRight, .bottomLeft], cornerRadii: CGSize(width: 15.0, height: 15.0))
             let maskLayer = CAShapeLayer()
             maskLayer.path = maskPath.cgPath
             cell.blueView.layer.mask = maskLayer
-            
-        }else if row == 2 {
-            
-            cell.whiteView.removeFromSuperview()
-            
-            let txt = "Oke udah di jalan"
-            
-            cell.blueLbl.text = txt
-            
-            let newWidth = self.estimatewidthForView(text: txt).width
-            let newHeight = self.estimateHeightForView(text: txt).height
-            
-            cell.blueWidth.constant = 20 + newWidth
-            
-            cell.blueHeight.constant = 20 + newHeight
-            
-            cell.blueView.layer.cornerRadius = 0.0
-            
-            let maskPath = UIBezierPath(roundedRect: CGRect.init(origin: cell.blueView.bounds.origin, size: CGSize.init(width: 16 + newWidth, height: 16 + newHeight)), byRoundingCorners: [.topLeft, .topRight, .bottomLeft], cornerRadii: CGSize(width: 15.0, height: 15.0))
-            let maskLayer = CAShapeLayer()
-            maskLayer.path = maskPath.cgPath
-            cell.blueView.layer.mask = maskLayer
-            
-        }else if row == 3 {
-            
-            cell.whiteView.removeFromSuperview()
-            
-            let txt = "Macet banget laper lagi"
-            
-            cell.blueLbl.text = txt
-            
-            let newWidth = self.estimatewidthForView(text: txt).width
-            let newHeight = self.estimateHeightForView(text: txt).height
-            
-            cell.blueWidth.constant = 20 + newWidth
-            
-            cell.blueHeight.constant = 20 + newHeight
-            
-            cell.blueView.layer.cornerRadius = 0.0
-            
-            let maskPath = UIBezierPath(roundedRect: CGRect.init(origin: cell.blueView.bounds.origin, size: CGSize.init(width: 16 + newWidth, height: 16 + newHeight)), byRoundingCorners: [.topLeft, .topRight, .bottomLeft], cornerRadii: CGSize(width: 15.0, height: 15.0))
-            let maskLayer = CAShapeLayer()
-            maskLayer.path = maskPath.cgPath
-            cell.blueView.layer.mask = maskLayer
-            
         }
         
         detailChatTVHeight.constant = detailChatTV.contentSize.height
         
         return cell
         
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let cell = self.detailChatTV.cellForRow(at: indexPath) as! DetailChatCell
+        let getDetailChat = try! Realm().objects(detail_chat.self).filter("chat_id = '\(chatID)'").sorted(byKeyPath: "date")
+        var height: CGFloat = 0.0
+        if chatID != "" {
+            if getUser.user_id != getDetailChat[indexPath.row].user_id  {
+                let getDetailChat = try! Realm().objects(detail_chat.self).filter("chat_id = '\(chatID)'")
+                let valueHeight = self.estimateHeightForViewContainer(text: getDetailChat[indexPath.row].isi, width: cell.whiteView.frame.width, PointSize: cell.whiteLbl.font.pointSize).height
+                height = 16 + 15 + 10 + valueHeight
+            }
+            if getUser.user_id == getDetailChat[indexPath.row].user_id  {
+                let getDetailChat = try! Realm().objects(detail_chat.self).filter("chat_id = '\(chatID)'")
+                let valueHeight = self.estimateHeightForViewContainer(text: getDetailChat[indexPath.row].isi, width: cell.blueView.frame.width, PointSize: cell.blueLbl.font.pointSize).height
+                height = 16 + 15 + 10 + valueHeight
+            }
+        }
+        return height
     }
     
     private func estimatewidthForView(text: String) -> CGRect {
@@ -212,10 +175,14 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
         return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 13)], context: nil)
     }
     
+    private func estimateHeightForViewContainer(text: String, width: CGFloat, PointSize: CGFloat) -> CGRect {
+        let size = CGSize(width: width, height: 10000)
+        let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+        return NSString(string: text).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: PointSize)], context: nil)
+    }
+    
     func endEdit() {
-    
         self.view.endEditing(true)
-    
     }
     
     private func estimateFrameForText(text: String) -> CGRect {
@@ -225,50 +192,30 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        
         if textView == chatTxt {
-            
             let height = self.estimateFrameForText(text: chatTxt.text!).height
-            
             if height > 30 {
-                
                 self.chatViewHeight.constant = height + 33
-                
                 UIView.animate(withDuration: 0.3, animations: {
-                    
                     self.view.layoutIfNeeded()
-                    
                 })
-                
             }else if 30 > height {
-                
                 self.chatViewHeight.constant = 46
-                
                 UIView.animate(withDuration: 0.3, animations: {
-                    
                     self.view.layoutIfNeeded()
-                    
                 })
-                
             }
-            
         }
-        
     }
     
     @IBAction func sentAct(_ sender: UIButton) {
-        self.sentMesssage()
+        self.sentMessage()
     }
     
-    func sentMesssage() {
-        
+    func sentMessage() {
         let isi = self.chatTxt.text!
-        
         let getKontak = try! Realm().objects(kontak.self).filter("nama = '\(self.nama)'").first!
-        
         let getChat = try! Realm().objects(chat.self)
-        
-        print(getChat)
         
         let dateFormatter:DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "h:mm a"
@@ -331,18 +278,12 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
             self.chatTxt.text = ""
             
             Alamofire.request("https://fcm.googleapis.com/fcm/send", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers)
-                .responseJSON{response in
-                    
+                .responseJSON{response in                    
                     if let jason = response.result.value {
-                        
                         print(JSON(jason).description)
-                        
                     }
-                    
             }
-            
         }else{
-            
             if getChat.count > 0 {
                 
                 let filter = getChat.filter("name = '\(self.nama)'")
