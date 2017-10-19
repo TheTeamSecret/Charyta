@@ -11,17 +11,16 @@ import Realm
 import RealmSwift
 
 class link: Object {
-
     let domain      = "http://api.charytamessenger.com/"
     let subDomain   = "http://api.charytamessenger.com/v1/"
     let domainMain  = "http://api.caryta.com/v1/"
     let gambar      = "http://api.charytamessenger.com/public/images/user/"
     let file        = "https://keep.caryta.com"
     let vid         = "https://drive.caryta.com"
-
 }
 
 class user: Object {
+    dynamic var token = ""
     dynamic var user_id = String()
     dynamic var first_name = String()
     dynamic var last_name = String()
@@ -31,18 +30,14 @@ class user: Object {
     dynamic var avatar = String()
     dynamic var registrasi_id = String()
     dynamic var status = String()
-
 }
 
 class profil: Object {
-
     dynamic var showName = String()
     dynamic var status = String()
-
 }
 
 class kontak: Object {
-
     dynamic var user_id = String()
     dynamic var nama = String()
     dynamic var gambar = String()
@@ -51,15 +46,11 @@ class kontak: Object {
     dynamic var phone = String()
     
     override static func primaryKey() -> String? {
-        
         return "user_id"
-        
     }
-
 }
 
 class chat: Object {
-
     dynamic var chat_id = String()
     dynamic var grup_id = String()
     dynamic var name = String()
@@ -68,15 +59,11 @@ class chat: Object {
     dynamic var date = String()
     
     override static func primaryKey() -> String? {
-        
         return "chat_id"
-        
     }
-
 }
 
 class detail_chat: Object {
-
     dynamic var chat_id = String()
     dynamic var user_id = String()
     dynamic var isi = String()
@@ -84,5 +71,4 @@ class detail_chat: Object {
     dynamic var date = String()
     dynamic var picture = String()
     dynamic var read = String()
-
 }

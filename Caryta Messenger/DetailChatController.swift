@@ -220,169 +220,156 @@ class DetailChatController: UIViewController, UITableViewDataSource, UITableView
         let dateFormatter:DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "h:mm a"
         
+        //Group
         if groupID != "" {
-            
             let filter = getChat.filter("grup_id = '\(self.groupID)'")
             
             let model = chat()
-            
             model.chat_id   = filter.first!.chat_id
             model.grup_id   = self.groupID
             model.name      = self.nama
             model.last_chat = isi
             model.avatar    = filter.first!.avatar
             model.date      = dateFormatter.string(from: Date())
-            
             DBHelper.update(obj: model)
             
             let model1 = detail_chat()
-            
             model1.chat_id  = getChat.first!.chat_id
             model1.user_id  = self.getUser.user_id
             model1.isi      = isi
             model1.avatar   = self.getUser.avatar
             model1.date     = dateFormatter.string(from: Date())
             model1.read     = "0"
-            
             DBHelper.insert(obj: model1)
             
-            self.detailChatTV.reloadData()
-            
-            self.detailChatTV.estimatedRowHeight = 80
-            self.detailChatTV.rowHeight = UITableViewAutomaticDimension
-            
-            let item = self.tableView(self.detailChatTV, numberOfRowsInSection: 0) - 1
-            
-            let lastItem = IndexPath.init(row: item, section: 0)
-            
-            self.detailChatTV.scrollToRow(at: lastItem, at: .bottom, animated: true)
-            
-            let headers = [
-                "Content-Type": "application/json",
-                "Authorization": "key=AAAAVLLQtxM:APA91bGS8w6GjsrDqiR8zorSN8F5AeK4PS3W3G08fUrOGEer07PK0pZ96KtrHmvz69CiU9stQBUsTXiyvmnZPfrLks0vzaJ-whV2ppEIxvJfg8ex_zo9SO9Wh2varAWiSWeXijXXkQ91"
-            ]
-            
-            let params = [
-                "to" : "/topics/\(self.groupID)",
-                "priority" : "high",
-                "notification" : [
-                    "body" : "\(getUser.first_name) : \(isi)",
-                    "title" : self.nama,
-                    "group_id" : self.groupID,
-                    "user_id" : self.getUser.user_id,
-                    "no_hp" : self.getUser.no_hp,
-                    "isi" : isi
-                ]
-                ] as [String : Any]
-            
-            self.chatTxt.text = ""
-            
-            Alamofire.request("https://fcm.googleapis.com/fcm/send", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers)
-                .responseJSON{response in                    
-                    if let jason = response.result.value {
-                        print(JSON(jason).description)
-                    }
-            }
+            self.scroolToLast()
+            self.sendGroup()
         }else{
+            //Personal
             if getChat.count > 0 {
-                
-                let filter = getChat.filter("name = '\(self.nama)'")
-                
+                let filter = getChat.filter("name = '\(self.nama)'").first!
                 let model = chat()
-                
-                model.chat_id   = filter.first!.chat_id
+                model.chat_id   = filter.chat_id
                 model.grup_id   = ""
                 model.name      = self.nama
                 model.last_chat = isi
-                model.avatar    = filter.first!.avatar
+                model.avatar    = filter.avatar
                 model.date      = dateFormatter.string(from: Date())
-                
                 DBHelper.update(obj: model)
                 
                 let model1 = detail_chat()
-                
                 model1.chat_id  = getChat.first!.chat_id
                 model1.user_id  = self.getUser.user_id
                 model1.isi      = isi
                 model1.avatar   = self.getUser.avatar
                 model1.date     = dateFormatter.string(from: Date())
                 model1.read     = "0"
-                
                 DBHelper.insert(obj: model1)
                 
-                self.detailChatTV.reloadData()
-                
-                self.detailChatTV.estimatedRowHeight = 80
-                self.detailChatTV.rowHeight = UITableViewAutomaticDimension
-                
-                let item = self.tableView(self.detailChatTV, numberOfRowsInSection: 0) - 1
-                
-                let lastItem = IndexPath.init(row: item, section: 0)
-                
-                self.detailChatTV.scrollToRow(at: lastItem, at: .bottom, animated: true)
-                
+                self.scroolToLast()
             }else{
-                
-                let getKontak = try! Realm().objects(kontak.self).filter("nama = '\(self.nama)'")
-                
                 let newID = "\(getChat.count + 1)"
                 
                 let model = chat()
-                
                 model.chat_id   = newID
                 model.grup_id   = ""
                 model.name      = self.nama
                 model.last_chat = isi
-                model.avatar    = getKontak.first!.gambar
+                model.avatar    = getKontak.gambar
                 model.date      = dateFormatter.string(from: Date())
-                
                 DBHelper.update(obj: model)
                 
                 let model1 = detail_chat()
-                
                 model1.chat_id  = newID
                 model1.user_id  = self.getUser.user_id
                 model1.isi      = isi
                 model1.avatar   = self.getUser.avatar
                 model1.date     = dateFormatter.string(from: Date())
                 model1.read     = "0"
-                
                 DBHelper.insert(obj: model1)
                 
-                self.detailChatTV.reloadData()
-                
-                self.detailChatTV.estimatedRowHeight = 80
-                self.detailChatTV.rowHeight = UITableViewAutomaticDimension
-                
-                let item = self.tableView(self.detailChatTV, numberOfRowsInSection: 0) - 1
-                
-                let lastItem = IndexPath.init(row: item, section: 0)
-                
-                self.detailChatTV.scrollToRow(at: lastItem, at: .bottom, animated: true)
-                
+                self.scroolToLast()
             }
-            
-            let params = [
-                "to"    : getKontak.user_id,
-                "from"  : getUser.user_id,
-                "text"  : isi
-            ]
-            
-            self.chatTxt.text = ""
-            
-            Alamofire.request("\(link().domain)single-notif", method: .post, parameters: params, encoding: JSONEncoding.default)
-                .responseJSON{response in
-                    
-                    if let jason = response.result.value {
-                        
-                        print(JSON(jason).description)
-                        
-                    }
-                    
-            }
-            
+            self.sendSingle()
         }
+    }
     
+    func scroolToLast(){
+        self.detailChatTV.reloadData()
+        self.detailChatTV.estimatedRowHeight = 80
+        self.detailChatTV.rowHeight = UITableViewAutomaticDimension
+        let item = self.tableView(self.detailChatTV, numberOfRowsInSection: 0) - 1
+        let lastItem = IndexPath.init(row: item, section: 0)
+        self.detailChatTV.scrollToRow(at: lastItem, at: .bottom, animated: true)
+    }
+    
+    func sendSingle(){
+        let getKontak = try! Realm().objects(kontak.self).filter("nama = '\(self.nama)'").first!
+        let isi = self.chatTxt.text!
+        let head = [
+            "kodeUser" : getUser.user_id,
+            "Content-Type" : "application/json"
+        ]
+        let params = [
+            "userKe"    : getKontak.user_id,
+            "pesan"  : isi
+        ]
+        self.chatTxt.text = ""
+        Alamofire.request("\(link().subDomain)chat/single", method: .post, parameters: params, encoding: JSONEncoding.default, headers: head)
+            .responseJSON{response in
+                if let jason = response.result.value {
+                    print(JSON(jason).description)
+                }
+        }
+    }
+    
+    func sendGroup(){
+        let isi = self.chatTxt.text!
+        let head = [
+            "kodeUser" : getUser.user_id,
+            "Content-Type" : "application/json"
+        ]
+        let params = [
+            "kodeGroup" : self.groupID,
+            "pesan" : isi
+        ]
+        self.chatTxt.text = ""
+        Alamofire.request("\(link().subDomain)chat/group", method: .post, parameters: params, encoding: JSONEncoding.default, headers: head)
+            .responseJSON{response in
+                if let jason = response.result.value {
+                    print(JSON(jason).description)
+                }
+        }
+    }
+    
+    func sendGroupOld(){
+        let isi = self.chatTxt.text!
+        let headers = [
+            "Content-Type": "application/json",
+            "Authorization": "key=AAAAVLLQtxM:APA91bGS8w6GjsrDqiR8zorSN8F5AeK4PS3W3G08fUrOGEer07PK0pZ96KtrHmvz69CiU9stQBUsTXiyvmnZPfrLks0vzaJ-whV2ppEIxvJfg8ex_zo9SO9Wh2varAWiSWeXijXXkQ91"
+        ]
+        
+        let params = [
+            "to" : "/topics/\(self.groupID)",
+            "priority" : "high",
+            "notification" : [
+                "body" : "\(getUser.first_name) : \(isi)",
+                "title" : self.nama,
+                "group_id" : self.groupID,
+                "user_id" : self.getUser.user_id,
+                "no_hp" : self.getUser.no_hp,
+                "isi" : isi
+            ]
+            ] as [String : Any]
+        
+        self.chatTxt.text = ""
+        
+        Alamofire.request("https://fcm.googleapis.com/fcm/send", method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers)
+            .responseJSON{response in
+                if let jason = response.result.value {
+                    print(JSON(jason).description)
+                }
+        }
     }
     
 

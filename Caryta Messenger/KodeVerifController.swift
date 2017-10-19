@@ -23,7 +23,7 @@ class KodeVerifController: UIViewController {
     @IBOutlet weak var sectionSix: UITextField!
     @IBOutlet weak var btnKirim: UIButton!
     
-    var pinId = String()
+    var noTelpon = ""
     
     func keyboardWillShow(_ notification : NSNotification) {
         let keyBoardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.size
@@ -102,12 +102,13 @@ class KodeVerifController: UIViewController {
     
     @IBAction func nextStep(_ sender: UIButton) {
         //self.verifyCode()
+        //Testing
         self.performSegue(withIdentifier: "showDataDiri", sender: self)
     }
     
     func verifyCode() {
         let code = "\(self.sectionOne.text!)\(self.sectionTwo.text!)\(self.sectionThree.text!)\(self.sectionFour.text!)\(self.sectionFive.text!)\(self.sectionSix.text!)"
-        Alamofire.request("\(link().domainMain)2fa/verify-message", method: .post, parameters: ["pinId": self.pinId, "code": code], encoding: JSONEncoding.default)
+        Alamofire.request("\(link().domainMain)2fa/verify-message", method: .post, parameters: ["pinId": self.noTelpon, "code": code], encoding: JSONEncoding.default)
             .responseJSON{response in
                 if let jason = response.result.value {
                     if JSON(jason)["status"].intValue == 0 {
@@ -123,8 +124,8 @@ class KodeVerifController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segue_data_diri" {
-            let next = segue.destination as! DataDiriController
-            
+            let conn = segue.destination as! DataDiriController
+            conn.noTelpon = self.noTelpon
         }
     }
 

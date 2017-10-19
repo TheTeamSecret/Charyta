@@ -62,6 +62,7 @@ class LoginWithCarytaController: UIViewController {
                     let token = InstanceID.instanceID().token()!
                     let data = JSON(jason)["user"]
                     let model = user()
+                    model.token         = JSON(jason)["access_token"].stringValue
                     model.user_id       = data["kode_user"].stringValue
                     model.first_name    = data["nama_depan"].stringValue
                     model.last_name     = data["nama_belakang"].stringValue

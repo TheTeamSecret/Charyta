@@ -37,6 +37,10 @@ class ListKontakController: UIViewController, NAExpandableTableViewDataSource, N
     var sentName = ""
     
     var from = ""
+    
+    var groupID = [String]()
+    var groupName = [String]()
+    var groupImage = [String]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,60 +48,39 @@ class ListKontakController: UIViewController, NAExpandableTableViewDataSource, N
         self.setStatusBarStyle(.lightContent)
         
         self.expendableTableController = NAExpandableTableController(dataSource: self, delegate: self)
-        
         kontakTV.dataSource = self.expendableTableController
         kontakTV.delegate = self.expendableTableController
-        
         kontakTV.tableFooterView = UIView(frame: CGRect.zero)
         
-        findContacts()
+        self.getListGroup()
         
+        self.findContacts()
         let getKontak = try! Realm().objects(kontak.self)
-        
         if getKontak.count > 0 {
-            
             for itemKontak in getKontak {
-                
                 if itemKontak.registrasi_id == "" {
-                    
                     DBHelper.delete(obj: itemKontak)
-                    
                 }
-                
             }
-            
         }
-        
-        getListGroup()
-
-        // Do any additional setup after loading the view.
     }
     
-    var groupID = [String]()
-    var groupName = [String]()
-    
     func getListGroup() {
-        
         let getUser = try! Realm().objects(user.self).first!
-    
-        Alamofire.request("\(link().domainMain)messenger/user/group", method: .post, parameters: ["kodeUser": getUser.user_id], encoding: JSONEncoding.default)
+        Alamofire.request("\(link().subDomain)user/render-group", method: .get, encoding: JSONEncoding.default, headers: ["Authorization" : "Bearer \(getUser.token)"])
             .responseJSON{response in
-        
                 if let jason = response.result.value {
-                
+                    print(jason)
                     for data in JSON(jason).array! {
-                    
-                        self.groupID.append(data["group_id"].stringValue)
-                        self.groupName.append(data["name"].stringValue)
-                    
+                        self.groupID.append(data["kode_group"].stringValue)
+                        self.groupName.append(data["nama_group"].stringValue)
+                        self.groupImage.append(data["gambar"].stringValue)
                     }
-                    
                     self.kontakTV.reloadData()
-                
+                }else{
+                    print("Request getListGroup Gagal")
                 }
-        
         }
-    
     }
 
     override func didReceiveMemoryWarning() {
@@ -106,164 +89,103 @@ class ListKontakController: UIViewController, NAExpandableTableViewDataSource, N
     }
     
     func numberOfSectionsInExpandableTableView(_ tableView: UITableView) -> Int {
-        
         return 2
-        
     }
     
     func expandableTableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         let getKontak = try! Realm().objects(kontak.self).sorted(byKeyPath: "nama")
-        
-         var row = 0
-        
+        var row = 0
         if section == 0 {
-        
             row = self.groupID.count
-        
         }
-        
         if section == 1 {
-            
             row = getKontak.count
-            
         }
-        
         return row
-        
     }
     
     func expandableTableView(_ tableView: UITableView, titleCellForSection section: Int, expanded: Bool) -> UITableViewCell {
-        
         let cell = kontakTV.dequeueReusableCell(withIdentifier: "header") as! KontakHeaderCell
-        
         let getKontak = try! Realm().objects(kontak.self).sorted(byKeyPath: "nama")
-        
         if section == 0 {
-            
             cell.headerLbl.text = "Grup \(self.groupID.count)"
-            
         }
-        
         if section == 1 {
-            
             cell.headerLbl.text = "Teman \(getKontak.count)"
-            
         }
-        
         return cell
-        
     }
     
     func expandableTableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
-        
-        let getKontak = try! Realm().objects(kontak.self).sorted(byKeyPath: "nama")
-        
         let cell = kontakTV.dequeueReusableCell(withIdentifier: "kontak", for: indexPath) as! ListKontakCell
         
         cell.initialLbl.layer.cornerRadius = 20
         cell.initialLbl.clipsToBounds = true
         cell.initialLbl.backgroundColor = UIColor.randomFlat
         
+        let getKontak = try! Realm().objects(kontak.self).sorted(byKeyPath: "nama")
+        
         if indexPath.section == 0 {
-            
             cell.nameLbl.text = self.groupName[indexPath.row]
             cell.phoneLbl.isHidden = true
             cell.msgBtn.isHidden = true
             cell.callBtn.isHidden = true
             cell.statusLbl.text = ""
-            
             let initIndex = self.groupName[indexPath.row].index(self.groupName[indexPath.row].startIndex, offsetBy: 1)
             let initial = self.groupName[indexPath.row].substring(to: initIndex).uppercased()
-            
             cell.initialLbl.text = initial
-            
         }
-        
         if indexPath.section == 1 {
-            
             cell.nameLbl.text = getKontak[indexPath.row].nama
             cell.statusLbl.text = getKontak[indexPath.row].status
-            
             let initIndex = getKontak[indexPath.row - 4].nama.index(getKontak[indexPath.row - 4].nama.startIndex, offsetBy: 1)
             let initial = getKontak[indexPath.row - 4].nama.substring(to: initIndex).uppercased()
-            
             cell.initialLbl.text = initial
-            
         }
-        
         if isEdit == true {
-            
             cell.selectBtnWidth.constant = 0
-            
             UIView.animate(withDuration: 0.3, animations: {
-                
                 cell.selectBtnWidth.constant = 25
                 self.view.layoutIfNeeded()
-                
             })
-            
         }else if isEdit == false {
-            
             cell.selectBtnWidth.constant = 25
-            
             UIView.animate(withDuration: 0.3, animations: {
-                
                 cell.selectBtnWidth.constant = 0
                 self.view.layoutIfNeeded()
-                
             })
-            
         }
-        
         return cell
-        
     }
     
     func expandableTableView(_ tableView: UITableView, heightForTitleCellInSection section: Int) -> CGFloat {
-        
         return 30
-        
     }
     
     func expandableTableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
-        
         return 56
-        
     }
     
     @IBAction func editAct(_ sender: UIBarButtonItem) {
-        
         if sender.title == "Edit" {
-            
             addDeleteBtn.image = UIImage.init(named: "hapus")
             isEdit = true
             editBtn.title = "Cancel"
             kontakTV.reloadData()
-            
         }else if sender.title == "Cancel" {
-            
             addDeleteBtn.image = UIImage.init(named: "add_kontak")
             isEdit = false
             editBtn.title = "Edit"
             kontakTV.reloadData()
-            
         }
-        
     }
     
     @IBAction func selctDeselect(_ sender: UIButton) {
-        
         if sender.imageView?.image == UIImage.init(named: "select") {
-            
             sender.setImage(UIImage.init(named: "select_blue"), for: .normal)
-            
         }else if sender.imageView?.image == UIImage.init(named: "select_blue") {
-            
             sender.setImage(UIImage.init(named: "select"), for: .normal)
-            
         }
-        
     }
     
     func findContacts() -> [CNContact] {
@@ -303,95 +225,59 @@ class ListKontakController: UIViewController, NAExpandableTableViewDataSource, N
     }
     
     func refresh() {
-        
-        for numb in number {
-            
+        for numb in self.number {
             let indexStr = numb.index(numb.startIndex, offsetBy: 1)
             let prefix = numb.substring(to: indexStr)
-            
             if prefix == "+" {
-                
                 let indexStrNew = numb.index(numb.startIndex, offsetBy: 3)
                 let newNumber = numb.substring(from: indexStrNew)
                 checkKontak(phoneNumber: newNumber, original: numb)
-                
             }else if prefix == "0" {
-                
                 let indexStrNew = numb.index(numb.startIndex, offsetBy: 1)
                 let newNumber = numb.substring(from: indexStrNew)
                 checkKontak(phoneNumber: newNumber, original: numb)
-                
             }
-            
         }
-        
     }
     
     func checkKontak(phoneNumber: String, original: String){
-        
         Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": phoneNumber], encoding: JSONEncoding.default)
             .responseJSON{response in
-                
                 if let jason = response.result.value {
-                    
                     if JSON(jason)["status"].stringValue == "1" {
-                        
                         print(JSON(jason).description)
-                        
                         let model = kontak()
-                        
                         let data = JSON(jason)["data"]
-                        
                         if data["registrasi_id"].stringValue != "" {
-                            
                             let i = self.number.index(of: original)!
-                            
                             model.user_id       =   data["user_id"].stringValue
                             model.nama          =   self.name[i]
                             model.gambar        =   data["gambar_small"].stringValue
                             model.status        =   data["status"].stringValue
                             model.registrasi_id =   data["registrasi_id"].stringValue
                             model.phone         =   phoneNumber
-                            
                             DBHelper.update(obj: model)
                             
                             self.kontakTV.reloadData()
-                            
                         }else{
-                            
                             self.checkKontak0(phoneNumber: phoneNumber, original: original)
-                            
                         }
-                        
                     }else{
-                        
                         self.checkKontak0(phoneNumber: phoneNumber, original: original)
-                        
                     }
-                    
                 }
-                
         }
-        
     }
     
     func checkKontak0(phoneNumber: String, original: String){
-        
         Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": "0\(phoneNumber)"], encoding: JSONEncoding.default)
             .responseJSON{response in
-                
                 if let jason = response.result.value {
-                    
                     if JSON(jason)["status"].stringValue == "1" {
-                        
                         print(JSON(jason).description)
-                        
                         let model = kontak()
-                        
                         let data = JSON(jason)["data"]
-                        
-                        if data["registrasi_id"].stringValue != "" {
-                            
+                        if data["registrasi_id"].stringValue != "" {                            
                             let i = self.number.index(of: original)!
                             
                             model.user_id       =   data["user_id"].stringValue
@@ -472,43 +358,28 @@ class ListKontakController: UIViewController, NAExpandableTableViewDataSource, N
     }
     
     func checkKontakPlus62(phoneNumber: String, original: String){
-        
         Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": "+62\(phoneNumber)"], encoding: JSONEncoding.default)
             .responseJSON{response in
-                
                 if let jason = response.result.value {
-                    
                     if JSON(jason)["status"].stringValue == "1" {
-                        
                         print(JSON(jason).description)
-                        
                         let model = kontak()
-                        
                         let data = JSON(jason)["data"]
-                        
                         if data["registrasi_id"].stringValue != "" {
-                            
                             let i = self.number.index(of: original)!
-                            
                             model.user_id       =   data["user_id"].stringValue
                             model.nama          =   self.name[i]
                             model.gambar        =   data["gambar_small"].stringValue
                             model.status        =   data["status"].stringValue
                             model.registrasi_id =   data["registrasi_id"].stringValue
                             model.phone         =   "+62\(phoneNumber)"
-                            
                             DBHelper.update(obj: model)
                             
                             self.kontakTV.reloadData()
-                            
                         }
-                        
                     }
-                    
                 }
-                
         }
-        
     }
     
     func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?) {

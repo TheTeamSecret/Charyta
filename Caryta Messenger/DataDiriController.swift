@@ -169,7 +169,20 @@ class DataDiriController: UIViewController, UINavigationControllerDelegate, UIIm
                         print(data["message"].stringValue)
                     }else{
                         print(data["message"].stringValue)
-                        self.login()
+                        //self.login()
+                        let token = InstanceID.instanceID().token()!
+                        let data = JSON(jason)["data"]
+                        let model = user()
+                        model.user_id       = data["kode_user"].stringValue
+                        model.first_name    = data["nama_depan"].stringValue
+                        model.last_name     = data["nama_belakang"].stringValue
+                        model.email         = data["email"].stringValue
+                        model.no_hp         = data["telepon"].stringValue
+                        model.sex           = data["jk"].stringValue
+                        model.avatar        = data["gambar"].stringValue
+                        model.registrasi_id = token
+                        DBHelper.insert(obj: model)
+                        self.updateToken(data["kode_user"].stringValue, token: token)
                     }
                 }
         }

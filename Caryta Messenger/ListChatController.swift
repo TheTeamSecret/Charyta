@@ -52,7 +52,6 @@ class ListChatController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = chatTV.dequeueReusableCell(withIdentifier: "chat", for: indexPath) as! ListChatCell
         
         cell.initialLbl.layer.cornerRadius = cell.initialLbl.frame.height / 2

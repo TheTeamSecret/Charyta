@@ -181,7 +181,7 @@ class FirstController: UIViewController, CLLocationManagerDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "segue_kode_verif" {
             let next = segue.destination as! KodeVerifController
-            next.pinId = self.pinId
+            next.noTelpon = self.pinId
         }
         if segue.identifier == "segue_login" {
             let next = segue.destination as! LoginController
