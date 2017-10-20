@@ -63,6 +63,10 @@ class ListKontakController: UIViewController, NAExpandableTableViewDataSource, N
                 }
             }
         }
+        let filterKontak = try! Realm().objects(kontak.self)
+        if filterKontak.count == 0 {
+            self.refresh()
+        }
     }
     
     func getListGroup() {
@@ -70,13 +74,17 @@ class ListKontakController: UIViewController, NAExpandableTableViewDataSource, N
         Alamofire.request("\(link().subDomain)user/render-group", method: .get, encoding: JSONEncoding.default, headers: ["Authorization" : "Bearer \(getUser.token)"])
             .responseJSON{response in
                 if let jason = response.result.value {
-                    print(jason)
-                    for data in JSON(jason).array! {
-                        self.groupID.append(data["kode_group"].stringValue)
-                        self.groupName.append(data["nama_group"].stringValue)
-                        self.groupImage.append(data["gambar"].stringValue)
+                    print("group", jason)
+                    let msg = JSON(jason)["message"].stringValue
+                    print("status", msg)
+                    if msg == "" {
+                        for data in JSON(jason).array! {
+                            self.groupID.append(data["kode_group"].stringValue)
+                            self.groupName.append(data["nama_group"].stringValue)
+                            self.groupImage.append(data["gambar"].stringValue)
+                        }
+                        self.kontakTV.reloadData()
                     }
-                    self.kontakTV.reloadData()
                 }else{
                     print("Request getListGroup Gagal")
                 }
@@ -97,9 +105,11 @@ class ListKontakController: UIViewController, NAExpandableTableViewDataSource, N
         var row = 0
         if section == 0 {
             row = self.groupID.count
+            if self.groupID.count == 0 {}
         }
         if section == 1 {
             row = getKontak.count
+            if getKontak.count == 0 {}
         }
         return row
     }
@@ -128,7 +138,7 @@ class ListKontakController: UIViewController, NAExpandableTableViewDataSource, N
         if indexPath.section == 0 {
             cell.nameLbl.text = self.groupName[indexPath.row]
             cell.phoneLbl.isHidden = true
-            cell.msgBtn.isHidden = true
+            cell.msgBtn.isHidden = false//true
             cell.callBtn.isHidden = true
             cell.statusLbl.text = ""
             let initIndex = self.groupName[indexPath.row].index(self.groupName[indexPath.row].startIndex, offsetBy: 1)
@@ -137,7 +147,7 @@ class ListKontakController: UIViewController, NAExpandableTableViewDataSource, N
         }
         if indexPath.section == 1 {
             cell.nameLbl.text = getKontak[indexPath.row].nama
-            cell.statusLbl.text = getKontak[indexPath.row].status
+            cell.statusLbl.text = "Ada"//getKontak[indexPath.row].status
             let initIndex = getKontak[indexPath.row - 4].nama.index(getKontak[indexPath.row - 4].nama.startIndex, offsetBy: 1)
             let initial = getKontak[indexPath.row - 4].nama.substring(to: initIndex).uppercased()
             cell.initialLbl.text = initial
@@ -198,10 +208,8 @@ class ListKontakController: UIViewController, NAExpandableTableViewDataSource, N
             try! store.enumerateContacts(with: fetchRequest, usingBlock: { (contact, stop) -> Void in
                 if contact.phoneNumbers.count > 0 {
                     let get = (contact.phoneNumbers[0].value as CNPhoneNumber).value(forKey: "digits") as! String
-                    
                     let countNumber = get.characters.count
                     if countNumber > 9 {
-                        
                         self.getContactNumber = get
                         var contName = ""
                         if contact.givenName != "" {
@@ -229,14 +237,56 @@ class ListKontakController: UIViewController, NAExpandableTableViewDataSource, N
             let indexStr = numb.index(numb.startIndex, offsetBy: 1)
             let prefix = numb.substring(to: indexStr)
             if prefix == "+" {
-                let indexStrNew = numb.index(numb.startIndex, offsetBy: 3)
-                let newNumber = numb.substring(from: indexStrNew)
-                checkKontak(phoneNumber: newNumber, original: numb)
-            }else if prefix == "0" {
                 let indexStrNew = numb.index(numb.startIndex, offsetBy: 1)
                 let newNumber = numb.substring(from: indexStrNew)
-                checkKontak(phoneNumber: newNumber, original: numb)
+                let countKontak = try! Realm().objects(kontak.self)
+                if countKontak.count > 0 {
+                    let filterKontak = try! Realm().objects(kontak.self).filter("phone = \(newNumber)")
+                    if filterKontak.count == 0 {
+                        self.checkContact(newNumber, original: numb)
+                    }
+                }else{
+                    self.checkContact(newNumber, original: numb)
+                }
             }
+            if prefix == "0" {
+                let indexStrNew = numb.index(numb.startIndex, offsetBy: 1)
+                let newNumber = numb.substring(from: indexStrNew)
+                let phoneNumber = "62" + newNumber
+                let countKontak = try! Realm().objects(kontak.self)
+                if countKontak.count > 0 {
+                    let filterKontak = try! Realm().objects(kontak.self).filter("phone = \(newNumber)")
+                    if filterKontak.count == 0 {
+                        self.checkContact(phoneNumber, original: numb)
+                    }
+                }else{
+                    self.checkContact(phoneNumber, original: numb)
+                }
+            }
+        }
+    }
+    
+    func checkContact(_ phoneNumber: String, original: String){
+        let getUser = try! Realm().objects(user.self).first!
+        Alamofire.request("\(link().subDomain)user/check-contact/\(phoneNumber)", method: .get, encoding: JSONEncoding.default, headers: ["Authorization" : "Bearer \(getUser.token)"])
+            .responseJSON{response in
+                if let jason = response.result.value {
+                    print("Kontak", jason)
+                    let data = JSON(jason)
+                    let model = kontak()
+                    model.user_id       =   data["user_penerima"].stringValue
+                    let i = self.number.index(of: original)!
+                    model.nama          =   self.name[i]
+                    model.gambar        =   ""//data["gambar_small"].stringValue
+                    model.status        =   ""//data["status"].stringValue
+                    model.registrasi_id =   ""//data["registrasi_id"].stringValue
+                    model.phone         =   data["telepon"].stringValue
+                    DBHelper.insert(obj: model)
+                    
+                    self.kontakTV.reloadData()
+                }else{
+                    print("Request check contact Gagal")
+                }
         }
     }
     
@@ -259,123 +309,6 @@ class ListKontakController: UIViewController, NAExpandableTableViewDataSource, N
                             DBHelper.update(obj: model)
                             
                             self.kontakTV.reloadData()
-                        }else{
-                            self.checkKontak0(phoneNumber: phoneNumber, original: original)
-                        }
-                    }else{
-                        self.checkKontak0(phoneNumber: phoneNumber, original: original)
-                    }
-                }
-        }
-    }
-    
-    func checkKontak0(phoneNumber: String, original: String){
-        Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": "0\(phoneNumber)"], encoding: JSONEncoding.default)
-            .responseJSON{response in
-                if let jason = response.result.value {
-                    if JSON(jason)["status"].stringValue == "1" {
-                        print(JSON(jason).description)
-                        let model = kontak()
-                        let data = JSON(jason)["data"]
-                        if data["registrasi_id"].stringValue != "" {                            
-                            let i = self.number.index(of: original)!
-                            
-                            model.user_id       =   data["user_id"].stringValue
-                            model.nama          =   self.name[i]
-                            model.gambar        =   data["gambar_small"].stringValue
-                            model.status        =   data["status"].stringValue
-                            model.registrasi_id =   data["registrasi_id"].stringValue
-                            model.phone         =   "0\(phoneNumber)"
-                            
-                            DBHelper.update(obj: model)
-                            
-                            self.kontakTV.reloadData()
-                            
-                        }else{
-                            
-                            self.checkKontak62(phoneNumber: phoneNumber, original: original)
-                            
-                        }
-                        
-                    }else{
-                        
-                        self.checkKontak62(phoneNumber: phoneNumber, original: original)
-                        
-                    }
-                    
-                }
-                
-        }
-        
-    }
-    
-    func checkKontak62(phoneNumber: String, original: String){
-        
-        Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": "62\(phoneNumber)"], encoding: JSONEncoding.default)
-            .responseJSON{response in
-                
-                if let jason = response.result.value {
-                    
-                    if JSON(jason)["status"].stringValue == "1" {
-                        
-                        print(JSON(jason).description)
-                        
-                        let model = kontak()
-                        
-                        let data = JSON(jason)["data"]
-                        
-                        if data["registrasi_id"].stringValue != "" {
-                            
-                            let i = self.number.index(of: original)!
-                            
-                            model.user_id       =   data["user_id"].stringValue
-                            model.nama          =   self.name[i]
-                            model.gambar        =   data["gambar_small"].stringValue
-                            model.status        =   data["status"].stringValue
-                            model.registrasi_id =   data["registrasi_id"].stringValue
-                            model.phone         =   "62\(phoneNumber)"
-                            
-                            DBHelper.update(obj: model)
-                            
-                            self.kontakTV.reloadData()
-                            
-                        }else{
-                            
-                            self.checkKontakPlus62(phoneNumber: phoneNumber, original: original)
-                            
-                        }
-                        
-                    }else{
-                        
-                        self.checkKontakPlus62(phoneNumber: phoneNumber, original: original)
-                        
-                    }
-                    
-                }
-                
-        }
-        
-    }
-    
-    func checkKontakPlus62(phoneNumber: String, original: String){
-        Alamofire.request("\(link().domain)check-contact", method: .post, parameters: ["phoneNumber": "+62\(phoneNumber)"], encoding: JSONEncoding.default)
-            .responseJSON{response in
-                if let jason = response.result.value {
-                    if JSON(jason)["status"].stringValue == "1" {
-                        print(JSON(jason).description)
-                        let model = kontak()
-                        let data = JSON(jason)["data"]
-                        if data["registrasi_id"].stringValue != "" {
-                            let i = self.number.index(of: original)!
-                            model.user_id       =   data["user_id"].stringValue
-                            model.nama          =   self.name[i]
-                            model.gambar        =   data["gambar_small"].stringValue
-                            model.status        =   data["status"].stringValue
-                            model.registrasi_id =   data["registrasi_id"].stringValue
-                            model.phone         =   "+62\(phoneNumber)"
-                            DBHelper.update(obj: model)
-                            
-                            self.kontakTV.reloadData()
                         }
                     }
                 }
@@ -383,41 +316,29 @@ class ListKontakController: UIViewController, NAExpandableTableViewDataSource, N
     }
     
     func contactViewController(_ viewController: CNContactViewController, didCompleteWith contact: CNContact?) {
-        
         viewController.dismiss(animated: true, completion: nil)
-        
     }
     
     @IBAction func addKontak(_ sender: UIBarButtonItem) {
-        
         addContact.delegate = self
         let navController = UINavigationController.init(rootViewController: addContact)
         self.present(navController, animated: true, completion: nil)
-        
+    }
+    
+    @IBAction func btnMsgTapped(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "segue_detail_chat", sender: self)
+    }
+    
+    @IBAction func btnCallTapped(_ sender: UIButton) {
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        
         searchBar.setShowsCancelButton(true, animated: true)
-        
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        
         searchBar.setShowsCancelButton(false, animated: true)
         self.view.endEditing(true)
-        
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+ 
 }

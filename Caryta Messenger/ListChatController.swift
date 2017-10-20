@@ -118,6 +118,10 @@ class ListChatController: UIViewController, UITableViewDataSource, UITableViewDe
         }
     }
     
+    @IBAction func btnNewChatTapped(_ sender: UIBarButtonItem) {
+        self.performSegue(withIdentifier: "showNewChat", sender: self)
+    }
+    
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.setShowsCancelButton(true, animated: true)
     }
